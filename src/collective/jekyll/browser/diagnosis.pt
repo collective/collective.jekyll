@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<metal:main fill-slot="main">
+
+    <h1 class="documentFirstHeading"
+        i18n:translate="label_diagnosis">
+      Diagnosis
+    </h1>
+    <tal:issues define="topicContents view/items;
+                        batch topicContents;">
+                <table class="listing"
+                       summary="Content listing"
+                       tal:define="vocab python:here.listMetaDataFields(False);
+                                   use_view_action site_properties/typesUseViewActionInListings|python:();"
+                       i18n:attributes="summary summary_content_listing;">
+                     <thead>
+                       <tr>
+                            <th>Diagnosis</th>
+                            <th tal:repeat="status view/getTestsTitles"
+                                tal:content="status"
+                                i18n:translate=""/>
+                            <th tal:repeat="field here/getCustomViewFields"
+                                tal:content="python:vocab.getValue(field, field)"
+                                i18n:translate=""/>
+                        </tr>
+                     </thead>
+                     <tbody>
+                       <tal:brain tal:repeat="result topicContents">
+                       <tr tal:define="obj python:result[0];
+                                       whole python:result[1];
+                                       statuses python:result[2];
+                                       oddrow repeat/result/odd;"
+                          tal:attributes="class python:'even' if oddrow else 'odd'">
+                          <td tal:define="diag python:'OK' if whole else 'Warning';
+                                          color python:'#75AD0A' if whole else 'red'"
+                                          tal:attributes="style string:background-color:${color};"
+                                          tal:content="diag" />
+                          <tal:status repeat="status statuses">
+                          <td tal:define="diag python:'OK' if status else 'Warning';
+                                          color python:'#75AD0A' if status else 'red'"
+                                          tal:attributes="style string:background-color:${color};"
+                                          tal:content="diag" />
+                          </tal:status>
+                            <tal:fields repeat="field here/getCustomViewFields"
+                                        define="normalizeString nocall:context/@@plone/normalizeString;
+                                                url obj/getURL;
+                                                obj_type obj/portal_type;
+                                                obj_description obj/Description;
+                                                obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
+                                                obj_icon python:plone_view.getIcon(obj);
+                                                obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
+                                                obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
+                                                obj_url python:url+'/view' if obj_type in use_view_action else url;
+                                                title_or_id obj/pretty_title_or_id">
+                            <tal:block define="value python: getattr(obj, field, None)">
+                                <td tal:condition="python: field != 'Title'"
+                                    tal:content="python:here.formatCatalogMetadata(value)"
+                                    i18n:translate=""/>
+                                <td tal:condition="python: field == 'Title'">
+                                    <a href="#" tal:attributes="href obj_url;
+                                                                title obj_description;">
+                                        <img src="#"
+                                             height="16"
+                                             width="16"
+                                             tal:condition="obj_icon/url"
+                                             tal:attributes="src obj_icon/url;
+                                                             alt obj_icon/description;
+                                                             title obj_icon/title;
+                                                             width obj_icon/width;
+                                                             height obj_icon/height;"/>
+                                    </a>
+                                    <a href="#"
+                                       tal:condition="python: obj.portal_type != 'Link'"
+                                       tal:attributes="href obj_url;
+                                                       class string:${obj_wf_state_class};
+                                                       title obj_description;"
+                                       tal:content="title_or_id">
+                                        Item Title
+                                    </a>
+
+                                    <a href="#"
+                                       tal:condition="python: obj.portal_type == 'Link'"
+                                       tal:attributes="href obj/getRemoteUrl;
+                                                       class string:${obj_wf_state_class} link-plain;
+                                                       title obj_description;"
+                                       class="link-plain"
+                                       tal:content="title_or_id" />
+
+                                </td>
+                            </tal:block>
+                            </tal:fields>
+                        </tr>
+                        </tal:brain>
+                     </tbody>
+                </table>
+                <div metal:use-macro="context/batch_macros/macros/navigation" />
+    </tal:issues>
+</metal:main>
+
+</html>

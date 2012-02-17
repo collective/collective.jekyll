@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.jekyll">
+
+  <include file="configure.zcml" />
+
+  <genericsetup:registerProfile
+      name="testing"
+      title="collective.jekyll tests"
+      directory="profiles/testing"
+      description="Content to ease tests"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="collective.jekyll.tests_content"
+      title="collective.jekyll test collection"
+      description="Various import steps that are not handled by GS import/export handlers."
+      handler=".setuphandlers.setupVarious">
+  </genericsetup:importStep>
+  
+</configure>

@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1dev (unreleased)
--------------------
+0.1a1 (2012-02-17)
+------------------
 
 - Initial functionality
   [gotcha]

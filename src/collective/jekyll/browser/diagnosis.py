@@ -11,29 +11,58 @@ class Diagnosis(BrowserView):
 
     def items(self):
         b_start = int(self.request.get('b_start', 0))
-        b_size = 7
+        b_size = 20
         context = self.context
         pcatalog = getToolByName(context, 'portal_catalog')
         query = context.buildQuery()
         results = pcatalog.searchResults(query)
         total_length = len(results)
-        filter = DiagnosisFilter([self.ok, self.inThree],
-                results, total_length)
+        tests = [hasBody, titleLengthOk, descriptionLengthOk, hasImage, imageSizeOk]
+        filter = DiagnosisFilter(tests, results, total_length)
         results = Batch(filter, b_size, b_start)
         return results
 
     def getTestsTitles(self):
-        return "Id is not error", "Url has no '3'"
+        return "Corps du texte rempli", "Longueur titre", "Longueur description", "Image presente", "Taille image"
 
-    def ok(self, value):
-        object = value.getObject()
-        diag = object.getId() != 'error'
-        return diag
 
-    def inThree(self, value):
-        object = value.getObject()
-        diag = '3' not in object.absolute_url()
-        return diag
+def hasBody(value):
+    obj = value.getObject()
+    diag = len(obj.CookedBody(stx_level=2).strip())
+    return diag
 
-    def error(self, value):
-        return not self.ok(value)
+
+def titleLengthOk(value):
+    obj = value.getObject()
+    title = obj.Title()
+    diag = wordCount(title) <= 5
+    return diag
+
+
+def descriptionLengthOk(value):
+    obj = value.getObject()
+    description = obj.Description()
+    diag = wordCount(description) <= 20
+    return diag
+
+
+def wordCount(string):
+    words = [word for word in string.split() if len(word) > 3]
+    return len(words)
+
+
+def hasImage(value):
+    obj = value.getObject()
+    imageField = obj.Schema()['image']
+    diag = imageField.get_size(obj)
+    return diag
+
+    
+def imageSizeOk(value):
+    if hasImage(value):
+        obj = value.getObject()
+        imageField = obj.Schema()['image']
+        diag = imageField.getSize(obj) == (675, 380)
+    else:
+        diag = False
+    return diag

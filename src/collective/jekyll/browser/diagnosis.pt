@@ -10,7 +10,7 @@
 
     <h1 class="documentFirstHeading"
         i18n:translate="label_diagnosis">
-      Diagnosis
+      Diagnostic
     </h1>
     <tal:issues define="topicContents view/items;
                         batch topicContents;">

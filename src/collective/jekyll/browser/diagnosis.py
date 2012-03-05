@@ -17,12 +17,14 @@ class Diagnosis(BrowserView):
         query = context.buildQuery()
         results = pcatalog.searchResults(query)
         total_length = len(results)
+        # avoid to hardcode: use named utilities
         tests = [hasBody, titleLengthOk, descriptionLengthOk, hasImage, imageSizeOk]
         filter = DiagnosisFilter(tests, results, total_length)
         results = Batch(filter, b_size, b_start)
         return results
 
     def getTestsTitles(self):
+        # avoid to hardcode: use named utilities
         return "Corps du texte rempli", "Longueur titre", "Longueur description", "Image presente", "Taille image"
 
 

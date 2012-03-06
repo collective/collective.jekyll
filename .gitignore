@@ -4,3 +4,4 @@ include/
 lib/
 parts/
 var/
+src/*.egg-info

@@ -5,5 +5,5 @@ lib/
 parts/
 var/
 *.pyc
-*.egg-info
 *.swp
+src/*.egg-info

@@ -5,7 +5,20 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.PloneBatch import Batch
 
 from collective.jekyll.browser.filter import DiagnosisFilter
+from collective.jekyll.interfaces import IDiagnosis
+from zope.component import createObject, getFactoriesFor
 
+class SingleDiagnosis(BrowserView):
+
+    def __call__(self):
+        self.get_diagnosises()
+
+    def get_diagnosises(self):
+        results = []
+        for name, factory in getFactoriesFor(IDiagnosis):
+            results.append(createObject(name, self.context))
+        import pdb; pdb.set_trace()
+        return results
 
 class Diagnosis(BrowserView):
 

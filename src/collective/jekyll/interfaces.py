@@ -1,12 +1,13 @@
 from zope.interface import Interface
 
-from zope.schema import TextLine
+from zope.schema import TextLine, Int
 from zope.schema import Text
 
 
-class ISymptom(Interface):
 
-    title = TextLine(u'Title')
+class IDiagnosis(Interface):
 
-    def __call__(value):
-        """returns True if symptom is not present, False otherwise"""
+    title = TextLine(title=u'Title')
+    description = Text(title=u'Description')
+    status = Int(title=u'Status')
+

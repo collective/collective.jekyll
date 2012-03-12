@@ -13,4 +13,12 @@
         permission="jekyll.Diagnose"
         />
 
+   <browser:page
+        for="*"
+        name="single_diagnosis_view"
+        class=".diagnosis.SingleDiagnosis"
+        permission="jekyll.Diagnose"
+        />
+
+
 </configure>

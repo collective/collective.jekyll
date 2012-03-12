@@ -4,3 +4,6 @@ include/
 lib/
 parts/
 var/
+*.pyc
+*.egg-info
+*.swp

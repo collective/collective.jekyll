@@ -22,9 +22,6 @@
                      <thead>
                        <tr>
                             <th>Diagnosis</th>
-                            <th tal:repeat="status view/getTestsTitles"
-                                tal:content="status"
-                                i18n:translate=""/>
                             <th tal:repeat="field here/getCustomViewFields"
                                 tal:content="python:vocab.getValue(field, field)"
                                 i18n:translate=""/>
@@ -33,20 +30,10 @@
                      <tbody>
                        <tal:brain tal:repeat="result topicContents">
                        <tr tal:define="obj python:result[0];
-                                       whole python:result[1];
-                                       statuses python:result[2];
+                                       status python:result[1].status;
                                        oddrow repeat/result/odd;"
                           tal:attributes="class python:'even' if oddrow else 'odd'">
-                          <td tal:define="diag python:'OK' if whole else 'Warning';
-                                          color python:'#75AD0A' if whole else 'red'"
-                                          tal:attributes="style string:background-color:${color};"
-                                          tal:content="diag" />
-                          <tal:status repeat="status statuses">
-                          <td tal:define="diag python:'OK' if status else 'Warning';
-                                          color python:'#75AD0A' if status else 'red'"
-                                          tal:attributes="style string:background-color:${color};"
-                                          tal:content="diag" />
-                          </tal:status>
+                            <td tal:content="structure obj/@@diagnose_item" />
                             <tal:fields repeat="field here/getCustomViewFields"
                                         define="normalizeString nocall:context/@@plone/normalizeString;
                                                 url obj/getURL;

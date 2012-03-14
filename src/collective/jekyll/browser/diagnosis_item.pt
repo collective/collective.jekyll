@@ -1,0 +1,23 @@
+<div id="diagnosis"
+    tal:define="diagnosis view/diagnosis">
+  <div id="status">
+    <span tal:define="status python:'ok' if diagnosis.status else 'warning'"
+          tal:attributes="class string:diag_${status}"
+          tal:content="status" />
+  </div>        
+  <div id="details">
+    <ul class="symptoms">
+      <li tal:repeat="symptom diagnosis/symptoms">
+        <span class="symptomTitle"
+              tal:content="symptom/title" />
+        <span class="symptomHelp"
+              tal:content="symptom/help" />
+        <span tal:define="status python:'ok' if symptom.status else 'warning'"
+              tal:attributes="class string:diag_${status}"
+              tal:content="status" />
+        <span class="symptomDescription"
+              tal:content="symptom/description" />
+      </li>
+    </ul>
+  </div>        
+</div>

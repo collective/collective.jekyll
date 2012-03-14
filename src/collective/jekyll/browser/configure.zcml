@@ -8,17 +8,24 @@
     <browser:page
         for="Products.ATContentTypes.interfaces.IATTopic"
         name="diagnosis_view"
-        class=".diagnosis.Diagnosis"
+        class=".diagnosis.DiagnosisCollectionView"
         template="diagnosis.pt"
         permission="jekyll.Diagnose"
         />
 
    <browser:page
         for="*"
-        name="single_diagnosis_view"
-        class=".diagnosis.SingleDiagnosis"
+        name="diagnose_item"
+        class=".diagnosis.DiagnosisItem"
+        template="diagnosis_item.pt"
         permission="jekyll.Diagnose"
         />
 
+   <browser:viewlet
+        name="jekyll.item"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+        template="diagnosis_viewlet.pt"
+        permission="jekyll.Diagnose"
+        />
 
 </configure>

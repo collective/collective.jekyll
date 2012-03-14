@@ -6,21 +6,16 @@ from Products.CMFPlone.PloneBatch import Batch
 
 from collective.jekyll.browser.filter import DiagnosisFilter
 from collective.jekyll.interfaces import IDiagnosis
-from zope.component import createObject, getFactoriesFor
 
-class SingleDiagnosis(BrowserView):
 
-    def __call__(self):
-        self.get_diagnosises()
+class DiagnosisItem(BrowserView):
 
-    def get_diagnosises(self):
-        results = []
-        for name, factory in getFactoriesFor(IDiagnosis):
-            results.append(createObject(name, self.context))
-        import pdb; pdb.set_trace()
-        return results
+    @property
+    def diagnosis(self):
+        return IDiagnosis(self.context)
 
-class Diagnosis(BrowserView):
+
+class DiagnosisCollectionView(BrowserView):
 
     def items(self):
         b_start = int(self.request.get('b_start', 0))
@@ -30,54 +25,6 @@ class Diagnosis(BrowserView):
         query = context.buildQuery()
         results = pcatalog.searchResults(query)
         total_length = len(results)
-        # avoid to hardcode: use named utilities
-        tests = [hasBody, titleLengthOk, descriptionLengthOk, hasImage, imageSizeOk]
-        filter = DiagnosisFilter(tests, results, total_length)
+        filter = DiagnosisFilter(results, total_length)
         results = Batch(filter, b_size, b_start)
         return results
-
-    def getTestsTitles(self):
-        # avoid to hardcode: use named utilities
-        return "Corps du texte rempli", "Longueur titre", "Longueur description", "Image presente", "Taille image"
-
-
-def hasBody(value):
-    obj = value.getObject()
-    diag = len(obj.CookedBody(stx_level=2).strip())
-    return diag
-
-
-def titleLengthOk(value):
-    obj = value.getObject()
-    title = obj.Title()
-    diag = wordCount(title) <= 5
-    return diag
-
-
-def descriptionLengthOk(value):
-    obj = value.getObject()
-    description = obj.Description()
-    diag = wordCount(description) <= 20
-    return diag
-
-
-def wordCount(string):
-    words = [word for word in string.split() if len(word) > 3]
-    return len(words)
-
-
-def hasImage(value):
-    obj = value.getObject()
-    imageField = obj.Schema()['image']
-    diag = imageField.get_size(obj)
-    return diag
-
-    
-def imageSizeOk(value):
-    if hasImage(value):
-        obj = value.getObject()
-        imageField = obj.Schema()['image']
-        diag = imageField.getSize(obj) == (675, 380)
-    else:
-        diag = False
-    return diag

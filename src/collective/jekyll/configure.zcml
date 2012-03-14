@@ -23,9 +23,41 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
    
-  <utility
-     provides="zope.component.interfaces.IFactory"
-     factory=".diagnosis.TitleLength" 
-     name="TitleLength" />
+  <adapter
+     for="OFS.interfaces.IItem"
+     provides=".interfaces.IDiagnosis"
+     factory=".diagnosis.Diagnosis" />
+
+  <adapter
+     for="Products.ZCatalog.interfaces.ICatalogBrain"
+     provides=".interfaces.IDiagnosis"
+     factory=".diagnosis.diagnosisFromBrain" />
+
+   <!-- symptoms -->
+
+  <subscriber
+     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     provides=".interfaces.ISymptomFactory"
+     factory=".symptoms.TitleLengthFactory" />
+
+  <subscriber
+     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     provides=".interfaces.ISymptomFactory"
+     factory=".symptoms.DescriptionLengthFactory" />
+
+  <subscriber
+     for="Products.ATContentTypes.interfaces.IATDocument"
+     provides=".interfaces.ISymptomFactory"
+     factory=".symptoms.BodyTextPresentFactory" />
+
+  <subscriber
+     for="Products.ATContentTypes.interfaces.IATNewsItem"
+     provides=".interfaces.ISymptomFactory"
+     factory=".symptoms.ImagePresentFactory" />
+
+  <subscriber
+     for="Products.ATContentTypes.interfaces.IATNewsItem"
+     provides=".interfaces.ISymptomFactory"
+     factory=".symptoms.ImageSizeFactory" />
 
 </configure>

@@ -1,24 +1,16 @@
 from itertools import islice, count
 
+from collective.jekyll.interfaces import IDiagnosis
+
 
 class DiagnosisFilter(object):
 
-    def __init__(self, tests, seq, length):
+    def __init__(self, seq, length):
         self._seq = seq
         self._invalid = []
         self._valid = []
         self._end_index = -1
-        self._tests = tests
         self._len = length
-
-    def isValid(self, value):
-        whole = True
-        items = []
-        for test in self._tests:
-            item = test(value)
-            items.append(item)
-            whole = whole and item
-        return whole, items
 
     def __getitem__(self, index):
         invalid = self._invalid
@@ -52,12 +44,12 @@ class DiagnosisFilter(object):
             try:
                 e = e + 1
                 v = s[e]
-                whole, items = self.isValid(v)
-                if whole:
-                    valid.append((v, whole, items))
+                diagnosis = IDiagnosis(v)
+                if diagnosis.status:
+                    valid.append((v, diagnosis))
                     valid_len += 1
                 else:
-                    invalid.append((v, whole, items))
+                    invalid.append((v, diagnosis))
                     invalid_len += 1
             except IndexError:
                 del self._seq

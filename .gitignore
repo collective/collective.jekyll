@@ -7,3 +7,4 @@ var/
 *.pyc
 *.swp
 src/*.egg-info
+buildout.cfg

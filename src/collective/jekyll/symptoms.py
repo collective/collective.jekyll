@@ -4,43 +4,29 @@ from zope.interface import implements
 from collective.jekyll.interfaces import ISymptom
 
 
-class SymptomFactory(object):
-    implements(IFactory)
+class SymptomBase(object):
+    implements(ISymptom)
 
     def __init__(self, context):
         self.context = context
+        self._update()
 
-    def __call__(self, *args, **kwargs):
+    def _update(self):
         raise NotImplemented(
-                'Symptom should be computed by inheriting classes.')
-
-    def getInterfaces(self):
-        return ISymptom
+                'Update should be computed by inheriting classes.')
 
 
-class Symptom(object):
-    implements(ISymptom)
-
-    def __init__(self, title, help, status, description):
-        self.title = title
-        self.help = help
-        self.status = status
-        self.description = description
-
-
-class TitleLengthFactory(SymptomFactory):
+class TitleLengthSymptom(SymptomBase):
 
     title = u"Title length"
     help = (u"Title should not count more than 5 significant words "
             u"(of more than three letters).")
 
-    def __call__(self):
+    def _update(self):
         title = self.context.Title()
         word_count = countWords(title)
-        status = word_count <= 5
-        description = u"The title counts %d words" % word_count
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
+        self.status = word_count <= 5
+        self.description = u"The title counts %d words" % word_count
 
 
 def countWords(string):
@@ -48,71 +34,63 @@ def countWords(string):
     return len(words)
 
 
-class DescriptionLengthFactory(SymptomFactory):
+class DescriptionLengthSymptom(SymptomBase):
 
     title = u"Description length"
     help = (u"Description should not count more than 20 significant words "
             u"(of more than three letters).")
 
-    def __call__(self):
+    def _update(self):
         word_count = countWords(self.context.Description())
-        status = word_count <= 20
-        description = u"The description counts %d words" % word_count
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
+        self.status = word_count <= 20
+        self.description = u"The description counts %d words" % word_count
 
 
-class BodyTextPresentFactory(SymptomFactory):
+class BodyTextPresentSymptom(SymptomBase):
 
     title = u"Body text present"
     help = u"Body text has content."
 
-    def __call__(self):
-        status = len(self.context.CookedBody(stx_level=2).strip())
-        if status:
-            description = self.help
+    def _update(self):
+        self.status = len(self.context.CookedBody(stx_level=2).strip())
+        if self.status:
+            self.description = self.help
         else:
-            description = u"Body text has no content."
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
+            self.description = u"Body text has no content."
 
 
-class ImagePresentFactory(SymptomFactory):
+class ImagePresentSymptom(SymptomBase):
 
     title = u"Image present"
     help = u"Image field has content."
 
-    def __call__(self):
-        status = hasImage(self.context)
-        if status:
-            description = self.help
+    def _update(self):
+        self.status = hasImage(self.context)
+        if self.status:
+            self.description = self.help
         else:
-            description = u"Image field has no content."
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
+            self.description = u"Image field has no content."
 
 
-class ImageSizeFactory(SymptomFactory):
+class ImageSizeSymptom(SymptomBase):
 
     title = u"Image size"
     help = u"Image field has correct size."
 
-    def __call__(self):
+    def _update(self):
         context = self.context
         if hasImage(context):
             imageField = context.Schema()['image']
             size = imageField.getSize(context)
-            status = size == (675, 380)
+            self.status = size == (675, 380)
         else:
-            status = False
+            self.status = False
             size = (0, 0)
-        if status:
-            description = self.help
+        if self.status:
+            self.description = self.help
         else:
-            description = (u"Image field has wrong size : %d, %d" %
+            self.description = (u"Image field has wrong size : %d, %d" %
                     (size[0], size[1]))
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
 
 
 def hasImage(value):

@@ -37,27 +37,27 @@
 
   <subscriber
      for="Products.CMFCore.interfaces.IMinimalDublinCore"
-     provides=".interfaces.ISymptomFactory"
-     factory=".symptoms.TitleLengthFactory" />
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.TitleLengthSymptom" />
 
   <subscriber
      for="Products.CMFCore.interfaces.IMinimalDublinCore"
-     provides=".interfaces.ISymptomFactory"
-     factory=".symptoms.DescriptionLengthFactory" />
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.DescriptionLengthSymptom" />
 
   <subscriber
      for="Products.ATContentTypes.interfaces.IATDocument"
-     provides=".interfaces.ISymptomFactory"
-     factory=".symptoms.BodyTextPresentFactory" />
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.BodyTextPresentSymptom" />
 
   <subscriber
      for="Products.ATContentTypes.interfaces.IATNewsItem"
-     provides=".interfaces.ISymptomFactory"
-     factory=".symptoms.ImagePresentFactory" />
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.ImagePresentSymptom" />
 
   <subscriber
      for="Products.ATContentTypes.interfaces.IATNewsItem"
-     provides=".interfaces.ISymptomFactory"
-     factory=".symptoms.ImageSizeFactory" />
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.ImageSizeSymptom" />
 
 </configure>

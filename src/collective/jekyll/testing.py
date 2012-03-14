@@ -5,8 +5,8 @@ from plone.app.testing import FunctionalTesting
 import collective.jekyll
 
 
-COLLECTIVE_JEKYLL = PloneWithPackageLayer(collective.jekyll,
-'collective.jekyll:default', name='COLLECTIVE_JEKYLL')
+COLLECTIVE_JEKYLL = PloneWithPackageLayer(module=collective.jekyll,
+    gs_profile_id='collective.jekyll:default', name='COLLECTIVE_JEKYLL')
 
 COLLECTIVE_JEKYLL_INTEGRATION = \
     IntegrationTesting(bases=(COLLECTIVE_JEKYLL, ),

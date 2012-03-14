@@ -28,4 +28,10 @@
         permission="jekyll.Diagnose"
         />
 
+   <browser:resourceDirectory
+        name="jekyll"
+        directory="static"
+        layer=".interfaces.IThemeSpecific"
+        />
+
 </configure>

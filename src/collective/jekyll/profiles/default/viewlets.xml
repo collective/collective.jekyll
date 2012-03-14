@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object purge="true">
+  <order manager="plone.belowcontenttitle">
+    <viewlet name="jekyll.item" />
+    <viewlet name="plone.belowcontenttitle.documentbyline" />
+  </order>
+</object>
+

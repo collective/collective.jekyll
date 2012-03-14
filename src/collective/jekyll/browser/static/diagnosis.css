@@ -1,0 +1,71 @@
+.diag-ok {
+  background-color: green;
+  color: white;
+}
+
+.diag-warning {
+  background-color: red;
+  color: white;
+}
+
+
+.symptoms {
+  border: 1px solid #CCC;
+  padding: .5em;
+  margin-top: 0.5em;
+  display: none;
+  clear: both;
+  position: absolute;
+  background-color: #FFF;
+  z-index: 100;
+}
+
+#content .symptoms li {
+  display: block;
+  padding: .5em;
+  margin: 0;
+}
+
+.symptoms li.even {
+  border: 1px solid #CCC;
+  background-color: #EEE;
+}
+
+.symptoms li.odd {
+  border: 1px solid #FFF;
+  background-color: #FFF;
+}
+
+.diagnosis .status {
+  clear: both;
+  float: left;
+  padding: 0 .5em;
+  border-radius: 0.5em 0.5em 0.5em 0.5em;
+  font-size: 85%;
+}
+
+.diagnosis > .status {
+  margin-right: .5em;
+  cursor: pointer;
+  line-height: 17px;
+}
+
+.diagnosis .symptoms .status {
+}
+
+.symptomTitle {
+  float: left;
+  font-weight: bold;
+  padding-left: .5em;
+}
+
+.symptomDescription,
+.symptomHelp {
+  clear: both;
+  display: block;
+}
+
+.symptomHelp {
+  color: #BBB;
+  font-size: 90%;
+}

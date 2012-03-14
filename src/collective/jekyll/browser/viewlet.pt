@@ -1,0 +1,1 @@
+<tal:diagnosis replace="structure view/diagnosis/@@detailed" />

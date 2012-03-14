@@ -4,11 +4,13 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.PloneBatch import Batch
 
+from plone.app.layout.viewlets.common import ViewletBase
+
 from collective.jekyll.browser.filter import DiagnosisFilter
 from collective.jekyll.interfaces import IDiagnosis
 
 
-class DiagnosisItem(BrowserView):
+class DiagnosisViewlet(ViewletBase):
 
     @property
     def diagnosis(self):

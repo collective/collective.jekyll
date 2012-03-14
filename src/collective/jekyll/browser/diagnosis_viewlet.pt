@@ -1,1 +1,0 @@
-<tal:diagnosis replace="structure context/@@diagnose_item" />

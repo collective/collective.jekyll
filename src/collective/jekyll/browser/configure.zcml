@@ -9,22 +9,22 @@
         for="Products.ATContentTypes.interfaces.IATTopic"
         name="diagnosis_view"
         class=".diagnosis.DiagnosisCollectionView"
-        template="diagnosis.pt"
+        template="collection_view.pt"
         permission="jekyll.Diagnose"
         />
 
    <browser:page
-        for="*"
-        name="diagnose_item"
-        class=".diagnosis.DiagnosisItem"
-        template="diagnosis_item.pt"
+        for="..interfaces.IDiagnosis"
+        name="detailed"
+        template="detailed.pt"
         permission="jekyll.Diagnose"
         />
 
    <browser:viewlet
         name="jekyll.item"
         manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
-        template="diagnosis_viewlet.pt"
+        class=".diagnosis.DiagnosisViewlet"
+        template="viewlet.pt"
         permission="jekyll.Diagnose"
         />
 

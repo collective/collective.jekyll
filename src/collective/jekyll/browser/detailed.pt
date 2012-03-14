@@ -1,13 +1,12 @@
-<div id="diagnosis"
-    tal:define="diagnosis view/diagnosis">
+<div id="diagnosis">
   <div id="status">
-    <span tal:define="status python:'ok' if diagnosis.status else 'warning'"
+    <span tal:define="status python:'ok' if context.status else 'warning'"
           tal:attributes="class string:diag_${status}"
           tal:content="status" />
   </div>        
   <div id="details">
     <ul class="symptoms">
-      <li tal:repeat="symptom diagnosis/symptoms">
+      <li tal:repeat="symptom context/symptoms">
         <span class="symptomTitle"
               tal:content="symptom/title" />
         <span class="symptomHelp"

@@ -3,11 +3,13 @@ from zope.interface import implements
 
 from collective.jekyll.interfaces import IDiagnosis
 
+
 class DiagnosisFactory(object):
     implements(IFactory)
 
     def __call__(self, *args, **kwargs):
-        raise NotImplemented('Diagnosis should be computed by inheriting classes.')
+        raise NotImplemented(
+                'Diagnosis should be computed by inheriting classes.')
 
     def getInterfaces(self):
         return IDiagnosis
@@ -15,7 +17,7 @@ class DiagnosisFactory(object):
 
 class Diagnosis(object):
     implements(IDiagnosis)
-    
+
     def __init__(self, title, description, status):
         self.title = title
         self.description = description
@@ -33,5 +35,3 @@ class TitleLength(DiagnosisFactory):
 def wordCount(string):
     words = [word for word in string.split() if len(word) > 3]
     return len(words)
-
-

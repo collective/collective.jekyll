@@ -1,0 +1,10 @@
+<div tal:define="status python:'ok' if context.status else 'warning'">
+  <span tal:attributes="class string:status diag-${status}"
+        tal:content="status" />
+  <span class="symptomTitle"
+        tal:content="context/title" />
+  <span class="symptomHelp"
+        tal:content="context/help" />
+  <span class="symptomDescription"
+        tal:content="context/description" />
+</div>

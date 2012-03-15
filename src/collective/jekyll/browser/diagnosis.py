@@ -6,6 +6,8 @@ from Products.CMFPlone.PloneBatch import Batch
 
 from plone.app.layout.viewlets.common import ViewletBase
 
+from plone.memoize import view
+
 from collective.jekyll.browser.filter import DiagnosisFilter
 from collective.jekyll.interfaces import IDiagnosis
 
@@ -19,6 +21,7 @@ class DiagnosisViewlet(ViewletBase):
 
 class DiagnosisCollectionView(BrowserView):
 
+    @view.memoize
     def items(self):
         b_start = int(self.request.get('b_start', 0))
         b_size = 20
@@ -30,3 +33,12 @@ class DiagnosisCollectionView(BrowserView):
         filter = DiagnosisFilter(results, total_length)
         results = Batch(filter, b_size, b_start)
         return results
+
+    @view.memoize
+    def getSymptomTitles(self):
+        titles = []
+        for item, diagnosis in self.items():
+            for symptom in diagnosis.symptoms:
+                if symptom.title not in titles:
+                    titles.append(symptom.title)
+        return titles

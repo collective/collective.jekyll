@@ -11,6 +11,7 @@ class Diagnosis(object):
     def __init__(self, context):
         self.context = context
         self._symptoms = None
+        self._mapping = {}
         self._status = True
 
     def _update(self):
@@ -21,6 +22,8 @@ class Diagnosis(object):
 
     def _updateSymptoms(self):
         self._symptoms = subscribers((self.context,), ISymptom)
+        for symptom in self._symptoms:
+            self._mapping[symptom.title] = symptom
    
     @property
     def symptoms(self):
@@ -31,6 +34,9 @@ class Diagnosis(object):
     def status(self):
         self._update()
         return self._status
+
+    def getSymptomByTitle(self, title):
+        return self._mapping[title]
     
 
 def diagnosisFromBrain(brain):

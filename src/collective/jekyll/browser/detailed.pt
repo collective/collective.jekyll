@@ -6,18 +6,9 @@
   </div>
   <ul class="symptoms hidden">
     <tal:symptoms repeat="symptom context/symptoms">
-    <li tal:define="status python:'ok' if symptom.status else 'warning';
-                    even repeat/symptom/even"
-        tal:attributes="class python:'even' if even else 'odd'">
-      <span tal:attributes="class string:status diag-${status}"
-            tal:content="status" />
-      <span class="symptomTitle"
-            tal:content="symptom/title" />
-      <span class="symptomHelp"
-            tal:content="symptom/help" />
-      <span class="symptomDescription"
-            tal:content="symptom/description" />
-    </li>
+    <li tal:content="structure symptom/@@view"
+        tal:define="even repeat/symptom/even" 
+        tal:attributes="class python:'even' if even else 'odd'" />
     </tal:symptoms>
   </ul>
 </div>

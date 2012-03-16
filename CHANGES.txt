@@ -4,11 +4,15 @@ Changelog
 0.1a2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add viewlet on content items.
+  [gotcha]
+
+- Refactored to use subscriber adapters.
+  [gotcha]
 
 
 0.1a1 (2012-02-17)
 ------------------
 
-- Initial functionality
+- Initial functionality.
   [gotcha]

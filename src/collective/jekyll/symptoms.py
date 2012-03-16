@@ -1,3 +1,7 @@
+import re
+
+from bs4 import BeautifulSoup
+
 from zope.interface import implements
 
 from collective.jekyll.interfaces import ISymptom
@@ -8,11 +12,27 @@ class SymptomBase(object):
 
     def __init__(self, context):
         self.context = context
+        self.status = True
+        self.description = ''
         self._update()
 
     def _update(self):
         raise NotImplemented(
                 'Update should be computed by inheriting classes.')
+
+
+class IdFormatSymptom(SymptomBase):
+
+    title = u"Id format"
+    help = (u"Id should not start with 'copy_of'.")
+
+    def _update(self):
+        id = self.context.getId()
+        copy = re.compile('^copy[0-9]*_of')
+        match = copy.match(id)
+        self.status = not bool(match)
+        if match:
+            self.description = u"Id starts with '%s'." % match.group()
 
 
 class TitleLengthSymptom(SymptomBase):
@@ -31,6 +51,31 @@ class TitleLengthSymptom(SymptomBase):
 def countWords(string):
     words = [word for word in string.split() if len(word) > 3]
     return len(words)
+
+
+class TitleFormatSymptom(SymptomBase):
+
+    title = u"Title format"
+    help = (u"Title should begin with uppercase letter.")
+
+    def _update(self):
+        title = self.context.Title()
+        if len(title):
+            self.status = title[0].isupper()
+        self.description = u"Title does not begin with uppercase letter."
+
+
+class DescriptionFormatSymptom(SymptomBase):
+
+    title = u"Description format"
+    help = (u"Description should begin with uppercase letter.")
+
+    def _update(self):
+        description = self.context.Description()
+        if len(description):
+            self.status = description[0].isupper()
+            self.description = (u"Description does not begin "
+                    u"with uppercase letter.")
 
 
 class DescriptionLengthSymptom(SymptomBase):
@@ -52,10 +97,22 @@ class BodyTextPresentSymptom(SymptomBase):
 
     def _update(self):
         self.status = len(self.context.CookedBody(stx_level=2).strip())
-        if self.status:
-            self.description = u"Body text has some content."
-        else:
+        if not self.status:
             self.description = u"Body text has no content."
+
+
+class LinksInBodySymptom(SymptomBase):
+
+    title = u"Links In Body"
+    help = u"Body text should have 2 links."
+
+    def _update(self):
+        cooked = self.context.CookedBody(stx_level=2).strip()
+        soup = BeautifulSoup(cooked)
+        links = soup.find_all('a')
+        self.status = len(links) > 1
+        if not self.status:
+            self.description = u"Body text has no links."
 
 
 class ImagePresentSymptom(SymptomBase):

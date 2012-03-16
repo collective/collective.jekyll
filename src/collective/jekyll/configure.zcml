@@ -34,6 +34,11 @@
      factory=".diagnosis.diagnosisFromBrain" />
 
    <!-- symptoms -->
+  
+  <subscriber
+     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.IdFormatSymptom" />
 
   <subscriber
      for="Products.CMFCore.interfaces.IMinimalDublinCore"
@@ -43,12 +48,27 @@
   <subscriber
      for="Products.CMFCore.interfaces.IMinimalDublinCore"
      provides=".interfaces.ISymptom"
+     factory=".symptoms.TitleFormatSymptom" />
+
+  <subscriber
+     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     provides=".interfaces.ISymptom"
      factory=".symptoms.DescriptionLengthSymptom" />
+
+  <subscriber
+     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.DescriptionFormatSymptom" />
 
   <subscriber
      for="Products.ATContentTypes.interfaces.IATDocument"
      provides=".interfaces.ISymptom"
      factory=".symptoms.BodyTextPresentSymptom" />
+
+  <subscriber
+     for="Products.ATContentTypes.interfaces.IATDocument"
+     provides=".interfaces.ISymptom"
+     factory=".symptoms.LinksInBodySymptom" />
 
   <subscriber
      for="Products.ATContentTypes.interfaces.IATNewsItem"

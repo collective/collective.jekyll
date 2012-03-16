@@ -33,7 +33,8 @@ setup(name='collective.jekyll',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Plone'
+          'Plone',
+          'beautifulsoup4',
       ],
       extras_require={'test': ['plone.app.testing']},
       )

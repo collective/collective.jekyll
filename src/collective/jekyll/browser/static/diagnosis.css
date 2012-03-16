@@ -1,3 +1,17 @@
+.diag-warning,
+.diag-ok {
+  margin: auto;
+  font-weight: bold;
+  line-height: 17px;
+  padding: .2em .5em;
+  border-radius: 0.5em 0.5em 0.5em 0.5em;
+  font-size: 85%;
+}
+
+.diagnosis .globalstatus {
+  padding: 0 .5em;
+}
+
 .diag-ok {
   background-color: green;
   color: white;
@@ -8,64 +22,84 @@
   color: white;
 }
 
+#content .diagnosis dd {
+  margin: 0;
+  border-radius: 0 0.5em 0.5em 0.5em;
+  padding: 0.3em;
+}
 
-.symptoms {
-  border: 1px solid #CCC;
-  padding: .5em;
-  margin-top: 0.5em;
-  display: none;
+#content ul.symptoms {
+  border: 0;
+  padding: 0.2em;
+  margin: 0;
   clear: both;
-  position: absolute;
-  background-color: #FFF;
-  z-index: 100;
+  color: black;
+  font-size: 118%;
+  font-weight: normal;
+}
+
+dd.diag-warning {
+  background-color: red;
+}
+
+dd.diag-ok {
+  background-color: green;
 }
 
 #content .symptoms li {
   display: block;
-  padding: .5em;
+  padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 
 .symptoms li.even {
-  border: 1px solid #CCC;
-  background-color: #EEE;
+  background-color: #F2F2F2;
 }
 
 .symptoms li.odd {
-  border: 1px solid #FFF;
   background-color: #FFF;
 }
 
-.diagnosis .status {
-  clear: both;
-  float: left;
-  padding: 0 .5em;
-  border-radius: 0.5em 0.5em 0.5em 0.5em;
-  font-size: 85%;
+dl.menu {
+  position: relative;
 }
 
-.diagnosis > .status {
-  margin-right: .5em;
+dl.menu dd {
+  display: none;
+  position: absolute;
+  z-index: 5;
+}
+
+dl.menu dd.activated {
+  display: block;
+  left: 0.5em;
+  top: 17px;
+}
+
+dl.menu .menuHandle {
   cursor: pointer;
-  line-height: 17px;
 }
 
-.diagnosis .symptoms .status {
+#content .diagnosis.menu dt {
+  margin-right: 0.5em;
+}
+
+.diagnosis .symptom {
+  padding: 0.5em;
+}
+
+.diagnosis .globalstatus {
+  float: left;
 }
 
 .symptomTitle {
-  float: left;
   font-weight: bold;
-  padding-left: .5em;
-}
-
-.symptomDescription,
-.symptomHelp {
-  clear: both;
-  display: block;
 }
 
 .symptomHelp {
-  color: #BBB;
+  display: none;
+  font-weight: normal;
   font-size: 90%;
+  color: #BBB;
 }

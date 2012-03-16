@@ -22,8 +22,9 @@
                      <thead>
                        <tr>
                             <th>Diagnosis</th>
-                            <th tal:repeat="symptomTitle view/getSymptomTitles"
-                                tal:content="symptomTitle" />
+                            <th tal:repeat="type view/getSymptomTypes"
+                                tal:content="type/title"
+                                tal:attributes="title type/help" />
                             <th tal:repeat="field here/getCustomViewFields"
                                 tal:content="python:vocab.getValue(field, field)"
                                 i18n:translate=""/>
@@ -36,10 +37,12 @@
                                        status diagnosis/status;
                                        oddrow repeat/result/odd;"
                           tal:attributes="class python:'even' if oddrow else 'odd'">
-                            <td tal:content="structure diagnosis/@@detailed" />
-                            <tal:symptoms repeat="symptomTitle view/getSymptomTitles">
-                            <td tal:define="symptom python:diagnosis.getSymptomByTitle(symptomTitle)"
-                                tal:content="structure symptom/@@view" />
+                            <td tal:content="structure diagnosis/@@status" />
+                            <tal:symptoms repeat="type view/getSymptomTypes">
+                            <td tal:define="symptom python:diagnosis.getSymptomByTitle(type['title'])">
+                               <span tal:condition="symptom" 
+                                     tal:content="structure symptom/@@status" />
+                            </td>
                             </tal:symptoms>
                             <tal:fields repeat="field here/getCustomViewFields"
                                         define="normalizeString nocall:context/@@plone/normalizeString;

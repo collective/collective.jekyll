@@ -24,20 +24,29 @@ class Diagnosis(object):
         self._symptoms = subscribers((self.context,), ISymptom)
         for symptom in self._symptoms:
             self._mapping[symptom.title] = symptom
-   
+
     @property
     def symptoms(self):
         self._update()
         return self._symptoms
-    
+
     @property
     def status(self):
         self._update()
         return self._status
 
     def getSymptomByTitle(self, title):
-        return self._mapping[title]
-    
+        return self._mapping.get(title, None)
+
+    def getSymptomsByStatus(self, status):
+        return [symptom for symptom in self.symptoms
+                if bool(symptom.status) == status]
+
+    def sorted_symptoms(self):
+        result = self.getSymptomsByStatus(False)
+        result.extend(self.getSymptomsByStatus(True))
+        return result
+
 
 def diagnosisFromBrain(brain):
     return Diagnosis(brain.getObject())

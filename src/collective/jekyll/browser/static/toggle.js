@@ -1,13 +1,16 @@
 jQuery(function($) {
     function toggleDocumentMouseDown(event) {
-        if (jQuery(event.target).parents('.symptoms').length)
+        if (jQuery(event.target).parents('.menu').length)
             // target is part of the menu, so just return and do the default
             return true;
 
-         $('.diagnosis > .symptoms').hide();
+         $('.menu > dd').removeClass('activated');
     };
     jQuery(document).mousedown(toggleDocumentMouseDown);
-    $('.diagnosis > .status').click(function() {
-        $(this).siblings().first().toggle();
+    $('.menu .menuHandle').click(function() {
+        $(this).parents('dl').first().children('dd').toggleClass('activated');
+    });
+    $('.symptom').click(function() {
+        $(this).children('.symptomHelp').slideToggle();
     });
 });

@@ -35,10 +35,11 @@ class DiagnosisCollectionView(BrowserView):
         return results
 
     @view.memoize
-    def getSymptomTitles(self):
-        titles = []
+    def getSymptomTypes(self):
+        helps = []
         for item, diagnosis in self.items():
             for symptom in diagnosis.symptoms:
-                if symptom.title not in titles:
-                    titles.append(symptom.title)
-        return titles
+                help = dict(title=symptom.title, help=symptom.help)
+                if help not in helps:
+                    helps.append(help)
+        return helps

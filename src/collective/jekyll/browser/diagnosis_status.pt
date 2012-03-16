@@ -1,0 +1,3 @@
+<div><span tal:define="status python:'ok' if context.status else 'warning'"
+      tal:attributes="class string:globalstatus diag-${status}"
+      tal:content="status" /></div>

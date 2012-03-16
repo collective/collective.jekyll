@@ -1,4 +1,3 @@
-from zope.component.interfaces import IFactory
 from zope.interface import implements
 
 from collective.jekyll.interfaces import ISymptom
@@ -42,19 +41,19 @@ class DescriptionLengthSymptom(SymptomBase):
 
     def _update(self):
         word_count = countWords(self.context.Description())
-        self.status = word_count <= 20
+        self.status = (word_count <= 20) and (word_count > 0)
         self.description = u"The description counts %d words" % word_count
 
 
 class BodyTextPresentSymptom(SymptomBase):
 
-    title = u"Body text present"
-    help = u"Body text has content."
+    title = u"Body text"
+    help = u"Body text should have content."
 
     def _update(self):
         self.status = len(self.context.CookedBody(stx_level=2).strip())
         if self.status:
-            self.description = self.help
+            self.description = u"Body text has some content."
         else:
             self.description = u"Body text has no content."
 
@@ -62,12 +61,12 @@ class BodyTextPresentSymptom(SymptomBase):
 class ImagePresentSymptom(SymptomBase):
 
     title = u"Image present"
-    help = u"Image field has content."
+    help = u"Image field should have content."
 
     def _update(self):
         self.status = hasImage(self.context)
         if self.status:
-            self.description = self.help
+            self.description = u"Image field has content."
         else:
             self.description = u"Image field has no content."
 
@@ -75,7 +74,7 @@ class ImagePresentSymptom(SymptomBase):
 class ImageSizeSymptom(SymptomBase):
 
     title = u"Image size"
-    help = u"Image field has correct size."
+    help = u"Image field should have correct size."
 
     def _update(self):
         context = self.context
@@ -87,10 +86,11 @@ class ImageSizeSymptom(SymptomBase):
             self.status = False
             size = (0, 0)
         if self.status:
-            self.description = self.help
+            self.description = u"Image field content has correct size."
         else:
-            self.description = (u"Image field has wrong size : %d, %d" %
-                    (size[0], size[1]))
+            self.description = (
+                u"Image field content has wrong size : %d, %d" %
+                (size[0], size[1]))
 
 
 def hasImage(value):

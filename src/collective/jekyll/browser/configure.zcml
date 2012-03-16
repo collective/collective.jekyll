@@ -21,9 +21,23 @@
         />
 
    <browser:page
+        for="..interfaces.IDiagnosis"
+        name="status"
+        template="diagnosis_status.pt"
+        permission="jekyll.Diagnose"
+        />
+
+   <browser:page
         for="..interfaces.ISymptom"
         name="view"
         template="symptom.pt"
+        permission="jekyll.Diagnose"
+        />
+
+   <browser:page
+        for="..interfaces.ISymptom"
+        name="status"
+        template="symptom_status.pt"
         permission="jekyll.Diagnose"
         />
 

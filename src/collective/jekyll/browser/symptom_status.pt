@@ -1,0 +1,5 @@
+<div tal:define="status python:'ok' if context.status else 'warning'"
+  class="symptom">
+  <span tal:attributes="class string:status diag-${status}"
+    tal:content="status" />
+</div>

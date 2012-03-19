@@ -4,11 +4,6 @@ from zope.component import testing
 from zope.component import provideSubscriptionAdapter
 from zope.component import provideAdapter
 
-from collective.jekyll.interfaces import ISymptom
-from collective.jekyll.interfaces import IDiagnosis
-from collective.jekyll.symptoms import SymptomBase
-from collective.jekyll.diagnosis import Diagnosis
-
 
 class Counter(object):
 
@@ -37,36 +32,41 @@ def getStatuses(item):
     return value, diag.status, substatuses
 
 
-class PositiveSymptom(SymptomBase):
-    title = "Positive"
-    help = "Is positive."
-
-    def _update(self):
-        context = self.context
-        counter.inc()
-        self.status = context > 0
-        if not self.status:
-            self.description = u"Is zero or negative."
-
-
-class GreaterThanOneSymptom(SymptomBase):
-    title = "Greater than one"
-    help = title
-
-    def _update(self):
-        context = self.context
-        self.status = context > 1
-        if not self.status:
-            self.description = u"Is smaller than one."
-
-
 class Filter(unittest.TestCase):
 
     def setUp(self):
+        from collective.jekyll.interfaces import IDiagnosis
+        from collective.jekyll.interfaces import ISymptom
+        from collective.jekyll.diagnosis import Diagnosis
+        from collective.jekyll.symptoms import SymptomBase
+
         testing.setUp(self)
         provideAdapter(Diagnosis, [int], IDiagnosis)
+
+        class PositiveSymptom(SymptomBase):
+            title = "Positive"
+            help = "Is positive."
+
+            def _update(self):
+                context = self.context
+                counter.inc()
+                self.status = context > 0
+                if not self.status:
+                    self.description = u"Is zero or negative."
+
         provideSubscriptionAdapter(
                 PositiveSymptom, [int], ISymptom)
+
+        class GreaterThanOneSymptom(SymptomBase):
+            title = "Greater than one"
+            help = title
+
+            def _update(self):
+                context = self.context
+                self.status = context > 1
+                if not self.status:
+                    self.description = u"Is smaller than one."
+
         provideSubscriptionAdapter(
                 GreaterThanOneSymptom, [int], ISymptom)
         counter.clear()

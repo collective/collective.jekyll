@@ -4,10 +4,9 @@ from zope.component import testing
 from zope.component import provideSubscriptionAdapter
 from zope.component import provideAdapter
 
-from collective.jekyll.interfaces import ISymptomFactory
+from collective.jekyll.interfaces import ISymptom
 from collective.jekyll.interfaces import IDiagnosis
-from collective.jekyll.symptoms import SymptomFactory
-from collective.jekyll.symptoms import Symptom
+from collective.jekyll.symptoms import SymptomBase
 from collective.jekyll.diagnosis import Diagnosis
 
 
@@ -38,35 +37,27 @@ def getStatuses(item):
     return value, diag.status, substatuses
 
 
-class PositiveFactory(SymptomFactory):
+class PositiveSymptom(SymptomBase):
     title = "Positive"
     help = "Is positive."
 
-    def __call__(self):
+    def _update(self):
         context = self.context
         counter.inc()
-        status = context > 0
-        if status:
-            description = self.help
-        else:
-            description = u"Is zero or negative."
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
+        self.status = context > 0
+        if not self.status:
+            self.description = u"Is zero or negative."
 
 
-class GreaterThanOneFactory(SymptomFactory):
+class GreaterThanOneSymptom(SymptomBase):
     title = "Greater than one"
     help = title
 
-    def __call__(self):
+    def _update(self):
         context = self.context
-        status = context > 1
-        if status:
-            description = self.help
-        else:
-            description = u"Is smaller than one."
-        symptom = Symptom(self.title, self.help, status, description)
-        return symptom
+        self.status = context > 1
+        if not self.status:
+            self.description = u"Is smaller than one."
 
 
 class Filter(unittest.TestCase):
@@ -75,9 +66,9 @@ class Filter(unittest.TestCase):
         testing.setUp(self)
         provideAdapter(Diagnosis, [int], IDiagnosis)
         provideSubscriptionAdapter(
-                PositiveFactory, [int], ISymptomFactory)
+                PositiveSymptom, [int], ISymptom)
         provideSubscriptionAdapter(
-                GreaterThanOneFactory, [int], ISymptomFactory)
+                GreaterThanOneSymptom, [int], ISymptom)
         counter.clear()
 
     def tearDown(self):

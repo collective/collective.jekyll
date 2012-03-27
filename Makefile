@@ -19,7 +19,7 @@ develop-eggs: bootstrap.py
 	python bootstrap.py
 else
 bin/python:
-        virtualenv-2.6 --no-site-packages .
+	virtualenv-2.6 --no-site-packages .
 
 develop-eggs: bin/python bootstrap.py
 	./bin/python bootstrap.py

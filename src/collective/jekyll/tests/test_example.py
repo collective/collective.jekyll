@@ -2,8 +2,7 @@ import unittest2 as unittest
 
 from Products.CMFCore.utils import getToolByName
 
-from collective.jekyll.testing import\
-    COLLECTIVE_JEKYLL_INTEGRATION
+from collective.jekyll.testing import COLLECTIVE_JEKYLL_INTEGRATION
 
 
 class TestExample(unittest.TestCase):

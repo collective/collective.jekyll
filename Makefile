@@ -2,7 +2,7 @@
 #
 options =
 
-.PHONY: instance cleanall
+.PHONY: instance cleanall test
 
 PACKAGE_ROOT = src/collective/jekyll
 
@@ -22,6 +22,10 @@ develop-eggs: bin/python bootstrap.py
 
 bin/buildout: develop-eggs
 
+bin/test: $(BUILDOUT_FILES)
+	./bin/buildout -Nvt 5 install test
+	touch $@
+
 bin/instance: $(BUILDOUT_FILES)
 	./bin/buildout -Nvt 5 install instance
 	touch $@
@@ -34,4 +38,7 @@ instance: bin/instance $(DATA_FS)
 
 cleanall:
 	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
+
+test: bin/test
+	bin/test
 

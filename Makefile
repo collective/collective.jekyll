@@ -32,13 +32,14 @@ bin/python:
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
 
+bin/pip: bin/python
+	touch $@
+
 PYBOT_BINARY = bin/pybot
 
-bin/pip: bin/python
-
 $(PYBOT_BINARY): bin/pip
-	bin/pip install robotframework-selenium2library
 	bin/pip install robotframework==2.7.1
+	bin/pip install --extra-index-url http://packages.affinitic.be robotframework-selenium2library==1.0.0.2
 endif
 
 buildout.cfg:

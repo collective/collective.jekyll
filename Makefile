@@ -10,6 +10,8 @@ GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
 BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
 
+PYBOT_BUILDOUT_FILES = $(BUILDOUT_FILES) pybot.cfg
+
 DATA_FS = var/filestorage/Data.fs
 
 all: instance
@@ -21,12 +23,22 @@ endif
 ifdef IS_TRAVIS
 develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
+
+PYBOT_BINARY = pybot
 else
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
+
+PYBOT_BINARY = bin/pybot
+
+bin/pip: bin/python
+
+$(PYBOT_BINARY): bin/pip
+	bin/pip install robotframework-selenium2library
+	bin/pip install robotframework==2.7.1
 endif
 
 buildout.cfg:
@@ -43,6 +55,7 @@ bin/instance: $(BUILDOUT_FILES)
 	touch $@
 	
 $(DATA_FS): $(GS_FILES)	bin/instance
+	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	./bin/buildout -Nvt 5 install plonesite
 
 instance: bin/instance $(DATA_FS)
@@ -54,3 +67,22 @@ cleanall:
 test: bin/test	
 	./bin/test
 
+bin/seleniumrc: $(PYBOT_BUILDOUT_FILES)
+	./bin/buildout -Nvt 5 -c pybot.cfg install seleniumrc
+	touch $@
+
+bin/supervisord: $(PYBOT_BUILDOUT_FILES)
+	./bin/buildout -Nvt 5 -c pybot.cfg install supervisor
+	touch $@
+
+bin/supervisorctl: bin/supervisord
+	touch $@
+
+var/supervisord.pid: bin/supervisord bin/instance bin/seleniumrc bin/supervisorctl
+	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
+	bin/supervisord --pidfile=$@
+	bin/supervisorctl start all
+	touch $@
+
+pybot: $(PYBOT_BINARY) var/supervisord.pid
+	$(PYBOT_BINARY) $(options) -d robot-output acceptance-tests

@@ -1,0 +1,57 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Adapted from code provided by 
+# Author:            Emerson Macedo - http://github.com/emerleite - http://codificando.com
+# Description:       Manage selenium server start and stop
+### END INIT INFO
+
+NAME="selenium"
+PIDFILE="./selenium.pid"
+LOGFILE="./var/log/selenium.log"
+JARFILE="./parts/selenium/selenium-server.jar"
+
+start_app() {
+    echo "Starting $NAME..."
+    if [ -f $PIDFILE ]
+    then
+        echo "$NAME is already running !"
+    else
+        java -jar $JARFILE >$LOGFILE 2>&1 & echo $! > $PIDFILE
+        echo "$NAME has started."
+    fi
+} 
+
+stop_app() {
+    echo "Stopping $NAME..."
+    if [ ! -f $PIDFILE ]
+    then
+        echo "$NAME was not running !"
+    else
+        kill -9 `cat $PIDFILE`
+        rm -f $PIDFILE
+        echo "$NAME has been stopped."
+    fi
+}
+
+case "$1" in
+  start)
+        start_app
+        ;;
+  stop)
+        stop_app
+        ;;
+  restart|force-reload)
+        echo "Restarting $NAME..."
+        stop_app
+        sleep 2
+        start_app
+        echo "$NAME restarted."
+        ;;
+  *)
+        echo "Usage: $NAME.sh {start|stop|restart|force-reload}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
+

@@ -7,6 +7,14 @@ Test setup
 
 *** Test cases ***
 
+Create Folder
+    [Tags]  edit
+    Click Link  css=li#portaltab-index_html a
+    Open Add New Menu
+    Click Link  css=#plone-contentmenu-factories a#folder
+    Input Text  title  Test folder
+    Click Button  Save
+
 Create Document
     [Tags]  edit
     Open Add New Menu
@@ -44,7 +52,7 @@ Select settings tab
 
 Create Related Document
     [Tags]  edit
-    Click Link  css=li#portaltab-index_html a
+    Click Link  css=li#portaltab-test-folder a
     Open Add New Menu
     Click Link  css=#plone-contentmenu-factories a#document
     Input Text  title  A related test page

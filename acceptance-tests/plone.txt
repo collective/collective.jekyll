@@ -22,6 +22,7 @@ Start browser and wake plone up
     Maximize browser window
     
     Set Selenium timeout  30s
+    Goto homepage
     Wait until keyword succeeds  30s  1s  Log in  admin  admin
     Log out
     Set Selenium timeout  7s
@@ -31,7 +32,7 @@ Close browser and selenium server
 
 Goto homepage
     Go to   ${PLONE_URL}
-    Page should contain  Plone site
+    Page should contain  Dr Jekyll Diagnosis
 
 Log out
     Go to  ${PLONE_URL}/logout

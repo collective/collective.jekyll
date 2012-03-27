@@ -19,13 +19,13 @@ IS_TRAVIS = yes
 endif
 
 ifdef IS_TRAVIS
-develop-eggs: bootstrap.py
+develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
 else
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 
-develop-eggs: bin/python bootstrap.py
+develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
 endif
 

@@ -12,20 +12,19 @@ ${BROWSER} =  Firefox
 
 Start browser and wake plone up
 
-
     Set Selenium timeout  3s
     
     ${previous}  Register keyword to run on failure  Close Browser
-    Wait until keyword succeeds  2min  3s  Open Browser  ${ZOPE_URL}  browser=${BROWSER}
+    Wait until keyword succeeds  2min  3s  Access plone
     Register keyword to run on failure  ${previous}
 
-    Maximize browser window
-    
-    Set Selenium timeout  30s
-    Goto homepage
     Wait until keyword succeeds  30s  1s  Log in  admin  admin
     Log out
-    Set Selenium timeout  7s
+
+Access plone
+    Open browser  ${ZOPE_URL}  ${BROWSER}
+    Goto homepage
+    [Return]  True
 
 Close browser and selenium server
     Close browser
@@ -46,6 +45,7 @@ Log in
     Input text  __ac_password  ${password}
     Click Button  Log in
     Go to  ${PLONE_URL}
+    [Return]  True
 
 Click Overlay Link
     [Arguments]  ${element}

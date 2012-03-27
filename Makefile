@@ -14,11 +14,16 @@ DATA_FS = var/filestorage/Data.fs
 
 all: instance
 
+ifdef $TRAVIS_PYTHON_VERSION
+develop-eggs: bootstrap.py
+	python bootstrap.py
+else
 bin/python:
-	virtualenv-2.6 --no-site-packages .
+        virtualenv-2.6 --no-site-packages .
 
 develop-eggs: bin/python bootstrap.py
 	./bin/python bootstrap.py
+endif
 
 bin/buildout: develop-eggs
 
@@ -39,6 +44,6 @@ instance: bin/instance $(DATA_FS)
 cleanall:
 	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
 
-test: bin/test
-	bin/test
+test: bin/test	
+	./bin/test
 

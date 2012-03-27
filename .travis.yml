@@ -7,9 +7,9 @@ before_script:
 install:
   - pip install robotframework>=2.7.1 --use-mirrors
   - pip install --extra-index-url http://packages.affinitic.be robotframework-selenium2library==1.0.0.2
-  - make bin/buildout
+#  - make bin/buildout
 # command to run tests, e.g. python setup.py test
 script: 
-  - make test
+#  - make test
   - make pybot
 

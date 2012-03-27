@@ -14,7 +14,7 @@ DATA_FS = var/filestorage/Data.fs
 
 all: instance
 
-ifdef $TRAVIS_PYTHON_VERSION
+ifdef $(TRAVIS_PYTHON_VERSION)
 develop-eggs: bootstrap.py
 	python bootstrap.py
 else

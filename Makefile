@@ -14,15 +14,15 @@ DATA_FS = var/filestorage/Data.fs
 
 all: instance
 
-ifdef $(TRAVIS_PYTHON_VERSION)
-develop-eggs: bootstrap.py
-	python bootstrap.py
-else
+ifeq ($(strip $(TRAVIS_PYTHON_VERSION)),)
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 
 develop-eggs: bin/python bootstrap.py
 	./bin/python bootstrap.py
+else
+develop-eggs: bootstrap.py
+	python bootstrap.py
 endif
 
 bin/buildout: develop-eggs

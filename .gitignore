@@ -8,3 +8,4 @@ var/
 *.swp
 src/*.egg-info
 buildout.cfg
+coverage

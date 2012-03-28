@@ -68,10 +68,6 @@ cleanall:
 test: bin/test	
 	./bin/test
 
-bin/seleniumrc: $(PYBOT_BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 -c pybot.cfg install seleniumrc
-	touch $@
-
 bin/supervisord: $(PYBOT_BUILDOUT_FILES)
 	./bin/buildout -Nvt 5 -c pybot.cfg install supervisor
 	touch $@
@@ -79,7 +75,7 @@ bin/supervisord: $(PYBOT_BUILDOUT_FILES)
 bin/supervisorctl: bin/supervisord
 	touch $@
 
-var/supervisord.pid: bin/supervisord bin/instance bin/seleniumrc bin/supervisorctl
+var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	bin/supervisord --pidfile=$@
 	bin/supervisorctl start all

@@ -2,7 +2,7 @@
 #
 options =
 
-.PHONY: instance cleanall test
+.PHONY: instance cleanall test robot
 
 PACKAGE_ROOT = src/collective/jekyll
 
@@ -81,5 +81,5 @@ var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	bin/supervisorctl start all
 	touch $@
 
-pybot: $(PYBOT_BINARY) var/supervisord.pid
+robot: $(PYBOT_BINARY) var/supervisord.pid
 	$(PYBOT_BINARY) $(options) -d robot-output acceptance-tests

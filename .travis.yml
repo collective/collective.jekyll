@@ -11,5 +11,5 @@ install:
 # command to run tests, e.g. python setup.py test
 script: 
 #  - make test
-  - make pybot
+  - make robot
 

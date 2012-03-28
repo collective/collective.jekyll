@@ -25,6 +25,9 @@ develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
 
 PYBOT_BINARY = pybot
+
+$(PYBOT_BINARY):
+	echo "noop" 
 else
 bin/python:
 	virtualenv-2.6 --no-site-packages .

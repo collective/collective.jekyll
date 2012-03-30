@@ -2,6 +2,7 @@ from zope.interface import Interface
 
 from zope.schema import TextLine
 from zope.schema import List
+from zope.schema import Bool
 from zope.schema import Int
 from zope.schema import Text
 from zope.schema import Object
@@ -13,6 +14,12 @@ class ISymptom(Interface):
     help = Text(title=u'Help')
     description = Text(title=u'Description')
     status = Int(title=u'Status')
+
+
+class IIsActive(Interface):
+
+    isActive = Bool(title=u'isActive')
+    name = TextLine(title=u'Name')
 
 
 class IDiagnosis(Interface):

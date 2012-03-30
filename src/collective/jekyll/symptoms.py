@@ -3,8 +3,15 @@ import re
 from bs4 import BeautifulSoup
 
 from zope.interface import implements
+from zope.component import getUtility
+from zope.schema import Bool
+
+from plone.registry import Record
+from plone.registry.interfaces import IRegistry
+from plone.registry.interfaces import IPersistentField
 
 from collective.jekyll.interfaces import ISymptom
+from collective.jekyll.interfaces import IIsActive
 
 
 class SymptomBase(object):
@@ -19,6 +26,37 @@ class SymptomBase(object):
     def _update(self):
         raise NotImplemented(
                 'Update should be computed by inheriting classes.')
+
+    @property
+    def isActive(self):
+        return IIsActive(self).isActive
+
+
+class ActiveSymptom(object):
+    implements(IIsActive)
+
+    def __init__(self, context):
+        self.context = context
+
+    @property
+    def isActive(self):
+        registry = getUtility(IRegistry)
+        active = registry.get(self.name, None)
+        if active is None:
+            makeRegistryRecord(registry, self)
+            active = True
+        return active
+
+    @property
+    def name(self):
+        klass = self.context.__class__
+        return '.'.join((klass.__module__, klass.__name__))
+
+
+def makeRegistryRecord(registry, symptom):
+    field = IPersistentField(Bool(title=u"Active symptom", description=u"",
+        default=True))
+    registry.records[symptom.name] = Record(field, True)
 
 
 class IdFormatSymptom(SymptomBase):

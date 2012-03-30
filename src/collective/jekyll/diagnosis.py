@@ -21,7 +21,9 @@ class Diagnosis(object):
                 self._status = self._status and symptom.status
 
     def _updateSymptoms(self):
-        self._symptoms = subscribers((self.context,), ISymptom)
+        self._symptoms = [symptom
+                for symptom in subscribers((self.context,), ISymptom)
+                if symptom.isActive]
         for symptom in self._symptoms:
             self._mapping[symptom.title] = symptom
 

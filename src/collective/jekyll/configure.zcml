@@ -73,6 +73,11 @@
   <subscriber
      for="Products.ATContentTypes.interfaces.IATDocument"
      provides=".interfaces.ISymptom"
+     factory=".symptoms.SpacesInBodySymptom" />
+
+  <subscriber
+     for="Products.ATContentTypes.interfaces.IATDocument"
+     provides=".interfaces.ISymptom"
      factory=".symptoms.LinksInBodySymptom" />
 
   <subscriber

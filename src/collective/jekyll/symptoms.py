@@ -139,6 +139,25 @@ class BodyTextPresentSymptom(SymptomBase):
             self.description = u"Body text has no content."
 
 
+class SpacesInBodySymptom(SymptomBase):
+
+    title = u"Spaces In Body"
+    help = u"Body text should not start or end with empty tags or BR."
+
+    def _update(self):
+        self.status = True
+        cooked = self.context.CookedBody(stx_level=2).strip()
+        soup = BeautifulSoup(cooked)
+        for child in soup.children:
+            if not child.previousSibling and not child.text:
+                self.status = False
+                self.description = u"Body text starts with empty tags or BR."
+        if not child.text:
+            self.status = False
+            if child.previousSibling:
+                self.description = u"Body text ends with empty tags or BR."
+
+
 class LinksInBodySymptom(SymptomBase):
 
     title = u"Links In Body"

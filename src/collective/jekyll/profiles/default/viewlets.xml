@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object>
-  <order manager="plone.belowcontenttitle">
+  <order manager="plone.belowcontenttitle" skinname="*">
     <viewlet name="jekyll.item" />
     <viewlet name="plone.belowcontenttitle.documentbyline" />
   </order>

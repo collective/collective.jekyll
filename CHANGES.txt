@@ -1,11 +1,10 @@
 Changelog
 =========
 
-0.1a3 (unreleased)
+0.1a3 (2012-04-30)
 ------------------
 
-- Nothing changed yet.
-
+- Symptoms can be deactivated in registry.
 
 0.1a2 (2012-03-16)
 ------------------
@@ -15,7 +14,6 @@ Changelog
 
 - Refactored to use subscriber adapters.
   [gotcha]
-
 
 0.1a1 (2012-02-17)
 ------------------

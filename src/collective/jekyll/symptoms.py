@@ -136,11 +136,13 @@ class SpacesInBodySymptom(SymptomBase):
         self.status = True
         cooked = self.context.CookedBody(stx_level=2).strip()
         soup = BeautifulSoup(cooked)
+        child_count = 0
         for child in soup.children:
+            child_count += 1
             if not child.previousSibling and not child.text:
                 self.status = False
                 self.description = u"Body text starts with empty tags or BR."
-        if not child.text:
+        if child_count != 0 and not child.text:
             self.status = False
             if child.previousSibling:
                 self.description = u"Body text ends with empty tags or BR."

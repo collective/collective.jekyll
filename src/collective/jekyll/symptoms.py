@@ -139,13 +139,19 @@ class SpacesInBodySymptom(SymptomBase):
         child_count = 0
         for child in soup.children:
             child_count += 1
-            if not child.previousSibling and not child.text:
+            if not child.previousSibling and empty_or_spaces(child.text):
                 self.status = False
                 self.description = u"Body text starts with empty tags or BR."
-        if child_count != 0 and not child.text:
+        if child_count != 0 and empty_or_spaces(child.text):
             self.status = False
             if child.previousSibling:
                 self.description = u"Body text ends with empty tags or BR."
+
+
+def empty_or_spaces(text):
+    #get rid of non breaking spaces
+    text = text.replace(u'\xa0', u' ').strip()
+    return not bool(text)
 
 
 class LinksInBodySymptom(SymptomBase):

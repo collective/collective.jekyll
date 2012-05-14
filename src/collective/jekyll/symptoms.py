@@ -9,7 +9,7 @@ from plone.registry.interfaces import IRegistry
 
 from collective.jekyll.interfaces import ISymptom
 from collective.jekyll.interfaces import IIsActive
-
+from collective.jekyll import jekyllMessageFactory as _
 
 class SymptomBase(object):
     implements(ISymptom)
@@ -49,8 +49,8 @@ class ActiveSymptom(object):
 
 class IdFormatSymptom(SymptomBase):
 
-    title = u"Id format"
-    help = (u"Id should not start with 'copy_of'.")
+    title = _(u"Id format")
+    help = (_(u"Id should not start with 'copy_of'."))
 
     def _update(self):
         id = self.context.getId()
@@ -63,9 +63,9 @@ class IdFormatSymptom(SymptomBase):
 
 class TitleLengthSymptom(SymptomBase):
 
-    title = u"Title length"
-    help = (u"Title should not count more than 5 significant words "
-            u"(of more than three letters).")
+    title = _( u"Title length")
+    help = (_(u"Title should not count more than 5 significant words "
+            u"(of more than three letters)."))
 
     def _update(self):
         title = self.context.Title()
@@ -81,34 +81,34 @@ def countWords(string):
 
 class TitleFormatSymptom(SymptomBase):
 
-    title = u"Title format"
-    help = (u"Title should begin with uppercase letter.")
+    title = _(u"Title format")
+    help = (_(u"Title should begin with uppercase letter."))
 
     def _update(self):
         title = self.context.Title()
         if len(title):
             self.status = title[0].isupper()
-        self.description = u"Title does not begin with uppercase letter."
+        self.description = _(u"Title does not begin with uppercase letter.")
 
 
 class DescriptionFormatSymptom(SymptomBase):
 
-    title = u"Description format"
-    help = (u"Description should begin with uppercase letter.")
+    title = _(u"Description format")
+    help = (_(u"Description should begin with uppercase letter."))
 
     def _update(self):
         description = self.context.Description()
         if len(description):
             self.status = description[0].isupper()
-            self.description = (u"Description does not begin "
-                    u"with uppercase letter.")
+            self.description = (_(u"Description does not begin "
+                    u"with uppercase letter."))
 
 
 class DescriptionLengthSymptom(SymptomBase):
 
-    title = u"Description length"
-    help = (u"Description should not count more than 20 significant words "
-            u"(of more than three letters).")
+    title = _(u"Description length")
+    help = (_(u"Description should not count more than 20 significant words "
+            u"(of more than three letters)."))
 
     def _update(self):
         word_count = countWords(self.context.Description())
@@ -118,19 +118,19 @@ class DescriptionLengthSymptom(SymptomBase):
 
 class BodyTextPresentSymptom(SymptomBase):
 
-    title = u"Body text"
-    help = u"Body text should have content."
+    title = _(u"Body text")
+    help = _(u"Body text should have content.")
 
     def _update(self):
         self.status = len(self.context.CookedBody(stx_level=2).strip())
         if not self.status:
-            self.description = u"Body text has no content."
+            self.description = _(u"Body text has no content.")
 
 
 class SpacesInBodySymptom(SymptomBase):
 
-    title = u"Spaces In Body"
-    help = u"Body text should not start or end with empty tags or BR."
+    title = _(u"Spaces In Body")
+    help = _(u"Body text should not start or end with empty tags or BR.")
 
     def _update(self):
         self.status = True
@@ -141,11 +141,11 @@ class SpacesInBodySymptom(SymptomBase):
             child_count += 1
             if not child.previousSibling and empty_or_spaces(child.text):
                 self.status = False
-                self.description = u"Body text starts with empty tags or BR."
+                self.description = _(u"Body text starts with empty tags or BR.")
         if child_count != 0 and empty_or_spaces(child.text):
             self.status = False
             if child.previousSibling:
-                self.description = u"Body text ends with empty tags or BR."
+                self.description = _(u"Body text ends with empty tags or BR.")
 
 
 def empty_or_spaces(text):
@@ -156,8 +156,8 @@ def empty_or_spaces(text):
 
 class LinksInBodySymptom(SymptomBase):
 
-    title = u"Links In Body"
-    help = u"Body text should have 2 links."
+    title = _(u"Links In Body")
+    help = _(u"Body text should have 2 links.")
 
     def _update(self):
         cooked = self.context.CookedBody(stx_level=2).strip()
@@ -165,26 +165,26 @@ class LinksInBodySymptom(SymptomBase):
         links = soup.find_all('a')
         self.status = len(links) > 1
         if not self.status:
-            self.description = u"Body text has no links."
+            self.description = _(u"Body text has no links.")
 
 
 class ImagePresentSymptom(SymptomBase):
 
-    title = u"Image present"
-    help = u"Image field should have content."
+    title = _(u"Image present")
+    help = _(u"Image field should have content.")
 
     def _update(self):
         self.status = hasImage(self.context)
         if self.status:
-            self.description = u"Image field has content."
+            self.description = _(u"Image field has content.")
         else:
-            self.description = u"Image field has no content."
+            self.description = _(u"Image field has no content.")
 
 
 class ImageSizeSymptom(SymptomBase):
 
-    title = u"Image size"
-    help = u"Image field should have correct size."
+    title = _(u"Image size")
+    help = _(u"Image field should have correct size.")
 
     def _update(self):
         context = self.context
@@ -196,7 +196,7 @@ class ImageSizeSymptom(SymptomBase):
             self.status = False
             size = (0, 0)
         if self.status:
-            self.description = u"Image field content has correct size."
+            self.description = _(u"Image field content has correct size.")
         else:
             self.description = (
                 u"Image field content has wrong size : %d, %d" %

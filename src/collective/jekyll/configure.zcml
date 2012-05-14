@@ -23,6 +23,8 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
    
+  <i18n:registerTranslations directory="locales" />
+
   <adapter
      for="OFS.interfaces.IItem"
      provides=".interfaces.IDiagnosis"

@@ -24,7 +24,7 @@ ifdef IS_TRAVIS
 
 # use cache to accelerate download 
 plone-download-cache-4.1.4.tgz:
-	wget https://github.com/downloads/plone/Products.CMFPlone/plone-download
+	wget https://github.com/downloads/plone/Products.CMFPlone/plone-download-cache-4.1.4.tgz
  
 download-cache: plone-download-cache-4.1.4.tgz
 	tar -xzf plone-download-cache-4.1.4.tgz

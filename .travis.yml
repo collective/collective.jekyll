@@ -4,13 +4,12 @@ python:
 before_install:
   - make buildout-cache
 install:
-  - pip install robotframework>=2.7.1 --use-mirrors
-  - pip install --extra-index-url http://packages.affinitic.be robotframework-selenium2library==1.0.0.2
   - make bin/instance
+  - make bin/pybot
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 script: 
   - make test
-#  - make robot
+  - make robot
 

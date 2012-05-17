@@ -30,11 +30,6 @@ cache.cfg: buildout-cache travis-cache.cfg.in
 
 develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
-
-PYBOT_BINARY = pybot
-
-$(PYBOT_BINARY):
-	echo "noop" 
 else
 cache.cfg:
 	touch $@
@@ -44,15 +39,6 @@ bin/python:
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
-
-bin/pip: bin/python
-	touch $@
-
-PYBOT_BINARY = bin/pybot
-
-$(PYBOT_BINARY): bin/pip
-	bin/pip install robotframework==2.7.1
-	bin/pip install --extra-index-url http://packages.affinitic.be robotframework-selenium2library==1.0.0.2
 endif
 
 buildout.cfg:
@@ -81,6 +67,10 @@ cleanall:
 test: bin/test	
 	./bin/test
 
+bin/pybot: $(PYBOT_BUILDOUT_FILES)
+	./bin/buildout -Nvt 5 -c pybot.cfg install robot
+	touch $@
+
 bin/supervisord: $(PYBOT_BUILDOUT_FILES)
 	./bin/buildout -Nvt 5 -c pybot.cfg install supervisor
 	touch $@
@@ -94,5 +84,5 @@ var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	bin/supervisorctl start all
 	touch $@
 
-robot: $(PYBOT_BINARY) var/supervisord.pid
-	$(PYBOT_BINARY) $(options) -d robot-output acceptance-tests
+robot: bin/pybot var/supervisord.pid
+	bin/pybot $(options) -d robot-output acceptance-tests

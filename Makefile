@@ -21,25 +21,31 @@ IS_TRAVIS = yes
 endif
 
 ifdef IS_TRAVIS
-buildout-cache:
-	wget https://github.com/downloads/plone/Products.CMFPlone/plone-buildout-cache-4.1.4.tgz
-	tar -xzf plone-buildout-cache-4.1.4.tgz
 
+# use cache to accelerate download 
+download-cache:
+	wget https://github.com/downloads/plone/Products.CMFPlone/plone-download-cache-4.1.4.tgz
+	tar -xzf plone-download-cache-4.1.4.tgz
+
+# use specific buildout that depends on cache
+buildout.cfg: travis.cfg download-cache
+	ln -s travis.cfg buildout.cfg
+
+# use python as Travis has setup the virtualenv
 develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
 
-buildout.cfg:
-	ln -s travis.cfg buildout.cfg
-
 else
+
+# make a virtualenv
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 
-develop-eggs: bin/python bootstrap.py buildout.cfg
-	./bin/python bootstrap.py
-
 buildout.cfg:
 	ln -s dev.cfg buildout.cfg
+
+develop-eggs: bin/python bootstrap.py buildout.cfg
+	./bin/python bootstrap.py
 
 endif
 
@@ -83,5 +89,5 @@ var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	bin/supervisorctl start all
 	touch $@
 
-robot: bin/pybot var/supervisord.pid
+robot: $(DATA_FS) bin/pybot var/supervisord.pid
 	bin/pybot $(options) -d robot-output acceptance-tests

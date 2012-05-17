@@ -16,15 +16,17 @@ DATA_FS = var/filestorage/Data.fs
 
 all: instance
 
-ifneq ($(strip $(TRAVIS_PYTHON_VERSION)),)
+ifneq ($(strip $(TRAVIS)),)
 IS_TRAVIS = yes
 endif
 
 ifdef IS_TRAVIS
 
 # use cache to accelerate download 
-download-cache:
-	wget https://github.com/downloads/plone/Products.CMFPlone/plone-download-cache-4.1.4.tgz
+plone-download-cache-4.1.4.tgz:
+	wget https://github.com/downloads/plone/Products.CMFPlone/plone-download
+ 
+download-cache: plone-download-cache-4.1.4.tgz
 	tar -xzf plone-download-cache-4.1.4.tgz
 
 # use specific buildout that depends on cache

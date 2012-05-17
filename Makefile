@@ -8,7 +8,7 @@ PACKAGE_ROOT = src/collective/jekyll
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
-BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
+BUILDOUT_FILES = cache.cfg buildout.cfg setup.py bin/buildout
 
 PYBOT_BUILDOUT_FILES = $(BUILDOUT_FILES) pybot.cfg
 
@@ -21,6 +21,13 @@ IS_TRAVIS = yes
 endif
 
 ifdef IS_TRAVIS
+buildout-cache:
+	wget https://github.com/downloads/plone/Products.CMFPlone/plone-buildout-cache-4.1.4.tgz
+	tar -xzf plone-buildout-cache-4.1.4.tgz
+
+cache.cfg: buildout-cache travis-cache.cfg.in
+	cp travis-cache.cfg.in $@
+
 develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
 
@@ -29,6 +36,9 @@ PYBOT_BINARY = pybot
 $(PYBOT_BINARY):
 	echo "noop" 
 else
+cache.cfg:
+	touch $@
+
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 

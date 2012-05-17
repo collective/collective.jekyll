@@ -13,3 +13,5 @@ coverage
 robot-output
 .installed.cfg
 *.po~
+cache.cfg
+buildout-cache

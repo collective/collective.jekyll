@@ -2,7 +2,7 @@
 #
 options =
 
-.PHONY: instance cleanall test robot
+.PHONY: instance cleanall test robot stop
 
 PACKAGE_ROOT = src/collective/jekyll
 
@@ -61,11 +61,12 @@ bin/instance: $(BUILDOUT_FILES)
 	./bin/buildout -Nvt 5 install instance
 	touch $@
 	
-$(DATA_FS): $(GS_FILES)	bin/instance
+var/plonesite: $(GS_FILES) bin/instance
 	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	./bin/buildout -Nvt 5 install plonesite
+	touch $@
 
-instance: bin/instance $(DATA_FS)
+instance: var/plonesite
 	bin/instance fg
 
 cleanall:
@@ -91,5 +92,8 @@ var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	bin/supervisorctl start all
 	touch $@
 
-robot: $(DATA_FS) bin/pybot var/supervisord.pid
+robot: bin/pybot var/plonesite var/supervisord.pid
 	bin/pybot $(options) -d robot-output acceptance-tests
+
+stop: 
+	bin/supervisorctl shutdown

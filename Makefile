@@ -8,7 +8,7 @@ PACKAGE_ROOT = src/collective/jekyll
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
-BUILDOUT_FILES = cache.cfg buildout.cfg setup.py bin/buildout
+BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
 
 PYBOT_BUILDOUT_FILES = $(BUILDOUT_FILES) pybot.cfg
 
@@ -25,24 +25,23 @@ buildout-cache:
 	wget https://github.com/downloads/plone/Products.CMFPlone/plone-buildout-cache-4.1.4.tgz
 	tar -xzf plone-buildout-cache-4.1.4.tgz
 
-cache.cfg: buildout-cache travis-cache.cfg.in
-	cp travis-cache.cfg.in $@
-
 develop-eggs: bootstrap.py buildout.cfg
 	python bootstrap.py
-else
-cache.cfg:
-	touch $@
 
+buildout.cfg:
+	ln -s travis.cfg buildout.cfg
+
+else
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
-endif
 
 buildout.cfg:
 	ln -s dev.cfg buildout.cfg
+
+endif
 
 bin/buildout: develop-eggs
 

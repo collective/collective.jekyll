@@ -15,3 +15,4 @@ robot-output
 *.po~
 cache.cfg
 buildout-cache
+eggs

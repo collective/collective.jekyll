@@ -62,6 +62,7 @@ Should be above
 Open Menu
     [Arguments]  ${elementId}
 
+    Element Should Be Visible  css=dl#${elementId} span
     Element Should Not Be Visible  css=dl#${elementId} dd.actionMenuContent
     Click link  css=dl#${elementId} dt.actionMenuHeader a
     Wait until keyword succeeds  1  5  Element Should Be Visible  css=dl#${elementId} dd.actionMenuContent
@@ -130,3 +131,27 @@ Rename Content Title
     Wait Until Page Contains Element  css=input#${id}_id
     Input Text  css=input#${id}_title  ${new_title}
     Click Button  Rename All
+
+
+Create folder
+    [arguments]  ${title}
+
+    Goto homepage
+    Open Add New Menu
+    Click Link  css=#plone-contentmenu-factories a#folder
+    Input Text  title  ${title}
+    Click Button  Save
+    Page should contain  ${title}
+    Element should contain  css=#parent-fieldname-title  ${title}
+
+Create document
+    [arguments]  ${title}
+
+    Create folder  Folder for ${title}
+    Open Add New Menu
+    Click Link  css=#plone-contentmenu-factories a#document
+    Input Text  title  ${title}
+    Click Button  Save
+    Page should contain  ${title}
+    Element should contain  css=#parent-fieldname-title  ${title}
+

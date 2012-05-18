@@ -3,7 +3,7 @@ Resource  library-settings.txt
 
 *** Variables ***
 
-${PORT} =  8080
+${PORT} =  5000 
 ${ZOPE_URL} =  http://localhost:${PORT}
 ${PLONE_URL} =  ${ZOPE_URL}/Plone
 ${BROWSER} =  Firefox

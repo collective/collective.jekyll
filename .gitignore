@@ -16,3 +16,8 @@ robot-output
 cache.cfg
 download-cache
 eggs
+etc/
+log.html
+output.xml
+report.html
+

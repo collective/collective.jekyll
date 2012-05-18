@@ -57,8 +57,10 @@ bin/test: $(BUILDOUT_FILES)
 	./bin/buildout -Nvt 5 install test
 	touch $@
 
-bin/instance: $(BUILDOUT_FILES)
+parts/instance: $(BUILDOUT_FILES)
 	./bin/buildout -Nvt 5 install instance
+
+bin/instance: parts/instance
 	touch $@
 	
 var/plonesite: $(GS_FILES) bin/instance
@@ -80,7 +82,7 @@ bin/pybot: $(PYBOT_BUILDOUT_FILES)
 	touch $@
 
 bin/supervisord: $(PYBOT_BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 -c pybot.cfg install supervisor
+	./bin/buildout -Nvt 5 -c pybot.cfg install varnish-build varnish-conf varnish supervisor
 	touch $@
 
 bin/supervisorctl: bin/supervisord

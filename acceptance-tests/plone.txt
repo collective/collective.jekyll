@@ -139,6 +139,7 @@ Create folder
     Goto homepage
     Open Add New Menu
     Click Link  css=#plone-contentmenu-factories a#folder
+    Element should be visible  css=#archetypes-fieldname-title input
     Input Text  title  ${title}
     Click Button  Save
     Page should contain  ${title}
@@ -150,6 +151,7 @@ Create document
     Create folder  Folder for ${title}
     Open Add New Menu
     Click Link  css=#plone-contentmenu-factories a#document
+    Element should be visible  css=#archetypes-fieldname-title input
     Input Text  title  ${title}
     Click Button  Save
     Page should contain  ${title}

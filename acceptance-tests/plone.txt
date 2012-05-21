@@ -12,8 +12,8 @@ ${BROWSER} =  Firefox
 
 Start browser and wake plone up
 
-    Set Selenium timeout  5s
-    Set Selenium implicit wait  0.1s
+    Set Selenium timeout  10s
+    Set Selenium implicit wait  0.2s
     
     ${previous}  Register keyword to run on failure  Close Browser
     Wait until keyword succeeds  2min  3s  Access plone

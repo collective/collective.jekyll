@@ -8,8 +8,6 @@ PACKAGE_ROOT = src/collective/jekyll
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
-BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
-
 DATA_FS = var/filestorage/Data.fs
 
 all: instance
@@ -32,7 +30,7 @@ download-cache: download-and-eggs-plone-4.1.4.tgz
 buildout.cfg: travis.cfg
 	ln -s travis.cfg buildout.cfg
 
-BUILDOUT_FILES = $(BUILDOUT_FILES) download-cache
+BUILDOUT_FILES = buildout.cfg setup.py bin/buildout download-cache
 
 # use python as Travis has setup the virtualenv
 develop-eggs: bootstrap.py buildout.cfg
@@ -46,6 +44,8 @@ bin/python:
 
 buildout.cfg:
 	ln -s dev.cfg buildout.cfg
+
+BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py

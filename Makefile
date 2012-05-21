@@ -1,6 +1,6 @@
 #!/usr/bin/make
 #
-options =
+pybot_options =
 
 .PHONY: instance cleanall test robot stop
 
@@ -22,15 +22,16 @@ ifdef IS_TRAVIS
 
 # use cache to accelerate download 
 plone-download-cache-4.1.4.tgz:
-	wget https://github.com/downloads/plone/Products.CMFPlone/plone-download-cache-4.1.4.tgz
+	wget https://github.com/downloads/plone/Products.CMFPlone/download-and-eggs-plone-4.1.4.tgz
  
 download-cache: plone-download-cache-4.1.4.tgz
 	tar -xzf plone-download-cache-4.1.4.tgz
 
+instance_options = -ov
+
 # use specific buildout that depends on cache
 buildout.cfg: travis.cfg download-cache
 	ln -s travis.cfg buildout.cfg
-	touch $@
 
 # use python as Travis has setup the virtualenv
 develop-eggs: bootstrap.py buildout.cfg
@@ -42,9 +43,10 @@ else
 bin/python:
 	virtualenv-2.6 --no-site-packages .
 
+instance_options = -Nvt 5
+
 buildout.cfg:
 	ln -s dev.cfg buildout.cfg
-	touch $@
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
@@ -58,7 +60,7 @@ bin/test: $(BUILDOUT_FILES)
 	touch $@
 
 parts/instance: $(BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 install instance
+	./bin/buildout $(instance_options) install instance
 
 bin/instance: parts/instance
 	touch $@
@@ -95,7 +97,7 @@ var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	touch $@
 
 robot: bin/pybot var/plonesite var/supervisord.pid
-	bin/pybot $(options) -d robot-output acceptance-tests
+	bin/pybot $(pybot_options) -d robot-output acceptance-tests
 
 stop: 
 	bin/supervisorctl shutdown

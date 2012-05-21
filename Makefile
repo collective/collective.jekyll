@@ -24,8 +24,8 @@ ifdef IS_TRAVIS
 plone-download-cache-4.1.4.tgz:
 	wget https://github.com/downloads/plone/Products.CMFPlone/download-and-eggs-plone-4.1.4.tgz
  
-download-cache: plone-download-cache-4.1.4.tgz
-	tar -xzf plone-download-cache-4.1.4.tgz
+download-cache: download-and-eggs-plone-4.1.4.tgz
+	tar -xzf download-and-eggs-plone-4.1.4.tgz
 
 instance_options = -ov
 

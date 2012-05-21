@@ -8,7 +8,7 @@ PACKAGE_ROOT = src/collective/jekyll
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
-BUILDOUT_FILES = buildout.cfg setup.py bin/buildout dev.cfg pybot.cfg
+BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
 
 DATA_FS = var/filestorage/Data.fs
 

@@ -6,8 +6,9 @@ before_install:
   - make download-cache
 install:
   - make var/plonesite
-  - make bin/pybot
+  - make bin/test
   - make bin/supervisord
+  - make bin/pybot
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"

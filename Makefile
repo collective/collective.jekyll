@@ -21,7 +21,7 @@ endif
 ifdef IS_TRAVIS
 
 # use cache to accelerate download 
-plone-download-cache-4.1.4.tgz:
+download-and-eggs-plone-4.1.4.tgz:
 	wget https://github.com/downloads/plone/Products.CMFPlone/download-and-eggs-plone-4.1.4.tgz
  
 download-cache: download-and-eggs-plone-4.1.4.tgz

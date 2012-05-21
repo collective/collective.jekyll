@@ -8,9 +8,7 @@ PACKAGE_ROOT = src/collective/jekyll
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
-BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
-
-PYBOT_BUILDOUT_FILES = $(BUILDOUT_FILES) pybot.cfg
+BUILDOUT_FILES = buildout.cfg setup.py bin/buildout dev.cfg pybot.cfg
 
 DATA_FS = var/filestorage/Data.fs
 
@@ -44,7 +42,7 @@ bin/python:
 	virtualenv-2.6 --no-site-packages .
 
 buildout.cfg:
-	ln -s dev.cfg buildout.cfg
+	ln -s pybot.cfg buildout.cfg
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
@@ -77,12 +75,12 @@ cleanall:
 test: bin/test	
 	./bin/test
 
-bin/pybot: $(PYBOT_BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 -c pybot.cfg install robot
+bin/pybot: $(BUILDOUT_FILES)
+	./bin/buildout -Nvt 5 install robot
 	touch $@
 
-bin/supervisord: $(PYBOT_BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 -c pybot.cfg install varnish-build varnish-conf varnish supervisor
+bin/supervisord: $(BUILDOUT_FILES)
+	./bin/buildout -Nvt 5 install varnish-build varnish-conf varnish supervisor
 	touch $@
 
 bin/supervisorctl: bin/supervisord

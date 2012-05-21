@@ -26,8 +26,7 @@ download-and-eggs-plone-4.1.4.tgz:
  
 download-cache: download-and-eggs-plone-4.1.4.tgz
 	tar -xzf download-and-eggs-plone-4.1.4.tgz
-
-instance_options = -ov
+	touch $@
 
 # use specific buildout that depends on cache
 buildout.cfg: travis.cfg download-cache
@@ -42,8 +41,6 @@ else
 # make a virtualenv
 bin/python:
 	virtualenv-2.6 --no-site-packages .
-
-instance_options = -Nvt 5
 
 buildout.cfg:
 	ln -s dev.cfg buildout.cfg
@@ -60,7 +57,7 @@ bin/test: $(BUILDOUT_FILES)
 	touch $@
 
 parts/instance: $(BUILDOUT_FILES)
-	./bin/buildout $(instance_options) install instance
+	./bin/buildout -Nvt 5 install instance
 
 bin/instance: parts/instance
 	touch $@

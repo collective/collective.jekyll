@@ -31,6 +31,7 @@ download-cache: download-and-eggs-plone-4.1.4.tgz
 # use specific buildout that depends on cache
 buildout.cfg: travis.cfg download-cache
 	ln -s travis.cfg buildout.cfg
+	touch $@
 
 # use python as Travis has setup the virtualenv
 develop-eggs: bootstrap.py buildout.cfg
@@ -44,6 +45,7 @@ bin/python:
 
 buildout.cfg:
 	ln -s dev.cfg buildout.cfg
+	touch $@
 
 develop-eggs: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py

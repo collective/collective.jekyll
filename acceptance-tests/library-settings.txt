@@ -1,2 +1,0 @@
-*** Settings ***
-Library  Selenium2Library  run_on_failure=Capture Page Screenshot

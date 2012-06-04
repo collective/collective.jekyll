@@ -10,6 +10,8 @@ GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
 DATA_FS = var/filestorage/Data.fs
 
+BUILDOUT_COMMAND = ./bin/buildout -Nt 5
+
 all: instance
 
 ifneq ($(strip $(TRAVIS)),)
@@ -28,62 +30,66 @@ download-cache: download-and-eggs-plone-4.1.4.tgz
 
 # use specific buildout that depends on cache
 buildout.cfg: travis.cfg
-	ln -s travis.cfg buildout.cfg
+	cp travis.cfg buildout.cfg
 
 BUILDOUT_FILES = buildout.cfg setup.py bin/buildout download-cache
 
 # use python as Travis has setup the virtualenv
-develop-eggs: bootstrap.py buildout.cfg
+bin/buildout: bootstrap.py buildout.cfg
 	python bootstrap.py
+	touch $@
 
 else
 
 # make a virtualenv
 bin/python:
 	virtualenv-2.6 --no-site-packages .
+	touch $@
 
 buildout.cfg:
-	ln -s dev.cfg buildout.cfg
+	cp dev.cfg buildout.cfg
 
 BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
 
-develop-eggs: bin/python bootstrap.py buildout.cfg
+bin/buildout: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
+	touch $@
 
 endif
 
-bin/buildout: develop-eggs
-
 bin/test: $(BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 install test
+	$(BUILDOUT_COMMAND) install test
 	touch $@
 
 parts/instance: $(BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 install instance
+	$(BUILDOUT_COMMAND) install instance
+	touch $@
 
 bin/instance: parts/instance
+	if [ -f var/plonesite ]; then rm var/ploneSite; fi
 	touch $@
 	
 var/plonesite: $(GS_FILES) bin/instance
 	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
-	./bin/buildout -Nvt 5 install plonesite
+	$(BUILDOUT_COMMAND) install plonesite
 	touch $@
 
 instance: var/plonesite
 	bin/instance fg
 
 cleanall:
+	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
 
 test: bin/test	
 	./bin/test
 
 bin/pybot: $(BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 install robot
+	$(BUILDOUT_COMMAND) install robot
 	touch $@
 
 bin/supervisord: $(BUILDOUT_FILES)
-	./bin/buildout -Nvt 5 install varnish-build varnish-conf varnish supervisor
+	$(BUILDOUT_COMMAND) install varnish-build varnish-conf varnish supervisor
 	touch $@
 
 bin/supervisorctl: bin/supervisord
@@ -92,10 +98,8 @@ bin/supervisorctl: bin/supervisord
 var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	bin/supervisord --pidfile=$@
-	bin/supervisorctl start all
-	touch $@
 
-robot: bin/pybot var/plonesite var/supervisord.pid
+robot: var/plonesite var/supervisord.pid bin/pybot
 	bin/pybot $(pybot_options) -d robot-output acceptance-tests
 
 stop: 

@@ -36,5 +36,11 @@ setup(name='collective.jekyll',
           'Plone',
           'beautifulsoup4',
       ],
-      extras_require={'test': ['plone.app.testing']},
+      extras_require=dict(
+          test=[
+          'plone.app.testing',
+          ],
+          robot=[
+          'plone.act',
+          ]),
       )

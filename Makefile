@@ -70,7 +70,6 @@ bin/instance: parts/instance
 	touch $@
 	
 var/plonesite: $(GS_FILES) bin/instance
-	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	$(BUILDOUT_COMMAND) install plonesite
 	touch $@
 
@@ -95,12 +94,12 @@ bin/supervisord: $(BUILDOUT_FILES)
 bin/supervisorctl: bin/supervisord
 	touch $@
 
-var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
+var/supervisord.pid: bin/supervisord bin/supervisorctl
 	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	bin/supervisord --pidfile=$@
 
 robot: bin/pybot var/supervisord.pid
-	bin/pybot $(pybot_options) -d robot-output acceptance-tests
+	bin/pybot $(pybot_options) -d robot-output acceptance-tests 
 
 stop: 
 	bin/supervisorctl shutdown

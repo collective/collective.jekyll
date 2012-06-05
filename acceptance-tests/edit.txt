@@ -1,9 +1,10 @@
 *** Settings ***
 Resource  plone/act/plone.txt
 
-Suite setup  Log in  admin  admin
+Suite Setup  Log in as site owner
 
-Test setup  
+Test setup  Zodb setup
+Test teardown  Zodb teardown
 
 *** Test cases ***
 

@@ -32,7 +32,7 @@ download-cache: download-and-eggs-plone-4.1.4.tgz
 buildout.cfg: travis.cfg
 	cp travis.cfg buildout.cfg
 
-BUILDOUT_FILES = buildout.cfg setup.py bin/buildout download-cache
+BUILDOUT_FILES = buildout.cfg pybot.cfg setup.py bin/buildout download-cache
 
 # use python as Travis has setup the virtualenv
 bin/buildout: bootstrap.py buildout.cfg
@@ -49,7 +49,7 @@ bin/python:
 buildout.cfg:
 	cp dev.cfg buildout.cfg
 
-BUILDOUT_FILES = buildout.cfg setup.py bin/buildout
+BUILDOUT_FILES = buildout.cfg pybot.cfg setup.py bin/buildout
 
 bin/buildout: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
@@ -66,7 +66,7 @@ parts/instance: $(BUILDOUT_FILES)
 	touch $@
 
 bin/instance: parts/instance
-	if [ -f var/plonesite ]; then rm var/ploneSite; fi
+	if [ -f var/plonesite ]; then rm var/plonesite; fi
 	touch $@
 	
 var/plonesite: $(GS_FILES) bin/instance
@@ -99,7 +99,7 @@ var/supervisord.pid: bin/supervisord bin/instance bin/supervisorctl
 	if [ -f var/supervisord.pid ]; then bin/supervisorctl shutdown; sleep 5; fi
 	bin/supervisord --pidfile=$@
 
-robot: var/plonesite var/supervisord.pid bin/pybot
+robot: bin/pybot var/supervisord.pid
 	bin/pybot $(pybot_options) -d robot-output acceptance-tests
 
 stop: 

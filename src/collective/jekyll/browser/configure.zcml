@@ -11,6 +11,7 @@
         class=".diagnosis.DiagnosisCollectionView"
         template="collection_view.pt"
         permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
         />
 
    <browser:page
@@ -18,6 +19,7 @@
         name="detailed"
         template="detailed.pt"
         permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
         />
 
    <browser:page
@@ -25,6 +27,7 @@
         name="status"
         template="diagnosis_status.pt"
         permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
         />
 
    <browser:page
@@ -32,6 +35,7 @@
         name="view"
         template="symptom.pt"
         permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
         />
 
    <browser:page
@@ -39,6 +43,7 @@
         name="status"
         template="symptom_status.pt"
         permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
         />
 
    <browser:viewlet
@@ -47,6 +52,7 @@
         class=".diagnosis.DiagnosisViewlet"
         template="viewlet.pt"
         permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
         />
 
    <browser:resourceDirectory

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object
+    name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone.app.theming"
+    purge="False">
+
+    <configlet
+        title="Jekyll symptoms"
+        action_id="collective.jekyll"
+        appId="collective.jekyll"
+        category="Plone"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@jekyll-controlpanel"
+        icon_expr="string:${portal_url}/++resource++collective.jekyll.png"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>

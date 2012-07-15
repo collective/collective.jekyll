@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Mon May 14 09:39:34 2012\n"
+"POT-Creation-Date: Sun Jul 15 21:21:36 2012\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -23,119 +23,139 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: collective.jekyll:/symptoms.py:103
+#: collective.jekyll:/browser/controlpanel.py:50
+msgid "Jekyll symptoms"
+msgstr ""
+
+#: collective.jekyll:/browser/controlpanel.py:51
+msgid "You can activate / deactivate symptoms using this form."
+msgstr ""
+
+#: collective.jekyll:/browser/controlpanel.py:52
+msgid "Jekyll symptoms activation settings"
+msgstr ""
+
+#: collective.jekyll:/interfaces.py:36
+msgid "Active Symptoms"
+msgstr ""
+
+#: collective.jekyll:/interfaces.py:37
+msgid "You can define which symptoms will be active to diagnose your content by checking / unchecking them."
+msgstr ""
+
+#: collective.jekyll:/symptoms.py:104
 msgid "Description does not begin with uppercase letter."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:109
+#: collective.jekyll:/symptoms.py:110
 msgid "Description length"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:110
+#: collective.jekyll:/symptoms.py:111
 msgid "Description should not count more than 20 significant words (of more than three letters)."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:121
+#: collective.jekyll:/symptoms.py:122
 msgid "Body text"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:122
+#: collective.jekyll:/symptoms.py:123
 msgid "Body text should have content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:127
+#: collective.jekyll:/symptoms.py:128
 msgid "Body text has no content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:132
+#: collective.jekyll:/symptoms.py:133
 msgid "Spaces In Body"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:133
+#: collective.jekyll:/symptoms.py:134
 msgid "Body text should not start or end with empty tags or BR."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:144
+#: collective.jekyll:/symptoms.py:145
 msgid "Body text starts with empty tags or BR."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:148
+#: collective.jekyll:/symptoms.py:149
 msgid "Body text ends with empty tags or BR."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:159
+#: collective.jekyll:/symptoms.py:160
 msgid "Links In Body"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:160
+#: collective.jekyll:/symptoms.py:161
 msgid "Body text should have 2 links."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:168
+#: collective.jekyll:/symptoms.py:169
 msgid "Body text has no links."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:173
+#: collective.jekyll:/symptoms.py:174
 msgid "Image present"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:174
+#: collective.jekyll:/symptoms.py:175
 msgid "Image field should have content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:179
+#: collective.jekyll:/symptoms.py:180
 msgid "Image field has content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:181
+#: collective.jekyll:/symptoms.py:182
 msgid "Image field has no content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:186
+#: collective.jekyll:/symptoms.py:187
 msgid "Image size"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:187
+#: collective.jekyll:/symptoms.py:188
 msgid "Image field should have correct size."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:199
+#: collective.jekyll:/symptoms.py:200
 msgid "Image field content has correct size."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:52
+#: collective.jekyll:/symptoms.py:53
 msgid "Id format"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:53
+#: collective.jekyll:/symptoms.py:54
 msgid "Id should not start with 'copy_of'."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:66
+#: collective.jekyll:/symptoms.py:67
 msgid "Title length"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:67
+#: collective.jekyll:/symptoms.py:68
 msgid "Title should not count more than 5 significant words (of more than three letters)."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:84
+#: collective.jekyll:/symptoms.py:85
 msgid "Title format"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:85
+#: collective.jekyll:/symptoms.py:86
 msgid "Title should begin with uppercase letter."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:91
+#: collective.jekyll:/symptoms.py:92
 msgid "Title does not begin with uppercase letter."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:96
+#: collective.jekyll:/symptoms.py:97
 msgid "Description format"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:97
+#: collective.jekyll:/symptoms.py:98
 msgid "Description should begin with uppercase letter."
 msgstr ""
 

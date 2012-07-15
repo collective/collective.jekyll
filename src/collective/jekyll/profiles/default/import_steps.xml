@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="collective.jekyll.setupSettings"
+               version="20120714-01"
+               handler="collective.jekyll.setuphandlers.setupSettings"
+               title="Collective Jekyll: setup settings">
+    <dependency step="registry" />
+    Setup settings for Collective Jekyll.
+  </import-step>
+</import-steps>

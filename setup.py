@@ -34,6 +34,7 @@ setup(name='collective.jekyll',
       install_requires=[
           'setuptools',
           'Plone',
+          'plone.app.registry',
           'beautifulsoup4',
       ],
       extras_require=dict(

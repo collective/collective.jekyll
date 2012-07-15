@@ -5,6 +5,16 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.jekyll">
 
+    <adapter factory=".controlpanel.JekyllControlPanelAdapter" />
+
+    <browser:page
+        name="jekyll-controlpanel"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.JekyllControlPanel"
+        permission="jekyll.Diagnose"
+        layer=".interfaces.IThemeSpecific"
+        />
+
     <browser:page
         for="Products.ATContentTypes.interfaces.IATTopic"
         name="diagnosis_view"
@@ -58,6 +68,12 @@
    <browser:resourceDirectory
         name="jekyll"
         directory="static"
+        layer=".interfaces.IThemeSpecific"
+        />
+
+    <browser:resource
+        name="collective.jekyll.png"
+        image="icon.png"
         layer=".interfaces.IThemeSpecific"
         />
 

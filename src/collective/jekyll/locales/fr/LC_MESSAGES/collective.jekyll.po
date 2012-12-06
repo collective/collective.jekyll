@@ -71,7 +71,7 @@ msgstr "Format description"
 
 #: ./symptoms.py:99
 msgid "Description length"
-msgstr "Taille de la description"
+msgstr "Longueur de la description"
 
 #: ./symptoms.py:87
 msgid "Description should begin with uppercase letter."

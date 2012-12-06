@@ -27,120 +27,120 @@ msgstr ""
 
 #: collective.jekyll:/symptoms.py:103
 msgid "Description does not begin with uppercase letter."
-msgstr ""
+msgstr "La description ne commence pas avec une lettre majuscule."
 
 #: collective.jekyll:/symptoms.py:109
 msgid "Description length"
-msgstr ""
+msgstr "Taille de la description"
 
 #: collective.jekyll:/symptoms.py:110
 msgid ""
 "Description should not count more than 20 significant words (of more than "
 "three letters)."
-msgstr ""
+msgstr "La description ne devrait pas compter plus de 20 mots de plus de 3 lettres"
 
 #: collective.jekyll:/symptoms.py:121
 msgid "Body text"
-msgstr ""
+msgstr "Corps du texte"
 
 #: collective.jekyll:/symptoms.py:122
 msgid "Body text should have content."
-msgstr ""
+msgstr "Le corps de texte devrait avoir du contenu."
 
 #: collective.jekyll:/symptoms.py:127
 msgid "Body text has no content."
-msgstr ""
+msgstr "Le corps de texte n'a pas de contenu."
 
 #: collective.jekyll:/symptoms.py:132
 msgid "Spaces In Body"
-msgstr ""
+msgstr "Espaces dans le corps"
 
 #: collective.jekyll:/symptoms.py:133
 msgid "Body text should not start or end with empty tags or BR."
-msgstr ""
+msgstr "Le corps de texte ne devrait pas commencer ou terminer avec des balises vides ou des retours à la ligne."
 
 #: collective.jekyll:/symptoms.py:144
 msgid "Body text starts with empty tags or BR."
-msgstr ""
+msgstr "Le corps de texte commence avec des balises vides ou des retours à la ligne."
 
 #: collective.jekyll:/symptoms.py:148
 msgid "Body text ends with empty tags or BR."
-msgstr ""
+msgstr "Le corps du texte se termine avec des balises vides ou des retours à la ligne."
 
 #: collective.jekyll:/symptoms.py:159
 msgid "Links In Body"
-msgstr ""
+msgstr "Liens dans le corps du texte"
 
 #: collective.jekyll:/symptoms.py:160
 msgid "Body text should have 2 links."
-msgstr ""
+msgstr "Le corps du texte devrait avoir au moins 2 liens."
 
 #: collective.jekyll:/symptoms.py:168
 msgid "Body text has no links."
-msgstr ""
+msgstr "Le corps du texte n'a pas de lien."
 
 #: collective.jekyll:/symptoms.py:173
 msgid "Image present"
-msgstr ""
+msgstr "Image"
 
 #: collective.jekyll:/symptoms.py:174
 msgid "Image field should have content."
-msgstr ""
+msgstr "Le champs image devrait avoir du contenu."
 
 #: collective.jekyll:/symptoms.py:179
 msgid "Image field has content."
-msgstr ""
+msgstr "Le champs image a du contenu."
 
 #: collective.jekyll:/symptoms.py:181
 msgid "Image field has no content."
-msgstr ""
+msgstr "Le champs image n'a pas de contenu."
 
 #: collective.jekyll:/symptoms.py:186
 msgid "Image size"
-msgstr ""
+msgstr "Taille de l'image"
 
 #: collective.jekyll:/symptoms.py:187
 msgid "Image field should have correct size."
-msgstr ""
+msgstr "La taille de l'image devrait être correct."
 
 #: collective.jekyll:/symptoms.py:199
 msgid "Image field content has correct size."
-msgstr ""
+msgstr "Le contenu du champs image a une taille correct."
 
 #: collective.jekyll:/symptoms.py:52
 msgid "Id format"
-msgstr ""
+msgstr "Format identifiant"
 
 #: collective.jekyll:/symptoms.py:53
 msgid "Id should not start with 'copy_of'."
-msgstr ""
+msgstr "L'identifiant ne devrait pas commencer avec 'copy_of'."
 
 #: collective.jekyll:/symptoms.py:66
 msgid "Title length"
-msgstr ""
+msgstr "Longueur du titre"
 
 #: collective.jekyll:/symptoms.py:67
 msgid ""
 "Title should not count more than 5 significant words (of more than three "
 "letters)."
-msgstr ""
+msgstr "Le titre ne devrait pas compter plus de 5 mots d'au moins 3 lettres."
 
 #: collective.jekyll:/symptoms.py:84
 msgid "Title format"
-msgstr ""
+msgstr "Format titre"
 
 #: collective.jekyll:/symptoms.py:85
 msgid "Title should begin with uppercase letter."
-msgstr ""
+msgstr "Le titre devrait commencer avec une lettre majuscule."
 
 #: collective.jekyll:/symptoms.py:91
 msgid "Title does not begin with uppercase letter."
-msgstr ""
+msgstr "Le titre ne commence pas avec une lettre majuscule."
 
 #: collective.jekyll:/symptoms.py:96
 msgid "Description format"
-msgstr ""
+msgstr "Format description"
 
 #: collective.jekyll:/symptoms.py:97
 msgid "Description should begin with uppercase letter."
-msgstr ""
+msgstr "La description devrait commencer avec une lettre majuscule."

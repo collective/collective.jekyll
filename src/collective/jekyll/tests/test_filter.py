@@ -37,20 +37,11 @@ class Filter(unittest.TestCase):
     def setUp(self):
         from collective.jekyll.interfaces import IDiagnosis
         from collective.jekyll.interfaces import ISymptom
-        from collective.jekyll.interfaces import IIsActive
         from collective.jekyll.diagnosis import Diagnosis
         from collective.jekyll.symptoms import SymptomBase
 
         testing.setUp(self)
         provideAdapter(Diagnosis, [int], IDiagnosis)
-
-        class AlwaysActive(object):
-            def __init__(self, context):
-                self.context = context
-
-            isActive = True
-
-        provideAdapter(AlwaysActive, [ISymptom], IIsActive)
 
         class PositiveSymptom(SymptomBase):
             title = "Positive"

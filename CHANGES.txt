@@ -6,7 +6,8 @@ Changelog
 ------------------
 
 - Add infrae.i18nextract for package translation.
-
+- Avoid one call per symptoms to component registry by removing IIsActive
+- Make provided symptoms configurable throw portal_registry
 
 0.1a3 (2012-04-30)
 ------------------

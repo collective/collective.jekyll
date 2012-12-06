@@ -13,10 +13,9 @@ def setupVarious(context):
     folder = getattr(portal, folder_id)
     for i in range(40):
         make_subfolder(folder, str(i + 1))
-    topic_id = portal.invokeFactory('Topic', 'diagnosis', title="Diagnosis")
+    topic_id = portal.invokeFactory('Collection', 'diagnosis', title="Diagnosis")
     topic = getattr(portal, topic_id)
-    criterion = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-    criterion.setValue('Page')
+    topic.setQuery([{'portal_type': 'Document'}])
 
 
 def make_subfolder(folder, index):

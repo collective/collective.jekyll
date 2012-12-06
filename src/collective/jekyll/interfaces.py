@@ -16,12 +16,6 @@ class ISymptom(Interface):
     status = Int(title=u'Status')
 
 
-class IIsActive(Interface):
-
-    isActive = Bool(title=u'isActive')
-    name = TextLine(title=u'Name')
-
-
 class IDiagnosis(Interface):
 
     status = Int(title=u'Status')

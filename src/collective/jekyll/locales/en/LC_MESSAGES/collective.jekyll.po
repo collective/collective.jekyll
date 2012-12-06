@@ -1,146 +1,147 @@
 # #############################################################################
-#
+# 
 # Copyright (c) 2003-2004 Zope Foundation and Contributors.
 # All Rights Reserved.
-#
+# 
 # This software is subject to the provisions of the Zope Public License,
 # Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
 # THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
 # WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
-#
+# 
 # #############################################################################
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Mon May 14 09:39:34 2012\n"
+"POT-Creation-Date: 2012-12-06 15:34+0000\n"
 "PO-Revision-Date: 2012-05-11 15:55+0200\n"
 "Last-Translator: bsuttor <bsuttor@cirb.irisnet.be>\n"
 "Language-Team: English\n"
-"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: zope/app/locales/extract.py\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+"Language: en\n"
+"Generated-By: zope/app/locales/extract.py\n"
 
-#: collective.jekyll:/symptoms.py:103
-msgid "Description does not begin with uppercase letter."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:109
-msgid "Description length"
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:110
-msgid ""
-"Description should not count more than 20 significant words (of more than "
-"three letters)."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:121
+#: ./symptoms.py:114
 msgid "Body text"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:122
-msgid "Body text should have content."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:127
-msgid "Body text has no content."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:132
-msgid "Spaces In Body"
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:133
-msgid "Body text should not start or end with empty tags or BR."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:144
-msgid "Body text starts with empty tags or BR."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:148
+#: ./symptoms.py:141
 msgid "Body text ends with empty tags or BR."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:159
-msgid "Links In Body"
+#: ./symptoms.py:120
+msgid "Body text has no content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:160
-msgid "Body text should have 2 links."
+#: ./symptoms.py:162
+msgid "Body text has not enough links."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:168
-msgid "Body text has no links."
+#: ./symptoms.py:115
+msgid "Body text should have content."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:173
-msgid "Image present"
+#: ./symptoms.py:153
+msgid "Body text should have links."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:174
-msgid "Image field should have content."
+#: ./symptoms.py:126
+msgid "Body text should not start or end with empty tags or BR."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:179
-msgid "Image field has content."
+#: ./symptoms.py:137
+msgid "Body text starts with empty tags or BR."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:181
-msgid "Image field has no content."
+#: ./symptoms.py:93
+msgid "Description does not begin with uppercase letter."
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:186
-msgid "Image size"
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:187
-msgid "Image field should have correct size."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:199
-msgid "Image field content has correct size."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:52
-msgid "Id format"
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:53
-msgid "Id should not start with 'copy_of'."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:66
-msgid "Title length"
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:67
-msgid ""
-"Title should not count more than 5 significant words (of more than three "
-"letters)."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:84
-msgid "Title format"
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:85
-msgid "Title should begin with uppercase letter."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:91
-msgid "Title does not begin with uppercase letter."
-msgstr ""
-
-#: collective.jekyll:/symptoms.py:96
+#: ./symptoms.py:86
 msgid "Description format"
 msgstr ""
 
-#: collective.jekyll:/symptoms.py:97
+#: ./symptoms.py:99
+msgid "Description length"
+msgstr ""
+
+#: ./symptoms.py:87
 msgid "Description should begin with uppercase letter."
 msgstr ""
+
+#: ./symptoms.py:100
+msgid "Description should not count too many significant words (of more than three letters)."
+msgstr ""
+
+#: ./symptoms.py:41
+msgid "Id format"
+msgstr ""
+
+#: ./symptoms.py:42
+msgid "Id should not start with 'copy_of'."
+msgstr ""
+
+#: ./symptoms.py:196
+msgid "Image field content has correct size."
+msgstr ""
+
+#: ./symptoms.py:173
+msgid "Image field has content."
+msgstr ""
+
+#: ./symptoms.py:175
+msgid "Image field has no content."
+msgstr ""
+
+#: ./symptoms.py:168
+msgid "Image field should have content."
+msgstr ""
+
+#: ./symptoms.py:181
+msgid "Image field should have correct size."
+msgstr ""
+
+#: ./symptoms.py:167
+msgid "Image present"
+msgstr ""
+
+#: ./symptoms.py:180
+msgid "Image size"
+msgstr ""
+
+#: ./symptoms.py:152
+msgid "Links In Body"
+msgstr ""
+
+#: ./symptoms.py:125
+msgid "Spaces In Body"
+msgstr ""
+
+#: ./symptoms.py:81
+msgid "Title does not begin with uppercase letter."
+msgstr ""
+
+#: ./symptoms.py:74
+msgid "Title format"
+msgstr ""
+
+#: ./symptoms.py:55
+msgid "Title length"
+msgstr ""
+
+#: ./symptoms.py:75
+msgid "Title should begin with uppercase letter."
+msgstr ""
+
+#: ./symptoms.py:56
+msgid "Title should not count more than 5 significant words (of more than three letters)."
+msgstr ""
+

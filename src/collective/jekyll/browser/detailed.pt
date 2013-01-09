@@ -1,5 +1,6 @@
 <dl class="diagnosis menu" 
-    tal:define="status python:'ok' if context.status else 'warning'">
+    tal:define="status python:'ok' if context.status else 'warning'"
+    tal:condition="context/sorted_symptoms">
   <dt tal:attributes="class string:menuHandle globalstatus diag-${status}">
     <span tal:replace="status" />
     <span class="arrowDownAlternative">▼</span>

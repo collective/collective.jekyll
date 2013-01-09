@@ -19,7 +19,7 @@
       name="collective.jekyll.tests_content"
       title="collective.jekyll test collection"
       description="Various import steps that are not handled by GS import/export handlers."
-      handler=".setuphandlers.setupVarious">
+      handler=".setuphandlers.testSetup">
   </genericsetup:importStep>
   
 </configure>

@@ -9,7 +9,9 @@ from plone.registry.interfaces import IRegistry
 
 from collective.jekyll.interfaces import ISymptom
 from collective.jekyll.interfaces import IIsActive
+from collective.jekyll.interfaces import IJekyllSettings
 from collective.jekyll import jekyllMessageFactory as _
+
 
 class SymptomBase(object):
     implements(ISymptom)
@@ -37,9 +39,8 @@ class ActiveSymptom(object):
 
     @property
     def isActive(self):
-        registry = getUtility(IRegistry)
-        active = registry.get(self.name, True)
-        return active
+        registry = getUtility(IRegistry).forInterface(IJekyllSettings, False)
+        return self.name in registry.activeSymptoms
 
     @property
     def name(self):
@@ -63,7 +64,7 @@ class IdFormatSymptom(SymptomBase):
 
 class TitleLengthSymptom(SymptomBase):
 
-    title = _( u"Title length")
+    title = _(u"Title length")
     help = (_(u"Title should not count more than 5 significant words "
             u"(of more than three letters)."))
 

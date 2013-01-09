@@ -1,4 +1,11 @@
-def setupVarious(context):
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+from plone.registry.interfaces import IRegistry
+
+from collective.jekyll.interfaces import IJekyllSettings
+
+
+def setupSettings(context):
 
     # Ordinarily, GenericSetup handlers check for the existence of XML files.
     # Here, we are not parsing an XML file, but we use this text file as a
@@ -7,6 +14,25 @@ def setupVarious(context):
 
     if context.readDataFile(
         'collective_jekyll_various.txt') is None:
+        return
+    portal = context.getSite()
+    settings = getUtility(IRegistry).forInterface(IJekyllSettings, False)
+    if settings.activeSymptoms is None:
+        vocabFactory = getUtility(IVocabularyFactory,
+                                  name="collective.jekyll.SymptomsVocabulary")
+        symptoms = vocabFactory(portal)
+        settings.activeSymptoms = [s.value for s in symptoms]
+
+
+def testSetup(context):
+
+    # Ordinarily, GenericSetup handlers check for the existence of XML files.
+    # Here, we are not parsing an XML file, but we use this text file as a
+    # flag to check that we actually meant for this import step to be run.
+    # The file is found in profiles/default.
+
+    if context.readDataFile(
+        'collective_jekyll_test.txt') is None:
         return
     portal = context.getSite()
     folder_id = portal.invokeFactory('Folder', 'pages')

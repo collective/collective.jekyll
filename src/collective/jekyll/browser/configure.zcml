@@ -16,7 +16,7 @@
         />
 
     <browser:page
-        for="Products.ATContentTypes.interfaces.IATTopic"
+        for="plone.app.collection.interfaces.ICollection"
         name="diagnosis_view"
         class=".diagnosis.DiagnosisCollectionView"
         template="collection_view.pt"

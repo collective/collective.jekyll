@@ -13,7 +13,7 @@ def setupSettings(context):
     # The file is found in profiles/default.
 
     if context.readDataFile(
-        'collective_jekyll_various.txt') is None:
+            'collective_jekyll_various.txt') is None:
         return
     portal = context.getSite()
     settings = getUtility(IRegistry).forInterface(IJekyllSettings, False)
@@ -32,21 +32,25 @@ def testSetup(context):
     # The file is found in profiles/default.
 
     if context.readDataFile(
-        'collective_jekyll_test.txt') is None:
+            'collective_jekyll_test.txt') is None:
         return
     portal = context.getSite()
     folder_id = portal.invokeFactory('Folder', 'pages')
     folder = getattr(portal, folder_id)
     for i in range(40):
         make_subfolder(folder, str(i + 1))
-    topic_id = portal.invokeFactory('Topic', 'diagnosis', title="Diagnosis")
+    topic_id = portal.invokeFactory(
+        'Collection', 'diagnosis', title="Diagnosis")
     topic = getattr(portal, topic_id)
-    criterion = topic.addCriterion('Type', 'ATPortalTypeCriterion')
-    criterion.setValue('Page')
+    topic.setQuery([
+        {'i': 'portal_type',
+         'o': 'plone.app.querystring.operation.selection.is',
+         'v': ['Document']}])
 
 
 def make_subfolder(folder, index):
     subfolder_id = folder.invokeFactory('Folder', 'subfolder_%s' % index)
     subfolder = getattr(folder, subfolder_id)
+    subfolder.setTitle(subfolder_id)
     subfolder.invokeFactory('Document', 'ok', title="Ok page")
     subfolder.invokeFactory('Document', 'error', title="Error")

@@ -26,9 +26,7 @@ class DiagnosisCollectionView(BrowserView):
         b_start = int(self.request.get('b_start', 0))
         b_size = 20
         context = self.context
-        pcatalog = getToolByName(context, 'portal_catalog')
-        query = context.buildQuery()
-        results = pcatalog.searchResults(query)
+        results = context.getQuery(brains=True)
         total_length = len(results)
         filter = DiagnosisFilter(results, total_length)
         results = Batch(filter, b_size, b_start)

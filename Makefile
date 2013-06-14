@@ -20,19 +20,11 @@ endif
 
 ifdef IS_TRAVIS
 
-# use cache to accelerate download 
-download-and-eggs-plone-4.2.5.tgz:
-	wget https://github.com/downloads/plone/Products.CMFPlone/download-and-eggs-plone-4.2.5.tgz
- 
-download-cache: download-and-eggs-plone-4.2.5.tgz
-	tar -xzf download-and-eggs-plone-4.2.5.tgz
-	touch $@
-
 # use specific buildout that depends on cache
 buildout.cfg: travis.cfg
 	cp travis.cfg buildout.cfg
 
-BUILDOUT_FILES = buildout.cfg pybot.cfg setup.py bin/buildout download-cache
+BUILDOUT_FILES = buildout.cfg pybot.cfg setup.py bin/buildout
 
 # use python as Travis has setup the virtualenv
 bin/buildout: bootstrap.py buildout.cfg

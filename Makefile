@@ -21,11 +21,11 @@ endif
 ifdef IS_TRAVIS
 
 # use cache to accelerate download 
-download-and-eggs-plone-4.1.4.tgz:
-	wget https://github.com/downloads/plone/Products.CMFPlone/download-and-eggs-plone-4.1.4.tgz
+download-and-eggs-plone-4.2.5.tgz:
+	wget https://github.com/downloads/plone/Products.CMFPlone/download-and-eggs-plone-4.2.5.tgz
  
-download-cache: download-and-eggs-plone-4.1.4.tgz
-	tar -xzf download-and-eggs-plone-4.1.4.tgz
+download-cache: download-and-eggs-plone-4.2.5.tgz
+	tar -xzf download-and-eggs-plone-4.2.5.tgz
 	touch $@
 
 # use specific buildout that depends on cache

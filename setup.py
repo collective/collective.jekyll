@@ -19,8 +19,8 @@ setup(name='collective.jekyll',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
-        ],
+          "Programming Language :: Python",
+      ],
       keywords='',
       author='',
       author_email='',
@@ -39,9 +39,7 @@ setup(name='collective.jekyll',
       ],
       extras_require=dict(
           test=[
-          'plone.app.testing',
-          ],
-          robot=[
-          'plone.act',
+              'plone.app.testing',
+              'plone.app.robotframework',
           ]),
       )

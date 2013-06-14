@@ -3,6 +3,8 @@ from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+
 import collective.jekyll
 
 
@@ -19,3 +21,7 @@ COLLECTIVE_JEKYLL_FUNCTIONAL = FunctionalTesting(bases=(COLLECTIVE_JEKYLL, ),
 COLLECTIVE_JEKYLL_ZSERVER = FunctionalTesting(
                        bases=(COLLECTIVE_JEKYLL, z2.ZSERVER_FIXTURE),
                        name="COLLECTIVE_JEKYLL_ZSERVER")
+
+COLLECTIVE_JEKYLL_ROBOT_TESTING = FunctionalTesting(
+    bases=(COLLECTIVE_JEKYLL, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER),
+    name="COLLECTIVE_JEKYLL_ROBOT_TESTING")

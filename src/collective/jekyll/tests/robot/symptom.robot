@@ -1,16 +1,16 @@
 *** Settings ***
-# Resource  plone/act/plone.txt
+Resource  plone/app/robotframework/keywords.robot
+Resource  plone/app/robotframework/selenium.robot
 
-Suite Setup  Log in as site owner
+Library  Remote  ${PLONE_URL}/RobotRemote
 
-Test setup  Zodb setup
-Test teardown  Zodb teardown
+Suite Setup  Suite Setup
+Suite Teardown  Close all browsers
 
 *** Test cases ***
 
 Diagnose empty description
-    [Tags]  edit
-    Create document  Diagnose empty description
+    Add document  Diagnose empty description
     Page should contain  warning
     Element Should Not Be Visible  css=.symptoms
     Click element  css=.diagnosis .menuHandle
@@ -18,8 +18,7 @@ Diagnose empty description
     Element Should Contain  css=.symptoms  The description counts 0 words
 
 Diagnose valid description
-    [Tags]  edit
-    Create document  Diagnose valid description
+    Add document  Diagnose valid description
     Page should contain  warning
     Element should be visible  css=li#contentview-edit a
     Click Link  css=li#contentview-edit a
@@ -32,4 +31,7 @@ Diagnose valid description
     Click element  css=.diagnosis .menuHandle
     Element Should Be Visible  css=.symptoms
 
-
+*** Keywords ***
+Suite Setup
+    Open test browser
+    Enable autologin as  Manager

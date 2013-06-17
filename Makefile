@@ -43,6 +43,7 @@ buildout.cfg:
 bin/buildout: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
 	touch $@
+	bin/buildout install download install
 
 endif
 

@@ -8,11 +8,11 @@ PACKAGE_ROOT = src/collective/jekyll
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
-DATA_FS = var/filestorage/Data.fs
-
 BUILDOUT_COMMAND = ./bin/buildout -Nt 5
 
 all: instance
+
+BUILDOUT_FILES = buildout.cfg buildout-varnish.cfg setup.py bin/buildout
 
 ifneq ($(strip $(TRAVIS)),)
 IS_TRAVIS = yes
@@ -24,8 +24,6 @@ ifdef IS_TRAVIS
 buildout.cfg: travis.cfg
 	cp travis.cfg buildout.cfg
 
-BUILDOUT_FILES = buildout.cfg pybot.cfg setup.py bin/buildout
-
 # use python as Travis has setup the virtualenv
 bin/buildout: bootstrap.py buildout.cfg
 	python bootstrap.py
@@ -35,13 +33,11 @@ else
 
 # make a virtualenv
 bin/python:
-	virtualenv-2.6 --no-site-packages .
+	virtualenv-2.7 --no-site-packages .
 	touch $@
 
 buildout.cfg:
 	cp dev.cfg buildout.cfg
-
-BUILDOUT_FILES = buildout.cfg pybot.cfg setup.py bin/buildout
 
 bin/buildout: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
@@ -49,8 +45,8 @@ bin/buildout: bin/python bootstrap.py buildout.cfg
 
 endif
 
-bin/test: $(BUILDOUT_FILES)
-	$(BUILDOUT_COMMAND) install test
+bin/test: $(BUILDOUT_FILES) bin/supervisord
+	$(BUILDOUT_COMMAND) install test test-wrap-varnish
 	touch $@
 
 parts/instance: $(BUILDOUT_FILES)
@@ -75,7 +71,7 @@ cleanall:
 test: bin/test	
 	./bin/test
 
-bin/pybot: $(BUILDOUT_FILES)
+bin/robot: $(BUILDOUT_FILES)
 	$(BUILDOUT_COMMAND) install robot
 	touch $@
 
@@ -91,7 +87,7 @@ var/supervisord.pid: bin/supervisord bin/supervisorctl
 	bin/supervisord --pidfile=$@
 
 robot: bin/pybot var/supervisord.pid
-	bin/pybot $(pybot_options) -d robot-output acceptance-tests 
+	bin/robot $(pybot_options) -d robot-output
 
 stop: 
 	bin/supervisorctl shutdown

@@ -26,7 +26,7 @@ buildout.cfg: travis.cfg
 
 # use python as Travis has setup the virtualenv
 bin/buildout: bootstrap.py buildout.cfg
-  mkdir -p buildout-cache/downloads
+	mkdir -p buildout-cache/downloads
 	python bootstrap.py
 	touch $@
 

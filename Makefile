@@ -29,6 +29,7 @@ bin/buildout: bootstrap.py buildout.cfg
 	mkdir -p buildout-cache/downloads
 	python bootstrap.py
 	touch $@
+	bin/buildout install download install
 
 else
 
@@ -43,7 +44,6 @@ buildout.cfg:
 bin/buildout: bin/python bootstrap.py buildout.cfg
 	./bin/python bootstrap.py
 	touch $@
-	bin/buildout install download install
 
 endif
 

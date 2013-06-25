@@ -2,7 +2,7 @@
 #
 pybot_options =
 
-.PHONY: instance cleanall test robot stop
+.PHONY: instance cleanall test robot stop coverage
 
 PACKAGE_ROOT = src/collective/jekyll
 
@@ -51,6 +51,14 @@ bin/test: $(BUILDOUT_FILES) bin/supervisord
 	$(BUILDOUT_COMMAND) install test test-wrap-varnish
 	touch $@
 
+bin/coverage-test: $(BUILDOUT_FILES)
+	$(BUILDOUT_COMMAND) install coverage-test
+	touch $@
+
+bin/coveragereport: $(BUILDOUT_FILES)
+	$(BUILDOUT_COMMAND) install coverage-report
+	touch $@
+
 parts/instance: $(BUILDOUT_FILES)
 	$(BUILDOUT_COMMAND) install instance
 	touch $@
@@ -93,3 +101,7 @@ robot: bin/pybot var/supervisord.pid
 
 stop: 
 	bin/supervisorctl shutdown
+
+coverage: bin/coverage-test bin/coveragereport
+	bin/coverage-test
+	bin/coveragereport

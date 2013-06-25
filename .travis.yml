@@ -4,9 +4,12 @@ python:
 before_install:
   - sudo apt-get install libpcre3-dev
 install:
+  - pip install coveralls
   - make bin/test
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 script: 
-  - make test
+  - make coverage
+after_success:
+  - coveralls

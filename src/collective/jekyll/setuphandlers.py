@@ -52,5 +52,6 @@ def make_subfolder(folder, index):
     subfolder_id = folder.invokeFactory('Folder', 'subfolder_%s' % index)
     subfolder = getattr(folder, subfolder_id)
     subfolder.setTitle(subfolder_id)
-    subfolder.invokeFactory('Document', 'ok', title="Ok page")
+    subfolder.invokeFactory(
+        'Document', 'ok', title="Ok page", description="Description")
     subfolder.invokeFactory('Document', 'error', title="Error")

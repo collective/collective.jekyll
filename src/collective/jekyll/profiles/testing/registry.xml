@@ -1,0 +1,9 @@
+<registry>
+  <record field="activeSymptoms" interface="collective.jekyll.interfaces.IJekyllSettings" name="collective.jekyll.interfaces.IJekyllSettings.activeSymptoms">
+    <value>
+      <element>collective.jekyll.symptoms.IdFormatSymptom</element>
+      <element>collective.jekyll.symptoms.TitleLengthSymptom</element>
+      <element>collective.jekyll.symptoms.DescriptionLengthSymptom</element>
+    </value>
+  </record>
+</registry>

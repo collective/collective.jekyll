@@ -7,6 +7,11 @@ from plone.registry.interfaces import IRegistry
 from collective.jekyll.interfaces import IJekyllSettings
 from collective.jekyll.testing import COLLECTIVE_JEKYLL_INTEGRATION
 
+SYMPTOMS_ACTIVE_BY_PROFILE = [
+    'collective.jekyll.symptoms.IdFormatSymptom',
+    'collective.jekyll.symptoms.TitleLengthSymptom',
+    'collective.jekyll.symptoms.DescriptionLengthSymptom']
+
 
 class TestSettings(unittest.TestCase):
 
@@ -18,13 +23,19 @@ class TestSettings(unittest.TestCase):
     def testRegistryAfterSetup(self):
         """
         """
-        settings = getUtility(IRegistry,
-                              context=self.portal).forInterface(IJekyllSettings,
-                                                                False)
+        settings = getUtility(
+            IRegistry, context=self.portal).forInterface(
+                IJekyllSettings, False)
         self.assertIsNotNone(settings.activeSymptoms)
-        vocabFactory = getUtility(IVocabularyFactory,
-                                  name="collective.jekyll.SymptomsVocabulary")
+        self.assertEquals(
+            len(settings.activeSymptoms), len(SYMPTOMS_ACTIVE_BY_PROFILE))
+        for symptom in SYMPTOMS_ACTIVE_BY_PROFILE:
+            self.assertTrue(symptom in settings.activeSymptoms)
+
+    def testVocabulary(self):
+        vocabFactory = getUtility(
+            IVocabularyFactory, name="collective.jekyll.SymptomsVocabulary")
         symptoms = vocabFactory(self.portal)
-        self.assertEquals(len(settings.activeSymptoms), len(symptoms))
-        for symptom in symptoms:
-            self.assertTrue(symptom.value in settings.activeSymptoms)
+        values = [symptom.value for symptom in symptoms]
+        for symptom in SYMPTOMS_ACTIVE_BY_PROFILE:
+            self.assertTrue(symptom in values)

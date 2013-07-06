@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.1a4 (unreleased)
+0.1.0 (2013-07-06)
 ------------------
 
 - Add infrae.i18nextract for package translation.

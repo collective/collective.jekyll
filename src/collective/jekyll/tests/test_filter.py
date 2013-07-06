@@ -55,7 +55,8 @@ class Filter(unittest.TestCase):
                     self.description = u"Is zero or negative."
 
         provideSubscriptionAdapter(
-                PositiveSymptom, [int], ISymptom)
+            PositiveSymptom, [int], ISymptom
+        )
 
         class GreaterThanOneSymptom(SymptomBase):
             title = "Greater than one"
@@ -68,7 +69,8 @@ class Filter(unittest.TestCase):
                     self.description = u"Is smaller than one."
 
         provideSubscriptionAdapter(
-                GreaterThanOneSymptom, [int], ISymptom)
+            GreaterThanOneSymptom, [int], ISymptom
+        )
         counter.clear()
 
     def tearDown(self):

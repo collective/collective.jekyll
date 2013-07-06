@@ -22,11 +22,11 @@ class JekyllControlPanelAdapter(SchemaAdapterBase):
 
     def __init__(self, context):
         super(JekyllControlPanelAdapter, self).__init__(context)
-        self.settings = getUtility(IRegistry).forInterface(IJekyllSettings, False)
+        registry = getUtility(IRegistry)
+        self.settings = registry.forInterface(IJekyllSettings, False)
         vocabFactory = getUtility(IVocabularyFactory,
                                   name="collective.jekyll.SymptomsVocabulary")
         self.symptoms = vocabFactory(context)
-
 
     def getActiveSymptoms(self):
         if self.settings.activeSymptoms is None:
@@ -47,10 +47,11 @@ class JekyllControlPanelAdapter(SchemaAdapterBase):
 
 class JekyllControlPanel(ControlPanelForm):
 
-    label = _("Jekyll symptoms")
+    label = _("Content quality")
     description = _("You can activate / deactivate symptoms using this form.")
-    form_name = _("Jekyll symptoms activation settings")
+    form_name = _("Symptoms activation")
 
     form_fields = form.FormFields(IJekyllSettings)
-    form_fields['activeSymptoms'].custom_widget = MultiCheckBoxThreeColumnWidget
-    form_fields['activeSymptoms'].custom_widget.cssClass = 'label'
+    active_symptoms = form_fields['activeSymptoms']
+    active_symptoms.custom_widget = MultiCheckBoxThreeColumnWidget
+    active_symptoms.custom_widget.cssClass = 'label'

@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 from zope.interface import implements
 from zope.component import queryUtility
+from zope.i18nmessageid import Message
 
 from plone.registry.interfaces import IRegistry
 
@@ -27,8 +28,8 @@ class SymptomBase(object):
 
     @property
     def isActive(self):
-        registry = getUtility(IRegistry).forInterface(IJekyllSettings, False)
-        return self.name in registry.activeSymptoms
+        settings = self._registry.forInterface(IJekyllSettings, False)
+        return self.name in settings.activeSymptoms
 
     @property
     def name(self):
@@ -48,21 +49,31 @@ class IdFormatSymptom(SymptomBase):
         match = copy.match(id)
         self.status = not bool(match)
         if match:
-            self.description = u"Id starts with '%s'." % match.group()
+            symptom_description = _(u"Id starts with '${start}'.")
+            self.description = Message(
+                symptom_description,
+                mapping={'start': match.group()}
+            )
 
 
 class TitleLengthSymptom(SymptomBase):
 
     title = _(u"Title length")
-    help = (_(u"Title should not count more than 5 significant words "
-            u"(of more than three letters)."))
+    help = _(u"Title should not count too many significant words.")
 
     def _update(self):
-        minimum = int(self._registry.get('%s.minimum'%self.name, 5))
+        maximum = int(self._registry.get('%s.maximum' % self.name, 5))
         title = self.context.Title()
         word_count = countWords(title)
-        self.status = word_count <= minimum
-        self.description = u"The title counts %d words" % word_count
+        self.status = word_count <= maximum
+        symptom_description = _(
+            u"The title counts ${word_count} significant words "
+            u"(longer than 3 letters). "
+            u"It should have at most ${maximum} significant words.")
+        self.description = Message(
+            symptom_description,
+            mapping={'word_count': word_count, 'maximum': maximum}
+        )
 
 
 def countWords(string):
@@ -73,7 +84,7 @@ def countWords(string):
 class TitleFormatSymptom(SymptomBase):
 
     title = _(u"Title format")
-    help = (_(u"Title should begin with uppercase letter."))
+    help = _(u"Title should begin with uppercase letter.")
 
     def _update(self):
         title = self.context.Title()
@@ -85,30 +96,38 @@ class TitleFormatSymptom(SymptomBase):
 class DescriptionFormatSymptom(SymptomBase):
 
     title = _(u"Description format")
-    help = (_(u"Description should begin with uppercase letter."))
+    help = _(u"Description should begin with uppercase letter.")
 
     def _update(self):
         description = self.context.Description()
         if len(description):
             self.status = description[0].isupper()
-            self.description = (_(u"Description does not begin "
-                    u"with uppercase letter."))
+            self.description = _(
+                u"Description does not begin with uppercase letter.")
 
 
 class DescriptionLengthSymptom(SymptomBase):
 
     title = _(u"Description length")
-    help = (_(u"Description should not count too many significant words "
-            u"(of more than three letters)."))
+    help = _(u"Description should not count too many significant words.")
 
     def _update(self):
-        minimum = int(self._registry.get('%s.minimum' % self.name, 20))
+        maximum = int(self._registry.get('%s.maximum' % self.name, 20))
         word_count = countWords(self.context.Description())
-        self.status = (word_count <= minimum) and (word_count > 0)
-        self.description = u"The description counts %d words." % word_count
-        self.description+= u"It should have %s words" % minimum
+        if not len(self.context.Description()):
+            self.status = False
+            self.description = _(u"Description does not have content.")
+        else:
+            self.status = (word_count <= maximum)
+            symptom_description = _(
+                u"The description counts ${word_count} significant words "
+                u"(longer than 3 letters). "
+                u"It should have at most ${maximum} significant words.")
+            self.description = Message(
+                symptom_description,
+                mapping={'word_count': word_count, 'maximum': maximum}
+            )
 
-        return 
 
 class BodyTextPresentSymptom(SymptomBase):
 
@@ -118,7 +137,7 @@ class BodyTextPresentSymptom(SymptomBase):
     def _update(self):
         self.status = len(self.context.CookedBody(stx_level=2).strip())
         if not self.status:
-            self.description = _(u"Body text has no content.")
+            self.description = _(u"Body text does not have content.")
 
 
 class SpacesInBodySymptom(SymptomBase):
@@ -135,7 +154,8 @@ class SpacesInBodySymptom(SymptomBase):
             child_count += 1
             if not child.previousSibling and empty_or_spaces(child.text):
                 self.status = False
-                self.description = _(u"Body text starts with empty tags or BR.")
+                self.description = _(
+                    u"Body text starts with empty tags or BR.")
         if child_count != 0 and empty_or_spaces(child.text):
             self.status = False
             if child.previousSibling:
@@ -154,13 +174,13 @@ class LinksInBodySymptom(SymptomBase):
     help = _(u"Body text should have links.")
 
     def _update(self):
-        self.minimum = int(self._registry.get('%s.minimum' % self.name, 20))
+        self.minimum = int(self._registry.get('%s.minimum' % self.name, 2))
         cooked = self.context.CookedBody(stx_level=2).strip()
         soup = BeautifulSoup(cooked)
         links = soup.find_all('a')
         self.status = len(links) > 1
         if not self.status:
-            self.description = _(u"Body text has not enough links.")
+            self.description = _(u"Body text does not have enough links.")
 
 
 class ImagePresentSymptom(SymptomBase):
@@ -173,7 +193,7 @@ class ImagePresentSymptom(SymptomBase):
         if self.status:
             self.description = _(u"Image field has content.")
         else:
-            self.description = _(u"Image field has no content.")
+            self.description = _(u"Image field does not have content.")
 
 
 class ImageSizeSymptom(SymptomBase):
@@ -184,7 +204,7 @@ class ImageSizeSymptom(SymptomBase):
     def _update(self):
         context = self.context
         width = int(self._registry.get('%s.width' % self.name, 675))
-        height = int(self._registry.get('%s.width' % self.name, 380))
+        height = int(self._registry.get('%s.height' % self.name, 380))
 
         if hasImage(context):
             imageField = context.Schema()['image']
@@ -196,9 +216,20 @@ class ImageSizeSymptom(SymptomBase):
         if self.status:
             self.description = _(u"Image field content has correct size.")
         else:
-            self.description = (
-             u"Image field content has wrong size : %d, %d. Should be %d, %d" %
-             (size[0], size[1]), width, height)
+            symptom_description = _(
+                u"Wrong size : image is "
+                u"${actual_width} by ${actual_height} pixels. "
+                u"It should be ${width} by ${height} pixels."
+            )
+            self.description = Message(
+                symptom_description,
+                mapping={
+                    'actual_width': size[0],
+                    'actual_height': size[1],
+                    'width': width,
+                    'height': height
+                }
+            )
 
 
 def hasImage(value):

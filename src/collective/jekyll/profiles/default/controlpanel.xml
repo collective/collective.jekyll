@@ -2,11 +2,11 @@
 <object
     name="portal_controlpanel"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="plone.app.theming"
+    i18n:domain="collective.jekyll"
     purge="False">
 
     <configlet
-        title="Jekyll symptoms"
+        title="Content quality"
         action_id="collective.jekyll"
         appId="collective.jekyll"
         category="Plone"

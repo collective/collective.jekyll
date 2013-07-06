@@ -1,0 +1,15 @@
+  include *.py
+  include *.rst
+  include *.txt
+  recursive-include docs *.GPL
+  recursive-include docs *.txt
+  recursive-include src *.css
+  recursive-include src *.js
+  recursive-include src *.png
+  recursive-include src *.po
+  recursive-include src *.pot
+  recursive-include src *.pt
+  recursive-include src *.robot
+  recursive-include src *.txt
+  recursive-include src *.xml
+  recursive-include src *.zcml

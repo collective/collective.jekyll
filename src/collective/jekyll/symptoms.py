@@ -3,12 +3,11 @@ import re
 from bs4 import BeautifulSoup
 
 from zope.interface import implements
-from zope.component import getUtility
+from zope.component import queryUtility
 
 from plone.registry.interfaces import IRegistry
 
 from collective.jekyll.interfaces import ISymptom
-from collective.jekyll.interfaces import IIsActive
 from collective.jekyll.interfaces import IJekyllSettings
 from collective.jekyll import jekyllMessageFactory as _
 
@@ -20,22 +19,11 @@ class SymptomBase(object):
         self.context = context
         self.status = True
         self.description = ''
+        self._registry = queryUtility(IRegistry, default={})
         self._update()
 
     def _update(self):
-        raise NotImplemented(
-                'Update should be computed by inheriting classes.')
-
-    @property
-    def isActive(self):
-        return IIsActive(self).isActive
-
-
-class ActiveSymptom(object):
-    implements(IIsActive)
-
-    def __init__(self, context):
-        self.context = context
+        raise NotImplementedError(u"")
 
     @property
     def isActive(self):
@@ -44,8 +32,9 @@ class ActiveSymptom(object):
 
     @property
     def name(self):
-        klass = self.context.__class__
-        return '.'.join((klass.__module__, klass.__name__))
+        klass = self.__class__
+        name = '.'.join((klass.__module__, klass.__name__))
+        return name
 
 
 class IdFormatSymptom(SymptomBase):
@@ -69,9 +58,10 @@ class TitleLengthSymptom(SymptomBase):
             u"(of more than three letters)."))
 
     def _update(self):
+        minimum = int(self._registry.get('%s.minimum'%self.name, 5))
         title = self.context.Title()
         word_count = countWords(title)
-        self.status = word_count <= 5
+        self.status = word_count <= minimum
         self.description = u"The title counts %d words" % word_count
 
 
@@ -108,14 +98,17 @@ class DescriptionFormatSymptom(SymptomBase):
 class DescriptionLengthSymptom(SymptomBase):
 
     title = _(u"Description length")
-    help = (_(u"Description should not count more than 20 significant words "
+    help = (_(u"Description should not count too many significant words "
             u"(of more than three letters)."))
 
     def _update(self):
+        minimum = int(self._registry.get('%s.minimum' % self.name, 20))
         word_count = countWords(self.context.Description())
-        self.status = (word_count <= 20) and (word_count > 0)
-        self.description = u"The description counts %d words" % word_count
+        self.status = (word_count <= minimum) and (word_count > 0)
+        self.description = u"The description counts %d words." % word_count
+        self.description+= u"It should have %s words" % minimum
 
+        return 
 
 class BodyTextPresentSymptom(SymptomBase):
 
@@ -158,15 +151,16 @@ def empty_or_spaces(text):
 class LinksInBodySymptom(SymptomBase):
 
     title = _(u"Links In Body")
-    help = _(u"Body text should have 2 links.")
+    help = _(u"Body text should have links.")
 
     def _update(self):
+        self.minimum = int(self._registry.get('%s.minimum' % self.name, 20))
         cooked = self.context.CookedBody(stx_level=2).strip()
         soup = BeautifulSoup(cooked)
         links = soup.find_all('a')
         self.status = len(links) > 1
         if not self.status:
-            self.description = _(u"Body text has no links.")
+            self.description = _(u"Body text has not enough links.")
 
 
 class ImagePresentSymptom(SymptomBase):
@@ -189,10 +183,13 @@ class ImageSizeSymptom(SymptomBase):
 
     def _update(self):
         context = self.context
+        width = int(self._registry.get('%s.width' % self.name, 675))
+        height = int(self._registry.get('%s.width' % self.name, 380))
+
         if hasImage(context):
             imageField = context.Schema()['image']
             size = imageField.getSize(context)
-            self.status = size == (675, 380)
+            self.status = size == (width, height)
         else:
             self.status = False
             size = (0, 0)
@@ -200,8 +197,8 @@ class ImageSizeSymptom(SymptomBase):
             self.description = _(u"Image field content has correct size.")
         else:
             self.description = (
-                u"Image field content has wrong size : %d, %d" %
-                (size[0], size[1]))
+             u"Image field content has wrong size : %d, %d. Should be %d, %d" %
+             (size[0], size[1]), width, height)
 
 
 def hasImage(value):

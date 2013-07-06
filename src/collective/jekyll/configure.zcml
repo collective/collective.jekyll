@@ -35,11 +35,6 @@
      provides=".interfaces.IDiagnosis"
      factory=".diagnosis.diagnosisFromBrain" />
 
-  <adapter
-     for=".interfaces.ISymptom"
-     provides=".interfaces.IIsActive"
-     factory=".symptoms.ActiveSymptom" />
-
   <utility
      component=".diagnosis.SymptomsVocabulary"
      name="collective.jekyll.SymptomsVocabulary" />

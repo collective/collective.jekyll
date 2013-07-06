@@ -1,5 +1,6 @@
-<div tal:define="status python:'ok' if context.status else 'warning'"
-  class="symptom">
+<div tal:define="status python:'ok' if context.status else 'warning';
+                 name context/serialized_name"
+     tal:attributes="class string:symptom name-${name}">
   <span tal:attributes="class string:status diag-${status}"
     tal:content="status" />
 </div>

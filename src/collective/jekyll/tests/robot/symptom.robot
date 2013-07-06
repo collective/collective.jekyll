@@ -3,6 +3,7 @@ Resource  plone/app/robotframework/keywords.robot
 Resource  plone/app/robotframework/selenium.robot
 
 Library  Remote  ${PLONE_URL}/RobotRemote
+Library  plone.app.robotframework.keywords.Debugging
 
 Suite Setup  Suite Setup
 Suite Teardown  Close all browsers
@@ -10,11 +11,12 @@ Suite Teardown  Close all browsers
 *** Test cases ***
 
 Diagnose empty description
+    [tags]  testing
     Add page with empty description
     Element Should Not Be Visible  css=.symptoms
     Click element  css=.diagnosis .menuHandle
     Element Should Be Visible  css=.symptoms
-    Element Should Contain  css=.symptoms  The description counts 0 words
+    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription  Description does not have content.
 
 Diagnose valid description
     Add page with valid description

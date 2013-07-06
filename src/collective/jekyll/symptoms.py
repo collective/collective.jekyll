@@ -41,6 +41,10 @@ class SymptomBase(object):
         name = '.'.join((klass.__module__, klass.__name__))
         return name
 
+    @property
+    def serialized_name(self):
+        return self.name.replace('.', '-')
+
 
 class IdFormatSymptom(SymptomBase):
 

@@ -5,6 +5,7 @@ before_install:
   - sudo apt-get install libpcre3-dev
 install:
   - pip install coveralls
+  - pip install distribute
   - make bin/test
 before_script:
   - "export DISPLAY=:99.0"

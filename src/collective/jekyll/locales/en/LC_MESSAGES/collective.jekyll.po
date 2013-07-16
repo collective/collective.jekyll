@@ -87,7 +87,7 @@ msgstr ""
 
 #: collective.jekyll:/symptoms.py:145
 msgid "Spaces In Body"
-msgstr ""
+msgstr "Spaces In Body Text"
 
 #: collective.jekyll:/symptoms.py:146
 msgid "Body text should not start or end with empty tags or BR."
@@ -103,7 +103,7 @@ msgstr ""
 
 #: collective.jekyll:/symptoms.py:173
 msgid "Links In Body"
-msgstr ""
+msgstr "Links In Body Text"
 
 #: collective.jekyll:/symptoms.py:174
 msgid "Body text should have links."
@@ -149,15 +149,15 @@ msgstr ""
 
 #: collective.jekyll:/symptoms.py:43
 msgid "Id format"
-msgstr ""
+msgstr "Short Name format"
 
 #: collective.jekyll:/symptoms.py:44
 msgid "Id should not start with 'copy_of'."
-msgstr ""
+msgstr "Short Name should not start with 'copy_of'."
 
 #: collective.jekyll:/symptoms.py:52
 msgid "Id starts with '${start}'."
-msgstr ""
+msgstr "Short Name starts with '${start}'."
 
 #: collective.jekyll:/symptoms.py:61
 msgid "Title length"

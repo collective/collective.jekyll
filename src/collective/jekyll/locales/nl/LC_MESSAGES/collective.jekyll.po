@@ -31,164 +31,164 @@ msgstr ""
 
 #: collective.jekyll:/browser/controlpanel.py:50
 msgid "Content quality"
-msgstr ""
+msgstr "Kwaliteit van de inhoud"
 
 #: collective.jekyll:/browser/controlpanel.py:51
 msgid "You can activate / deactivate symptoms using this form."
-msgstr ""
+msgstr "U kan met dit formulier criteria activeren of desactiveren."
 
 #: collective.jekyll:/browser/controlpanel.py:52
 msgid "Symptoms activation"
-msgstr ""
+msgstr "Criteria activeren"
 
 #: collective.jekyll:/interfaces.py:29
 msgid "Active Symptoms"
-msgstr ""
+msgstr "Actieve criteria"
 
 #: collective.jekyll:/interfaces.py:30
 msgid ""
 "Select which symptoms will be taken in account when diagnosing content "
 "quality."
-msgstr ""
+msgstr "Selecteer de criteria die gebruikt zullen worden tijdens de diagnose van de kwaliteit van de inhoud."
 
 #: collective.jekyll:/symptoms.py:105
 msgid "Description does not begin with uppercase letter."
-msgstr ""
+msgstr "De beschrijving begint niet met een hoofdletter."
 
 #: collective.jekyll:/symptoms.py:111
 msgid "Description length"
-msgstr ""
+msgstr "Lengte van de beschrijving"
 
 #: collective.jekyll:/symptoms.py:112
 msgid "Description should not count too many significant words."
-msgstr ""
+msgstr "De beschrijving mag niet te veel significante woorden bevatten."
 
 #: collective.jekyll:/symptoms.py:119
 msgid "Description does not have content."
-msgstr ""
+msgstr "De beschrijving is leeg."
 
 #: collective.jekyll:/symptoms.py:122
 msgid ""
 "The description counts ${word_count} significant words (longer than 3 "
 "letters). It should have at most ${maximum} significant words."
-msgstr ""
+msgstr "De beschrijving telt ${word_count} significante woorden (langer dan 3 letters). Ze zou hoogstens ${maximum} significante woorden mogen bevatten."
 
 #: collective.jekyll:/symptoms.py:134
 msgid "Body text"
-msgstr ""
+msgstr "Hoofdtekst"
 
 #: collective.jekyll:/symptoms.py:135
 msgid "Body text should have content."
-msgstr ""
+msgstr "De hoofdtekst moet inhoud hebben."
 
 #: collective.jekyll:/symptoms.py:140
 msgid "Body text does not have content."
-msgstr ""
+msgstr "De hoofdtekst is leeg."
 
 #: collective.jekyll:/symptoms.py:145
 msgid "Spaces In Body"
-msgstr ""
+msgstr "Spaties in hoofdtekst"
 
 #: collective.jekyll:/symptoms.py:146
 msgid "Body text should not start or end with empty tags or BR."
-msgstr ""
+msgstr "Hoofdtekst mag niet starten of eindigen met lege tags of BR."
 
 #: collective.jekyll:/symptoms.py:157
 msgid "Body text starts with empty tags or BR."
-msgstr ""
+msgstr "De hoofdtekst start met lege tags of BR."
 
 #: collective.jekyll:/symptoms.py:162
 msgid "Body text ends with empty tags or BR."
-msgstr ""
+msgstr "De hoofdtekst eindigt met lege tags of BR."
 
 #: collective.jekyll:/symptoms.py:173
 msgid "Links In Body"
-msgstr ""
+msgstr "Links in hoofdtekst"
 
 #: collective.jekyll:/symptoms.py:174
 msgid "Body text should have links."
-msgstr ""
+msgstr "De hoofdtekst moet links bevatten."
 
 #: collective.jekyll:/symptoms.py:183
 msgid "Body text does not have enough links."
-msgstr ""
+msgstr "De hoofdtekst bevat niet genoeg links."
 
 #: collective.jekyll:/symptoms.py:188
 msgid "Image present"
-msgstr ""
+msgstr "Afbeelding aanwezig"
 
 #: collective.jekyll:/symptoms.py:189
 msgid "Image field should have content."
-msgstr ""
+msgstr "Het veld afbeelding moet ingevuld zijn."
 
 #: collective.jekyll:/symptoms.py:194
 msgid "Image field has content."
-msgstr ""
+msgstr "Het veld afbeelding is ingevuld."
 
 #: collective.jekyll:/symptoms.py:196
 msgid "Image field does not have content."
-msgstr ""
+msgstr "Het veld afbeelding is niet ingevuld."
 
 #: collective.jekyll:/symptoms.py:201
 msgid "Image size"
-msgstr ""
+msgstr "Grootte van de afbeelding"
 
 #: collective.jekyll:/symptoms.py:202
 msgid "Image field should have correct size."
-msgstr ""
+msgstr "Het veld afbeelding moet een correcte grootte hebben."
 
 #: collective.jekyll:/symptoms.py:217
 msgid "Image field content has correct size."
-msgstr ""
+msgstr "Het veld afbeelding heeft een correcte grootte."
 
 #: collective.jekyll:/symptoms.py:219
 msgid ""
 "Wrong size : image is ${actual_width} by ${actual_height} pixels. It should "
 "be ${width} by ${height} pixels."
-msgstr ""
+msgstr "Verkeerde grootte: de afbeelding is ${actual_width} op ${actual_height} pixels groot. Ze zou ${width} op ${height} pixels groot moeten zijn."
 
 #: collective.jekyll:/symptoms.py:43
 msgid "Id format"
-msgstr ""
+msgstr "Formaat van verkorte naam"
 
 #: collective.jekyll:/symptoms.py:44
 msgid "Id should not start with 'copy_of'."
-msgstr ""
+msgstr "Verkorte naam mag niet starten met 'copy_of'."
 
 #: collective.jekyll:/symptoms.py:52
 msgid "Id starts with '${start}'."
-msgstr ""
+msgstr "Verkorte naam start met '${start}'."
 
 #: collective.jekyll:/symptoms.py:61
 msgid "Title length"
-msgstr ""
+msgstr "Lengte van de titel"
 
 #: collective.jekyll:/symptoms.py:62
 msgid "Title should not count too many significant words."
-msgstr ""
+msgstr "De titel mag niet te veel significante woorden bevatten."
 
 #: collective.jekyll:/symptoms.py:69
 msgid ""
 "The title counts ${word_count} significant words (longer than 3 letters). It "
 "should have at most ${maximum} significant words."
-msgstr ""
+msgstr "De titel bevat ${word_count} significante woorden (langer dan 3 letters). Hij zou hoogstens ${maximum} significante woorden mogen bevatten."
 
 #: collective.jekyll:/symptoms.py:86
 msgid "Title format"
-msgstr ""
+msgstr "Formaat van de titel"
 
 #: collective.jekyll:/symptoms.py:87
 msgid "Title should begin with uppercase letter."
-msgstr ""
+msgstr "De titel moet beginnen met een hoofdletter."
 
 #: collective.jekyll:/symptoms.py:93
 msgid "Title does not begin with uppercase letter."
-msgstr ""
+msgstr "De titel begint niet met een hoofdletter."
 
 #: collective.jekyll:/symptoms.py:98
 msgid "Description format"
-msgstr ""
+msgstr "Formaat van de beschrijving"
 
 #: collective.jekyll:/symptoms.py:99
 msgid "Description should begin with uppercase letter."
-msgstr ""
+msgstr "De beschrijving moet beginnen met een hoofdletter."

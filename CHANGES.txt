@@ -5,20 +5,27 @@ Changelog
 0.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add dutch translation
+  [dbutaye]
 
 
 0.1.0 (2013-07-06)
 ------------------
 
 - Add infrae.i18nextract for package translation.
-- Avoid one call per symptoms to component registry by removing IIsActive
-- Make provided symptoms configurable throw portal_registry
+  [toutpt]
+
+- Avoid one call per symptoms to component registry by removing `IIsActive`.
+  [toutpt]
+
+- Make provided symptoms configurable through `portal_registry`.
+  [toutpt]
 
 0.1a3 (2012-04-30)
 ------------------
 
 - Symptoms can be deactivated in registry.
+  [laulaz]
 
 0.1a2 (2012-03-16)
 ------------------

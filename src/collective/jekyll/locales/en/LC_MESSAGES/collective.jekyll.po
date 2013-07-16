@@ -75,7 +75,7 @@ msgstr ""
 
 #: collective.jekyll:/symptoms.py:134
 msgid "Body text"
-msgstr ""
+msgstr "Body text present"
 
 #: collective.jekyll:/symptoms.py:135
 msgid "Body text should have content."

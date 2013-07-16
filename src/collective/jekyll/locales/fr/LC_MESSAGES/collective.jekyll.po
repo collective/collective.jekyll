@@ -76,7 +76,7 @@ msgstr "La description a ${word_count} mots significatifs (de plus de 3 "
 
 #: collective.jekyll:/symptoms.py:134
 msgid "Body text"
-msgstr "Corps du texte"
+msgstr "Corps du texte requis"
 
 #: collective.jekyll:/symptoms.py:135
 msgid "Body text should have content."

@@ -149,7 +149,7 @@ msgstr "Verkeerde grootte: de afbeelding is ${actual_width} op ${actual_height} 
 
 #: collective.jekyll:/symptoms.py:43
 msgid "Id format"
-msgstr "Formaat van verkorte naam"
+msgstr "Formaat van de verkorte naam"
 
 #: collective.jekyll:/symptoms.py:44
 msgid "Id should not start with 'copy_of'."

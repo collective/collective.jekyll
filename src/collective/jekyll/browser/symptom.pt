@@ -3,6 +3,8 @@
      tal:attributes="class string:symptom name-${name}">
     <div>
       <span tal:attributes="class string:status diag-${status}"
+            i18n:translate=""
+            i18n:domain="collective.jekyll"
             tal:content="status" />
       <span class="symptomTitle"
         tal:content="context/title" />

@@ -200,3 +200,10 @@ msgstr "Format de la description"
 #: collective.jekyll:/symptoms.py:99
 msgid "Description should begin with uppercase letter."
 msgstr "La description devrait commencer avec une lettre majuscule."
+
+# values for status
+msgid "ok"
+msgstr ""
+
+msgid "warning"
+msgstr "alerte"

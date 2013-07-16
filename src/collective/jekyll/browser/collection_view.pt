@@ -34,7 +34,6 @@
                        <tal:brain tal:repeat="result topicContents">
                        <tr tal:define="obj python:result[0];
                                        diagnosis python:result[1];
-                                       status diagnosis/status;
                                        oddrow repeat/result/odd;"
                           tal:attributes="class python:'even' if oddrow else 'odd'">
                             <td tal:content="structure diagnosis/@@status" />

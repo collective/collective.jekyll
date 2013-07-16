@@ -179,3 +179,9 @@ msgstr ""
 msgid "Description should begin with uppercase letter."
 msgstr ""
 
+# values for status
+msgid "ok"
+msgstr ""
+
+msgid "warning"
+msgstr ""

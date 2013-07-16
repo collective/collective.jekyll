@@ -192,3 +192,10 @@ msgstr ""
 #: collective.jekyll:/symptoms.py:99
 msgid "Description should begin with uppercase letter."
 msgstr ""
+
+# values for status
+msgid "ok"
+msgstr ""
+
+msgid "warning"
+msgstr ""

@@ -2,7 +2,9 @@
     tal:define="status python:'ok' if context.status else 'warning'"
     tal:condition="context/sorted_symptoms">
   <dt tal:attributes="class string:menuHandle globalstatus diag-${status}">
-    <span tal:replace="status" />
+  <span i18n:translate=""
+        i18n:domain="collective.jekyll"
+        tal:replace="status" />
     <span class="arrowDownAlternative">▼</span>
   </dt>
   <dd >

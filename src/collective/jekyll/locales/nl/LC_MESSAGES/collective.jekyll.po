@@ -75,7 +75,7 @@ msgstr "De beschrijving telt ${word_count} significante woorden (langer dan 3 le
 
 #: collective.jekyll:/symptoms.py:134
 msgid "Body text"
-msgstr "Hoofdtekst"
+msgstr "Hoofdtekst aanwezig"
 
 #: collective.jekyll:/symptoms.py:135
 msgid "Body text should have content."
@@ -192,3 +192,10 @@ msgstr "Formaat van de beschrijving"
 #: collective.jekyll:/symptoms.py:99
 msgid "Description should begin with uppercase letter."
 msgstr "De beschrijving moet beginnen met een hoofdletter."
+
+# values for status
+msgid "ok"
+msgstr ""
+
+msgid "warning"
+msgstr "niet ok"

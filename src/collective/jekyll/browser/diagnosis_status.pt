@@ -1,5 +1,2 @@
-<div><span tal:define="status python:'ok' if context.status else 'warning'"
-      tal:attributes="class string:globalstatus diag-${status}"
-      i18n:translate=""
-      i18n:domain="collective.jekyll"
-      tal:content="status" /></div>
+<div><span tal:attributes="class string:globalstatus diag-${context/status_class}"
+           tal:content="context/status_title" /></div>

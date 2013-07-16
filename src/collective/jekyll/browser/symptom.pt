@@ -1,11 +1,7 @@
-<div tal:define="status python:'ok' if context.status else 'warning';
-                 name context/serialized_name"
-     tal:attributes="class string:symptom name-${name}">
+<div tal:attributes="class string:symptom name-${context/serialized_name}">
     <div>
-      <span tal:attributes="class string:status diag-${status}"
-            i18n:translate=""
-            i18n:domain="collective.jekyll"
-            tal:content="status" />
+      <span tal:attributes="class string:status diag-${context/status_class}"
+            tal:content="context/status_title" />
       <span class="symptomTitle"
         tal:content="context/title" />
     </div>

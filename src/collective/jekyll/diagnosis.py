@@ -7,9 +7,10 @@ from zope.schema.vocabulary import SimpleTerm
 
 from collective.jekyll.interfaces import IDiagnosis
 from collective.jekyll.interfaces import ISymptom
+from collective.jekyll.symptoms import Status
 
 
-class Diagnosis(object):
+class Diagnosis(Status):
     implements(IDiagnosis)
 
     def __init__(self, context):
@@ -25,9 +26,11 @@ class Diagnosis(object):
                 self._status = self._status and symptom.status
 
     def _updateSymptoms(self):
-        self._symptoms = [symptom
-                for symptom in subscribers((self.context,), ISymptom)
-                if symptom.isActive]
+        self._symptoms = [
+            symptom
+            for symptom in subscribers((self.context,), ISymptom)
+            if symptom.isActive
+        ]
         for symptom in self._symptoms:
             self._mapping[symptom.title] = symptom
 
@@ -69,9 +72,9 @@ class SymptomsVocabulary(object):
         for registration in gsm.registeredSubscriptionAdapters():
             if registration.provided is ISymptom:
                 symptomClass = registration.factory
-                name = '.'.join((symptomClass.__module__, \
+                name = '.'.join((symptomClass.__module__,
                                  symptomClass.__name__))
-                items.append(SimpleTerm(name, \
+                items.append(SimpleTerm(name,
                                         title=symptomClass.title))
         return SimpleVocabulary(items)
 

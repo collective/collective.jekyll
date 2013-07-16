@@ -13,7 +13,17 @@ from collective.jekyll.interfaces import IJekyllSettings
 from collective.jekyll import jekyllMessageFactory as _
 
 
-class SymptomBase(object):
+class Status(object):
+    @property
+    def status_class(self):
+        return u"ok" if self.status else u"warning"
+
+    @property
+    def status_title(self):
+        return _(self.status_class)
+
+
+class SymptomBase(Status):
     implements(ISymptom)
 
     def __init__(self, context):

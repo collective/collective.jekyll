@@ -36,7 +36,7 @@
      factory=".diagnosis.diagnosisFromBrain" />
 
   <utility
-     component=".diagnosis.SymptomsVocabulary"
+     component=".symptoms.SymptomsVocabulary"
      name="collective.jekyll.SymptomsVocabulary" />
 
    <!-- symptoms -->

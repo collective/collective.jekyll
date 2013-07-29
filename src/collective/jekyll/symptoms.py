@@ -3,8 +3,12 @@ import re
 from bs4 import BeautifulSoup
 
 from zope.interface import implements
-from zope.component import queryUtility
 from zope.i18nmessageid import Message
+from zope.component import queryUtility
+from zope.component import getGlobalSiteManager
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.vocabulary import SimpleTerm
 
 from plone.registry.interfaces import IRegistry
 
@@ -54,6 +58,26 @@ class SymptomBase(Status):
     @property
     def serialized_name(self):
         return self.name.replace('.', '-')
+
+
+class SymptomsVocabulary(object):
+    """
+    """
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        items = []
+        gsm = getGlobalSiteManager()
+        for registration in gsm.registeredSubscriptionAdapters():
+            if registration.provided is ISymptom:
+                symptomClass = registration.factory
+                name = '.'.join((symptomClass.__module__,
+                                 symptomClass.__name__))
+                items.append(SimpleTerm(name,
+                                        title=symptomClass.title))
+        return SimpleVocabulary(items)
+
+SymptomsVocabulary = SymptomsVocabulary()
 
 
 class IdFormatSymptom(SymptomBase):

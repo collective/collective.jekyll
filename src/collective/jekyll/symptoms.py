@@ -196,7 +196,7 @@ class LinksInBodySymptom(SymptomBase):
         cooked = self.context.CookedBody(stx_level=2).strip()
         soup = BeautifulSoup(cooked)
         links = soup.find_all('a')
-        self.status = len(links) > 1
+        self.status = len(links) > self.minimum
         if not self.status:
             self.description = _(u"Body text does not have enough links.")
 

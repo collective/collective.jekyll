@@ -207,3 +207,13 @@ msgstr ""
 
 msgid "warning"
 msgstr "alerte"
+
+# values for ignore
+msgid "Ignore"
+msgstr "Ignorer"
+
+msgid "Ignored"
+msgstr "Ignoré"
+
+msgid "Restore"
+msgstr "Réactiver"

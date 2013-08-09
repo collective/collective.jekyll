@@ -119,7 +119,7 @@ div.restore {
   border-bottom: 1px solid #BBB;
 }
 
-#content .restore a:visited,
-#content .restore a:link {
+#content .symptom a:visited,
+#content .symptom a:link {
   border: 0;
 }

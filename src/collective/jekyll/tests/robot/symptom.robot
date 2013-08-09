@@ -15,14 +15,37 @@ Diagnose empty description
     Add page with empty description
     Element Should Not Be Visible  css=.symptoms
     Page should contain element  css=dt.diag-warning.globalstatus
+    Page should contain element  css=.diagnosis .menuHandle
     Click element  css=.diagnosis .menuHandle
     Element Should Be Visible  css=.symptoms
     Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription  Description does not have content.
+
+Diagnose empty description and ignore
+    [tags]  testing
+    Add page with empty description
+    Element Should Not Be Visible  css=.symptoms
+    Page should contain element  css=dt.diag-warning.globalstatus
+    Page should contain element  css=.diagnosis .menuHandle
+    Click element  css=.diagnosis .menuHandle
+    Element Should Be Visible  css=.symptoms
+    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription  Description does not have content.
+    Element Should Be Visible  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription a
+    Click Element  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription a
+    Page should contain element  css=dt.diag-ok.globalstatus
+    Element Should Not Be Visible  css=.symptoms
+    Page should contain element  css=.diagnosis .menuHandle
+    Click element  css=.diagnosis .menuHandle
+    Element Should Be Visible  css=.symptoms
+    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom.ignored .symptomDescription  Description does not have content.
+    Element Should Be Visible  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom.ignored .symptomDescription a
+    Click Element  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom.ignored .symptomDescription a
+    Page should contain element  css=dt.diag-warning.globalstatus
 
 Diagnose valid description
     Add page with valid description
     Element Should Not Be Visible  css=.symptoms
     Page should contain element  css=dt.diag-ok.globalstatus
+    Page should contain element  css=.diagnosis .menuHandle
     Click element  css=.diagnosis .menuHandle
     Element Should Be Visible  css=.symptoms
     Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-ok  ok

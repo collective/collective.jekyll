@@ -14,6 +14,7 @@ Diagnose empty description
     [tags]  testing
     Add page with empty description
     Element Should Not Be Visible  css=.symptoms
+    Page should contain element  css=dt.diag-warning.globalstatus
     Click element  css=.diagnosis .menuHandle
     Element Should Be Visible  css=.symptoms
     Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription  Description does not have content.
@@ -21,8 +22,10 @@ Diagnose empty description
 Diagnose valid description
     Add page with valid description
     Element Should Not Be Visible  css=.symptoms
+    Page should contain element  css=dt.diag-ok.globalstatus
     Click element  css=.diagnosis .menuHandle
     Element Should Be Visible  css=.symptoms
+    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-ok  ok
 
 Diagnosis view
     Element Should Be Visible  css=#portaltab-diagnosis a

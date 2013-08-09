@@ -1,7 +1,5 @@
 from Products.Five import BrowserView
 
-from Products.CMFCore.utils import getToolByName
-
 from Products.CMFPlone.PloneBatch import Batch
 
 from plone.app.layout.viewlets.common import ViewletBase
@@ -10,6 +8,7 @@ from plone.memoize import view
 
 from collective.jekyll.browser.filter import DiagnosisFilter
 from collective.jekyll.interfaces import IDiagnosis
+from collective.jekyll.interfaces import IIgnoredSymptomNames
 
 
 class DiagnosisViewlet(ViewletBase):
@@ -41,3 +40,21 @@ class DiagnosisCollectionView(BrowserView):
                 if help not in helps:
                     helps.append(help)
         return helps
+
+
+class IgnoreSymptomView(BrowserView):
+
+    def __call__(self):
+        name = self.request.symptomName
+        ignored = IIgnoredSymptomNames(self.context)
+        ignored.ignore(name)
+        self.request.RESPONSE.redirect(self.context.absolute_url())
+
+
+class RestoreSymptomView(BrowserView):
+
+    def __call__(self):
+        name = self.request.symptomName
+        ignored = IIgnoredSymptomNames(self.context)
+        ignored.restore(name)
+        self.request.RESPONSE.redirect(self.context.absolute_url())

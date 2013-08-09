@@ -24,6 +24,17 @@ class IDiagnosis(Interface):
     symptoms = List(title=u'Symptoms', value_type=Object(ISymptom))
 
 
+class IIgnoredSymptomNames(Interface):
+    def ignore(name):
+        """store on context that symptom will be ignored"""
+
+    def restore(name):
+        """store on context that symptom will not be ignored"""
+
+    def isIgnored(name):
+        """check if symptom name is among ignored names"""
+
+
 class IJekyllSettings(Interface):
     activeSymptoms = List(
         title=_(u"Active Symptoms"),

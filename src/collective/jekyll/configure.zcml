@@ -13,6 +13,10 @@
               title="collective.jekyll: Diagnose"
               />
 
+  <permission id="jekyll.Ignore"
+              title="collective.jekyll: Ignore"
+              />
+
   <include package=".browser" />
 
   <genericsetup:registerProfile
@@ -29,6 +33,11 @@
      for="OFS.interfaces.IItem"
      provides=".interfaces.IDiagnosis"
      factory=".diagnosis.Diagnosis" />
+
+  <adapter
+     for="OFS.interfaces.IItem"
+     provides=".interfaces.IIgnoredSymptomNames"
+     factory=".ignored.IgnoredNames" />
 
   <adapter
      for="Products.ZCatalog.interfaces.ICatalogBrain"

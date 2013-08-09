@@ -1,14 +1,34 @@
-<div tal:attributes="class string:symptom name-${context/serialized_name}">
+<div tal:define="ignored python:'ignored' if context.isIgnored else ''"
+  tal:attributes="class string:symptom name-${context/serialized_name}
+  ${ignored}">
     <div>
       <span tal:attributes="class string:status diag-${context/status_class}"
             tal:content="context/status_title" />
       <span class="symptomTitle"
-        tal:content="context/title" />
+            tal:content="context/title" />
     </div>
+    <tal:ignored condition="not:context/isIgnored">
     <div tal:condition="not:context/status"
-         class="symptomDescription"
-         tal:content="context/description" />
+         class="symptomDescription">
+      <span tal:replace="context/description" />
+      <a tal:define="content nocall:context/content;
+                     url content/absolute_url;
+                     name context/name"
+         tal:attributes="href string:$url/jekyll_ignore_symptom?symptomName=$name"
+         i18n:translate="">Ignore</a>
+    </div>
+    </tal:ignored>
     <div class="symptomHelp">
+      <tal:ignored condition="context/isIgnored">
+      <div class="restore">Ignored - 
+        <a tal:define="content nocall:context/content;
+                       url content/absolute_url;
+                       name context/name"
+           tal:attributes="href string:$url/jekyll_restore_symptom?symptomName=$name"
+           i18n:translate="">Restore</a> 
+      </div>
+      <hl />
+      </tal:ignored>
       <div tal:replace="context/help" />
     </div>
 </div>

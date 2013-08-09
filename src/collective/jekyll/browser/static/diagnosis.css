@@ -22,6 +22,16 @@
   color: white;
 }
 
+.ignored .diag-ok {
+  background-color: lightgreen;
+  color: white;
+}
+
+.ignored .diag-warning {
+  background-color: pink;
+  color: white;
+}
+
 #content .diagnosis dd {
   margin: 0;
   border-radius: 0 0.5em 0.5em 0.5em;
@@ -102,4 +112,14 @@ dl.menu .menuHandle {
   font-weight: normal;
   font-size: 90%;
   color: #BBB;
+}
+
+div.restore {
+  border: 0;
+  border-bottom: 1px solid #BBB;
+}
+
+#content .restore a:visited,
+#content .restore a:link {
+  border: 0;
 }

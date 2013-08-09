@@ -24,6 +24,22 @@
         layer=".interfaces.IThemeSpecific"
         />
 
+    <browser:page
+        for="OFS.interfaces.IItem"
+        name="jekyll_ignore_symptom"
+        class=".diagnosis.IgnoreSymptomView"
+        permission="jekyll.Ignore"
+        layer=".interfaces.IThemeSpecific"
+        />
+
+    <browser:page
+        for="OFS.interfaces.IItem"
+        name="jekyll_restore_symptom"
+        class=".diagnosis.RestoreSymptomView"
+        permission="jekyll.Ignore"
+        layer=".interfaces.IThemeSpecific"
+        />
+
    <browser:page
         for="..interfaces.IDiagnosis"
         name="detailed"

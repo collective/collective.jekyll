@@ -4,7 +4,6 @@
   <span tal:replace="context/status_title" />
     <span class="arrowDownAlternative">▼</span>
   </dt>
-  <dd >
   <dd tal:attributes="class string:diag-${context/status_class}">
   <ul class="symptoms">
     <tal:symptoms repeat="symptom context/sorted_symptoms">

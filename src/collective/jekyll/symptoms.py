@@ -13,6 +13,7 @@ from zope.schema.vocabulary import SimpleTerm
 from plone.registry.interfaces import IRegistry
 
 from collective.jekyll.interfaces import ISymptom
+from collective.jekyll.interfaces import IIgnoredSymptomNames
 from collective.jekyll.interfaces import IJekyllSettings
 from collective.jekyll import jekyllMessageFactory as _
 
@@ -31,7 +32,7 @@ class SymptomBase(Status):
     implements(ISymptom)
 
     def __init__(self, context):
-        self.context = context
+        self.content = self.context = context
         self.status = True
         self.description = ''
         self._registry = queryUtility(IRegistry, default={})
@@ -48,6 +49,11 @@ class SymptomBase(Status):
             return self.name in settings.activeSymptoms
         else:
             return True
+
+    @property
+    def isIgnored(self):
+        ignored = IIgnoredSymptomNames(self.context)
+        return ignored.isIgnored(self.name)
 
     @property
     def name(self):

@@ -13,42 +13,46 @@ Suite Teardown  Close all browsers
 Diagnose empty description
     [tags]  testing
     Add page with empty description
-    Element Should Not Be Visible  css=.symptoms
-    Page should contain element  css=dt.diag-warning.globalstatus
-    Page should contain element  css=.diagnosis .menuHandle
-    Click element  css=.diagnosis .menuHandle
-    Element Should Be Visible  css=.symptoms
-    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription  Description does not have content.
+    Diagnosis should be warning
+    Diagnosis menu should be closed
+    Click to open diagnosis menu
+    Symptom IdFormatSymptom should be ok
+    IdFormatSymptom should not be ignored
+    Symptom TitleLengthSymptom should be ok
+    TitleLengthSymptom should not be ignored
+    Symptom DescriptionLengthSymptom should be warning
+    Description of symptom DescriptionLengthSymptom should be Description does not have content.
+    DescriptionLengthSymptom should not be ignored
+    DescriptionLengthSymptom should have Ignore link
 
-Diagnose empty description and ignore
+Ignore empty description
     [tags]  testing
     Add page with empty description
-    Element Should Not Be Visible  css=.symptoms
-    Page should contain element  css=dt.diag-warning.globalstatus
-    Page should contain element  css=.diagnosis .menuHandle
-    Click element  css=.diagnosis .menuHandle
-    Element Should Be Visible  css=.symptoms
-    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription  Description does not have content.
-    Element Should Be Visible  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription a
-    Click Element  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .symptomDescription a
-    Page should contain element  css=dt.diag-ok.globalstatus
-    Element Should Not Be Visible  css=.symptoms
-    Page should contain element  css=.diagnosis .menuHandle
-    Click element  css=.diagnosis .menuHandle
-    Element Should Be Visible  css=.symptoms
-    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom.ignored .symptomDescription  Description does not have content.
-    Element Should Be Visible  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom.ignored .symptomDescription a
-    Click Element  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom.ignored .symptomDescription a
-    Page should contain element  css=dt.diag-warning.globalstatus
+    Click to open diagnosis menu
+    Click DescriptionLengthSymptom Ignore link
+    Diagnosis should be ok
+    Diagnosis menu should be closed
+    Click to open diagnosis menu
+    DescriptionLengthSymptom should be ignored
+    DescriptionLengthSymptom should have Restore link
+    Click DescriptionLengthSymptom Restore link
+    Diagnosis should be warning
+    Diagnosis menu should be closed
+    Click to open diagnosis menu
+    DescriptionLengthSymptom should not be ignored
+    DescriptionLengthSymptom should have Ignore link
 
 Diagnose valid description
     Add page with valid description
-    Element Should Not Be Visible  css=.symptoms
-    Page should contain element  css=dt.diag-ok.globalstatus
-    Page should contain element  css=.diagnosis .menuHandle
-    Click element  css=.diagnosis .menuHandle
-    Element Should Be Visible  css=.symptoms
-    Element Should Contain  css=.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-ok  ok
+    Diagnosis should be ok
+    Diagnosis menu should be closed
+    Click to open diagnosis menu
+    Symptom IdFormatSymptom should be ok
+    IdFormatSymptom should not be ignored
+    Symptom TitleLengthSymptom should be ok
+    TitleLengthSymptom should not be ignored
+    Symptom DescriptionLengthSymptom should be ok
+    DescriptionLengthSymptom should not be ignored
 
 Diagnosis view
     Element Should Be Visible  css=#portaltab-diagnosis a
@@ -81,3 +85,53 @@ Add page with valid description
     Click button  Save
     Page should contain  Valid description
     Page should contain  ok
+
+Diagnosis should be ${status}
+    Page should contain element  css=dt.diag-${status}.globalstatus
+    
+Diagnosis menu should be closed
+    Element Should Not Be Visible  css=.symptoms
+
+Diagnosis menu should be opened
+    Element Should Be Visible  css=.symptoms
+
+Click to open diagnosis menu
+    Diagnosis menu should be closed
+    Page should contain element  css=.diagnosis .menuHandle
+    Click element  css=.diagnosis .menuHandle
+    Diagnosis menu should be opened
+
+Symptom ${symptom_class} should be ${symptom_status}
+    ${status_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} .diag-${symptom_status}
+    Page should contain element  ${status_selector} 
+    Element should be visible  ${status_selector}
+    Element should contain  ${status_selector}  ${symptom_status}
+
+Description of symptom ${symptom_class} should be ${symptom_description}
+    ${description_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} .symptomDescription
+    Page Should Contain Element  ${description_selector}
+    Element Should Be Visible  ${description_selector}
+    Element Should Contain  ${description_selector}  ${symptom_description}
+
+${symptom_class} should have ${link_text} link
+    ${link_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} .symptomDescription a
+    Page Should Contain Element  ${link_selector}
+    Element Should Be Visible  ${link_selector} 
+    Element Should contain  ${link_selector}  ${link_text}
+
+Click ${symptom_class} ${link_text} link
+    ${symptom_class} should have ${link_text} link
+    ${link_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} .symptomDescription a
+    Click Element  ${link_selector}
+
+${symptom_class} should be ignored
+    ${symptom_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class}
+    ${ignored_selector} =  set variable  ${symptom_selector}.ignored
+    Page Should Contain Element  ${ignored_selector}
+    Element Should Be Visible  ${ignored_selector} 
+
+${symptom_class} should not be ignored
+    ${symptom_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class}
+    ${ignored_selector} =  set variable  ${symptom_selector}.ignored
+    Page Should Contain Element  ${symptom_selector}
+    Page Should Not Contain Element  ${ignored_selector}

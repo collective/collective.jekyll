@@ -5,6 +5,7 @@ before_install:
   - sudo apt-get install libpcre3-dev
 install:
   - pip install coveralls
+  - pip install --upgrade setuptools=0.9.8
   - pip install distribute
   - make bin/test
 before_script:

@@ -62,8 +62,10 @@ Diagnosis view
     Element Should Be Visible  css=#plone-contentmenu-display-diagnosis_view span
     Click element  css=#plone-contentmenu-display-diagnosis_view span
     Page should contain  View changed
+    Page should contain  [1]
     Element Should contain  css=.listing tr:nth-child(1) td span.globalstatus  warning
     Click link  3
+    Page should contain  [3]
     Element Should contain  css=.listing tr:nth-child(1) td span.globalstatus  ok
 
 *** Keywords ***

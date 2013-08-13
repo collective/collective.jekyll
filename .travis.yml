@@ -1,17 +1,22 @@
+after_success: 
+- coveralls
+install: 
+- pip install coveralls
+- pip install --upgrade setuptools==0.9.8
+- pip install distribute
+- make bin/test
+env: 
+  global: 
+    secure: aeJaNydBzTcyBwbbluHDvs8vmryEpwaSFYD+SvTlD2e341Ilye+vxKR2/fT56OYLONEvFXkc5K1maw4caJqaxAfjlfO80Id3FsIO3f/AM/zTl3SERHd//y8CaaokL9vaxqNRjUHRMrpJZQpTFKW8V7HMnK88ulQF8nuM1gaQU/Q=
 language: python
-python:
-  - 2.6
-before_install:
-  - sudo apt-get install libpcre3-dev
-install:
-  - pip install coveralls
-  - pip install --upgrade setuptools==0.9.8
-  - pip install distribute
-  - make bin/test
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+before_script: 
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+before_install: 
+- sudo apt-get install libpcre3-dev
+python: 
+- 2.6
+after_script: 
+- .update-gh-pages.sh
 script: 
-  - make coverage
-after_success:
-  - coveralls
+- make coverage

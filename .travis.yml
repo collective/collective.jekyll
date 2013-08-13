@@ -19,4 +19,4 @@ python:
 after_script: 
 - .update-gh-pages.sh
 script: 
-- make coverage
+- make test

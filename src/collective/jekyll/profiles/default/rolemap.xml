@@ -4,10 +4,14 @@
     <permission name="collective.jekyll: Diagnose"
                 acquire="True">
       <role name="Site Administrator"/>
+      <role name="Editor"/>
+      <role name="Manager"/>
     </permission>
     <permission name="collective.jekyll: Ignore"
                 acquire="True">
       <role name="Site Administrator"/>
+      <role name="Reviewer"/>
+      <role name="Manager"/>
     </permission>
   </permissions>
 </rolemap>

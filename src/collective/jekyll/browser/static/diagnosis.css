@@ -114,13 +114,6 @@ dl.menu .menuHandle {
   color: #BBB;
 }
 
-.symptomDescription .discrete {
-  border: 0;
-  border-top: 1px solid #BBB;
-  display: block;
-  color: #BBB;
-}
-
 #content .symptom a:visited,
 #content .symptom a:link {
   border: 0;

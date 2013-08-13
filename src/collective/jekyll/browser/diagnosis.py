@@ -10,6 +10,7 @@ from collective.jekyll.browser.filter import DiagnosisFilter
 from collective.jekyll.interfaces import IDiagnosis
 from collective.jekyll.interfaces import IIgnoredSymptomNames
 from collective.jekyll import jekyllMessageFactory as _
+from collective.jekyll import IGNORE_PERMISSION
 
 
 class DiagnosisViewlet(ViewletBase):
@@ -46,16 +47,21 @@ class DiagnosisCollectionView(BrowserView):
 class SymptomView(BrowserView):
 
     def ignore_action(self):
+        content = self.context.context
+        user = self.request.get('AUTHENTICATED_USER', None)
+        if (
+            user is None or
+            not user.has_permission(IGNORE_PERMISSION, content)
+        ):
+            return u''
         return self._make_link()
 
     def _make_link(self):
         content = self.context.context
         if self.context.isIgnored:
-            ignored_text = u"{0} - ".format(_("Ignored"))
             link_text = _("Restore")
             action = u"restore"
         else:
-            ignored_text = u""
             link_text = _("Ignore")
             action = u"ignore"
         url = u'{url}/jekyll_{action}_symptom?symptomName={name}'.format(
@@ -63,12 +69,9 @@ class SymptomView(BrowserView):
             name=self.context.name,
             action=action,
         )
-        return u'''<span class="discrete">{ignored}
-  <a href="{url}">{text}</a>
-</span>'''.format(
+        return u'<a href="{url}">{text}</a>'.format(
             url=url,
             text=link_text,
-            ignored=ignored_text
         )
 
 

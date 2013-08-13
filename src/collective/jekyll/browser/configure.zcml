@@ -60,6 +60,7 @@
         for="..interfaces.ISymptom"
         name="view"
         template="symptom.pt"
+        class=".diagnosis.SymptomView"
         permission="jekyll.Diagnose"
         layer=".interfaces.IThemeSpecific"
         />

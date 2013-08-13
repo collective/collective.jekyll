@@ -9,21 +9,7 @@
     <div tal:condition="not:context/status"
          class="symptomDescription">
       <span tal:replace="context/description" />
-      <tal:ignored condition="not:context/isIgnored">
-      <a tal:define="content nocall:context/content;
-                     url content/absolute_url;
-                     name context/name"
-         tal:attributes="href string:$url/jekyll_ignore_symptom?symptomName=$name"
-         i18n:translate="">Ignore</a>
-      </tal:ignored>
-      <tal:ignored condition="context/isIgnored">
-      <span i18n:translate="">Ignored</span> - 
-      <a tal:define="content nocall:context/content;
-                     url content/absolute_url;
-                     name context/name"
-         tal:attributes="href string:$url/jekyll_restore_symptom?symptomName=$name"
-         i18n:translate="">Restore</a> 
-      </tal:ignored>
+      <span tal:replace="structure view/ignore_action" />
     </div>
     <div class="symptomHelp">
       <div tal:replace="context/help" />

@@ -9,6 +9,7 @@ from plone.memoize import view
 from collective.jekyll.browser.filter import DiagnosisFilter
 from collective.jekyll.interfaces import IDiagnosis
 from collective.jekyll.interfaces import IIgnoredSymptomNames
+from collective.jekyll import jekyllMessageFactory as _
 
 
 class DiagnosisViewlet(ViewletBase):
@@ -40,6 +41,35 @@ class DiagnosisCollectionView(BrowserView):
                 if help not in helps:
                     helps.append(help)
         return helps
+
+
+class SymptomView(BrowserView):
+
+    def ignore_action(self):
+        return self._make_link()
+
+    def _make_link(self):
+        content = self.context.context
+        if self.context.isIgnored:
+            ignored_text = u"{0} - ".format(_("Ignored"))
+            link_text = _("Restore")
+            action = u"restore"
+        else:
+            ignored_text = u""
+            link_text = _("Ignore")
+            action = u"ignore"
+        url = u'{url}/jekyll_{action}_symptom?symptomName={name}'.format(
+            url=content.absolute_url(),
+            name=self.context.name,
+            action=action,
+        )
+        return u'''<span class="discrete">{ignored}
+  <a href="{url}">{text}</a>
+</span>'''.format(
+            url=url,
+            text=link_text,
+            ignored=ignored_text
+        )
 
 
 class IgnoreSymptomView(BrowserView):

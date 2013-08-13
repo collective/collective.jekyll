@@ -32,7 +32,7 @@ class SymptomBase(Status):
     implements(ISymptom)
 
     def __init__(self, context):
-        self.content = self.context = context
+        self.context = context
         self.status = True
         self.description = ''
         self._registry = queryUtility(IRegistry, default={})

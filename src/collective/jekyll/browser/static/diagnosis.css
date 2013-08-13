@@ -114,9 +114,11 @@ dl.menu .menuHandle {
   color: #BBB;
 }
 
-div.restore {
+.symptomDescription .discrete {
   border: 0;
-  border-bottom: 1px solid #BBB;
+  border-top: 1px solid #BBB;
+  display: block;
+  color: #BBB;
 }
 
 #content .symptom a:visited,

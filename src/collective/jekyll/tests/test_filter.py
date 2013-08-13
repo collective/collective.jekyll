@@ -43,7 +43,18 @@ class Filter(unittest.TestCase):
         testing.setUp(self)
         provideAdapter(Diagnosis, [int], IDiagnosis)
 
-        class PositiveSymptom(SymptomBase):
+        class TestSymptom(SymptomBase):
+
+            @property
+            def isIgnored(self):
+                return False
+
+            @property
+            def isActive(self):
+                return True
+
+
+        class PositiveSymptom(TestSymptom):
             title = "Positive"
             help = "Is positive."
 
@@ -58,7 +69,7 @@ class Filter(unittest.TestCase):
             PositiveSymptom, [int], ISymptom
         )
 
-        class GreaterThanOneSymptom(SymptomBase):
+        class GreaterThanOneSymptom(TestSymptom):
             title = "Greater than one"
             help = title
 

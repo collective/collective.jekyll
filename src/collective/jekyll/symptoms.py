@@ -43,8 +43,7 @@ class SymptomBase(Status):
 
     @property
     def isActive(self):
-        # TODO better way to have test_filter pass
-        if self._registry:
+        if hasattr(self._registry, 'forInterface'):
             settings = self._registry.forInterface(IJekyllSettings, False)
             return self.name in settings.activeSymptoms
         else:

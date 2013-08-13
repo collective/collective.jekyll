@@ -56,6 +56,10 @@ class SymptomBase(Status):
         return ignored.isIgnored(self.name)
 
     @property
+    def ignored_class(self):
+        return u"ignored" if self.isIgnored else u""
+
+    @property
     def name(self):
         klass = self.__class__
         name = '.'.join((klass.__module__, klass.__name__))

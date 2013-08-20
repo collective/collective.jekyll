@@ -1,17 +1,28 @@
 import unittest2 as unittest
 
+from zope.interface import alsoProvides
+from zope.component import getMultiAdapter
+
 from Products.CMFCore.utils import getToolByName
+
+from plone.app.testing import login
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 
 from collective.jekyll.testing import COLLECTIVE_JEKYLL_INTEGRATION
 
 
-class TestExample(unittest.TestCase):
+class TestIntegration(unittest.TestCase):
 
     layer = COLLECTIVE_JEKYLL_INTEGRATION
 
     def setUp(self):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        from collective.jekyll.browser.interfaces import IThemeSpecific
+        alsoProvides(self.request, IThemeSpecific)
         self.qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
 
     def test_product_is_installed(self):
@@ -22,3 +33,21 @@ class TestExample(unittest.TestCase):
         installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
         self.assertTrue(pid in installed,
                         'package appears not to have been installed')
+
+    def test_collection_view(self):
+        diagnosis = self.portal.diagnosis
+        diagnosis_view = getMultiAdapter(
+            (diagnosis, self.request),
+            name="diagnosis_view"
+        )
+        content = diagnosis_view()
+        WARNING = '<span class="globalstatus diag-warning">warning</span>'
+        self.assertTrue(WARNING in content)
+
+    def test_viewlet(self):
+        login(self.portal, TEST_USER_NAME)
+        setRoles(self.portal, TEST_USER_ID, ['Editor', 'Member'])
+        pages = self.portal.pages
+        content = pages()
+        VIEWLET = '<dl class="diagnosis menu">'
+        self.assertTrue(VIEWLET in content)

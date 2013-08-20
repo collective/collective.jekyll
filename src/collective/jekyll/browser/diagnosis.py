@@ -1,3 +1,5 @@
+from AccessControl import getSecurityManager
+
 from zope.i18n import translate
 
 from Products.Five import BrowserView
@@ -63,11 +65,8 @@ class SymptomView(BrowserView):
 
     def ignore_action(self):
         content = self.context.context
-        user = self.request.get('AUTHENTICATED_USER', None)
-        if (
-            user is None or
-            not user.has_permission(IGNORE_PERMISSION, content)
-        ):
+        sm = getSecurityManager()
+        if not sm.checkPermission(IGNORE_PERMISSION, content):
             return u''
         return self._make_link()
 

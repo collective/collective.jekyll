@@ -1,5 +1,6 @@
-from Products.Five import BrowserView
+from zope.i18n import translate
 
+from Products.Five import BrowserView
 from Products.CMFPlone.PloneBatch import Batch
 
 from plone.app.layout.viewlets.common import ViewletBase
@@ -73,10 +74,10 @@ class SymptomView(BrowserView):
     def _make_link(self):
         content = self.context.context
         if self.context.isIgnored:
-            link_text = _("Restore")
+            link_text = translate(_(u"Restore"), context=self.request)
             action = u"restore"
         else:
-            link_text = _("Ignore")
+            link_text = translate(_(u"Ignore"), context=self.request)
             action = u"ignore"
         url = u'{url}/jekyll_{action}_symptom?symptomName={name}'.format(
             url=content.absolute_url(),

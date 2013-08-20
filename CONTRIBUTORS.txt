@@ -1,1 +1,5 @@
 - Godefroid Chapelle, original author
+- Laurent Lasudry
+- Benoit Suttor
+- Jean-Michel Francois
+- Danny Butaye

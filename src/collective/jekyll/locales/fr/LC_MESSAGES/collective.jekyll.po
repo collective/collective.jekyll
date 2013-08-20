@@ -216,4 +216,4 @@ msgid "Ignored"
 msgstr "Ignoré"
 
 msgid "Restore"
-msgstr "Réactiver"
+msgstr "Rétablir"

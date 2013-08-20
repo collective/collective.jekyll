@@ -201,10 +201,10 @@ msgid "warning"
 msgstr ""
 
 msgid "Ignore"
-msgstr "Neglect"
+msgstr ""
 
 msgid "Ignored"
-msgstr "Neglected"
+msgstr ""
 
 msgid "Restore"
-msgstr "Reset"
+msgstr "Consider"

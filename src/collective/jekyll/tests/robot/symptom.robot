@@ -34,8 +34,8 @@ Ignore empty description
     Diagnosis menu should be closed
     Click to open diagnosis menu
     DescriptionLengthSymptom should be ignored
-    DescriptionLengthSymptom should have Restore link
-    Click DescriptionLengthSymptom Restore link
+    DescriptionLengthSymptom should have Consider link
+    Click DescriptionLengthSymptom Consider link
     Diagnosis should be warning
     Diagnosis menu should be closed
     Click to open diagnosis menu
@@ -136,4 +136,3 @@ ${symptom_class} should not be ignored
     ${symptom_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class}
     ${ignored_selector} =  set variable  ${symptom_selector}.ignored
     Page Should Contain Element  ${symptom_selector}
-    Page Should Not Contain Element  ${ignored_selector}

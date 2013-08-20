@@ -199,3 +199,12 @@ msgstr ""
 
 msgid "warning"
 msgstr ""
+
+msgid "Ignore"
+msgstr "Neglect"
+
+msgid "Ignored"
+msgstr "Neglected"
+
+msgid "Restore"
+msgstr "Reset"

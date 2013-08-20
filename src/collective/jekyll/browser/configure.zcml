@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:browser="http://namespaces.zope.org/browser"
@@ -23,6 +24,19 @@
         permission="jekyll.Diagnose"
         layer=".interfaces.IThemeSpecific"
         />
+
+    <configure zcml:condition="installed Products.ATContentTypes.content.topic">
+
+      <browser:page
+          for="Products.ATContentTypes.interfaces.IATTopic"
+          name="diagnosis_view"
+          class=".diagnosis.DiagnosisTopicView"
+          template="collection_view.pt"
+          permission="jekyll.Diagnose"
+          layer=".interfaces.IThemeSpecific"
+          />
+
+    </configure>
 
     <browser:page
         for="OFS.interfaces.IItem"

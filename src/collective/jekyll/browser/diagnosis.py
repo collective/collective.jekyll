@@ -26,12 +26,14 @@ class DiagnosisCollectionView(BrowserView):
     def items(self):
         b_start = int(self.request.get('b_start', 0))
         b_size = 20
-        context = self.context
-        results = context.getQuery(brains=True)
+        results = self._getResults()
         total_length = len(results)
         filter = DiagnosisFilter(results, total_length)
         results = Batch(filter, b_size, b_start)
         return results
+
+    def _getResults(self):
+        return self.context.getQuery(brains=True)
 
     @view.memoize
     def getSymptomTypes(self):
@@ -42,6 +44,18 @@ class DiagnosisCollectionView(BrowserView):
                 if help not in helps:
                     helps.append(help)
         return helps
+
+
+class DiagnosisTopicView(DiagnosisCollectionView):
+    "for old-style collection (ATTopic)"
+
+    def _getResults(self):
+        from Products.CMFCore.util import getToolByName
+
+        context = self.context
+        pcatalog = getToolByName(context, 'portal_catalog')
+        query = context.buildQuery()
+        return pcatalog.searchResults(query)
 
 
 class SymptomView(BrowserView):

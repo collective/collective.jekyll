@@ -5,6 +5,9 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
+- Restore view for old-style collection (topic).
+  [gotcha]
+
 - Add ignore symptom feature.
   [gotcha]
 

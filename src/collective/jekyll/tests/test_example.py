@@ -1,7 +1,9 @@
 import unittest2 as unittest
 
-from zope.interface import alsoProvides
 from zope.component import getMultiAdapter
+from zope.event import notify
+from zope.traversing.interfaces import BeforeTraverseEvent
+
 
 from Products.CMFCore.utils import getToolByName
 
@@ -21,8 +23,7 @@ class TestIntegration(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        from collective.jekyll.browser.interfaces import IThemeSpecific
-        alsoProvides(self.request, IThemeSpecific)
+        notify(BeforeTraverseEvent(self.portal, self.request))
         self.qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
 
     def test_product_is_installed(self):

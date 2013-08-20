@@ -50,7 +50,7 @@ class DiagnosisTopicView(DiagnosisCollectionView):
     "for old-style collection (ATTopic)"
 
     def _getResults(self):
-        from Products.CMFCore.util import getToolByName
+        from Products.CMFCore.utils import getToolByName
 
         context = self.context
         pcatalog = getToolByName(context, 'portal_catalog')

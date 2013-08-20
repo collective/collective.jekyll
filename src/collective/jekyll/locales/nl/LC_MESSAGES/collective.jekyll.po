@@ -202,10 +202,10 @@ msgstr "niet ok"
 
 # values for ignore
 msgid "Ignore"
-msgstr "Vergeten"
+msgstr "Negeren"
 
 msgid "Ignored"
-msgstr "Vergeten"
+msgstr "Genegeerd"
 
 msgid "Restore"
-msgstr "Activeren"
+msgstr "Herstellen"

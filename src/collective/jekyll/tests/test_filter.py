@@ -53,7 +53,6 @@ class Filter(unittest.TestCase):
             def isActive(self):
                 return True
 
-
         class PositiveSymptom(TestSymptom):
             title = "Positive"
             help = "Is positive."
@@ -87,6 +86,18 @@ class Filter(unittest.TestCase):
     def tearDown(self):
         testing.tearDown(self)
 
+    def testCornerCases(self):
+        from collective.jekyll.browser.filter import DiagnosisFilter
+
+        values = [1, 2, 3, 4, 5, -1, -2, -3, -4, -5]
+
+        filter = DiagnosisFilter(values, 10)
+        self.assertEquals(getValues([filter[-3]]), [3])
+        filter = DiagnosisFilter(values, 10)
+        self.assertRaises(IndexError, filter.__getitem__, -13)
+        filter = DiagnosisFilter(values, 10)
+        self.assertRaises(IndexError, filter.__getitem__, 13)
+
     def testTrueFirst(self):
         from collective.jekyll.browser.filter import DiagnosisFilter
 
@@ -110,6 +121,7 @@ class Filter(unittest.TestCase):
         self.assertEquals(counter.value, 10)
 
         self.assertEquals(getStatuses(filter[9]), (5, True, [True, True]))
+        self.assertEquals(getStatuses(filter[-1]), (5, True, [True, True]))
 
     def testFalseFirst(self):
         from collective.jekyll.browser.filter import DiagnosisFilter

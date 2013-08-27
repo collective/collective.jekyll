@@ -24,19 +24,22 @@ class TestIntegration(unittest.TestCase):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
         notify(BeforeTraverseEvent(self.portal, self.request))
-        self.qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
 
     def test_product_is_installed(self):
         """ Validate that our products GS profile has been run and the product
             installed
         """
+        qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
         pid = 'collective.jekyll'
-        installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
+        installed = [p['id'] for p in qi_tool.listInstalledProducts()]
         self.assertTrue(pid in installed,
                         'package appears not to have been installed')
 
     def test_collection_view(self):
         diagnosis = self.portal.diagnosis
+        from zope.interface import alsoProvides
+        from collective.jekyll.browser.interfaces import IThemeSpecific
+        alsoProvides(self.request, IThemeSpecific)
         diagnosis_view = getMultiAdapter(
             (diagnosis, self.request),
             name="diagnosis_view"

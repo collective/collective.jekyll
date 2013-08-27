@@ -1,16 +1,10 @@
 import doctest
 from unittest import TestSuite
 
-from Products.PloneTestCase.PloneTestCase import setupPloneSite
-from Testing.ZopeTestCase import FunctionalDocFileSuite
-
 from plone.app.controlpanel.tests.cptc import ControlPanelTestCase
 
 from collective.jekyll.testing import COLLECTIVE_JEKYLL_FUNCTIONAL
-
-setupPloneSite()
-
-OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
+from plone.testing import layered
 
 
 class JekyllControlPanelTestCase(ControlPanelTestCase):
@@ -21,10 +15,15 @@ class JekyllControlPanelTestCase(ControlPanelTestCase):
 def test_suite():
     suite = TestSuite()
 
-    suite.addTest(FunctionalDocFileSuite(
-        'functional.txt',
-        optionflags=OPTIONFLAGS,
-        package="collective.jekyll.tests",
-        test_class=JekyllControlPanelTestCase))
+    OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
+    suite.addTests([
+        layered(
+            doctest.DocFileSuite(
+                'functional.txt',
+                optionflags=OPTIONFLAGS,
+            ),
+            layer=COLLECTIVE_JEKYLL_FUNCTIONAL
+        ),
+    ])
     return suite

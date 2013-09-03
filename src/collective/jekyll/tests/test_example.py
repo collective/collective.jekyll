@@ -45,8 +45,10 @@ class TestIntegration(unittest.TestCase):
             name="diagnosis_view"
         )
         content = diagnosis_view()
-        WARNING = '<span class="globalstatus diag-warning">warning</span>'
+        WARNING = '<span class="status diag-warning">warning</span>'
         self.assertTrue(WARNING in content)
+        SYMPTOM = 'name-collective-jekyll-symptoms-DescriptionLengthSymptom'
+        self.assertTrue(SYMPTOM in content)
 
     def test_viewlet(self):
         login(self.portal, TEST_USER_NAME)

@@ -21,7 +21,6 @@
                        i18n:attributes="summary summary_content_listing;">
                      <thead>
                        <tr>
-                            <th>Diagnosis</th>
                             <th tal:repeat="type view/getSymptomTypes"
                                 tal:content="type/title"
                                 tal:attributes="title type/help" />
@@ -36,11 +35,10 @@
                                        diagnosis python:result[1];
                                        oddrow repeat/result/odd;"
                           tal:attributes="class python:'even' if oddrow else 'odd'">
-                            <td tal:content="structure diagnosis/@@status" />
                             <tal:symptoms repeat="type view/getSymptomTypes">
                             <td tal:define="symptom python:diagnosis.getSymptomByTitle(type['title'])">
                                <span tal:condition="symptom" 
-                                     tal:content="structure symptom/@@status" />
+                                     tal:replace="structure symptom/@@status" />
                             </td>
                             </tal:symptoms>
                             <tal:fields repeat="field here/getCustomViewFields"

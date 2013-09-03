@@ -63,10 +63,12 @@ Diagnosis view
     Click element  css=#plone-contentmenu-display-diagnosis_view span
     Page should contain  View changed
     Page should contain  [1]
-    Element Should contain  css=.listing tr:nth-child(1) td span.globalstatus  warning
+    Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-TitleLengthSymptom .diag-ok
+    Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-warning
     Click link  3
     Page should contain  [3]
-    Element Should contain  css=.listing tr:nth-child(1) td span.globalstatus  ok
+    Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-TitleLengthSymptom .diag-ok
+    Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-ok
 
 *** Keywords ***
 Suite Setup
@@ -75,18 +77,15 @@ Suite Setup
 
 Add page with empty description
     Add document  Diagnose empty description
-    Page should contain  warning
 
 Add page with valid description
     Add document  Diagnose valid description
-    Page should contain  warning
     Element should be visible  css=li#contentview-edit a
     Click Link  css=li#contentview-edit a
     Element Should Be Visible  css=input#title
     Input text  description  Valid description
     Click button  Save
     Page should contain  Valid description
-    Page should contain  ok
 
 Diagnosis should be ${status}
     Page should contain element  css=dt.diag-${status}.globalstatus

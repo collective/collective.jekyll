@@ -5,7 +5,8 @@ Changelog
 0.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove global diagnosis column in collection_view.
+  [gotcha]
 
 
 0.2 (2013-08-27)

@@ -21,7 +21,7 @@ Diagnose empty description
     Symptom TitleLengthSymptom should be ok
     TitleLengthSymptom should not be ignored
     Symptom DescriptionLengthSymptom should be warning
-    Description of symptom DescriptionLengthSymptom should be Description does not have content.
+    Description of symptom DescriptionLengthSymptom should be Summary does not have content.
     DescriptionLengthSymptom should not be ignored
     DescriptionLengthSymptom should have Ignore link
 

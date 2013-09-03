@@ -173,7 +173,7 @@ class DescriptionFormatSymptom(SymptomBase):
 
     def _update(self):
         description = self.context.Description()
-        if 'summary' in self.context.schema['description'].widget.label:
+        if 'summary' in self.context.Schema()['description'].widget.label:
             key = 'summary'
         else:
             key = 'description'
@@ -223,7 +223,7 @@ class DescriptionLengthSymptom(SymptomBase):
     def _update(self):
         maximum = self.maximum
         word_count = countWords(self.context.Description())
-        if 'summary' in self.context.schema['description'].widget.label:
+        if 'summary' in self.context.Schema()['description'].widget.label:
             key = 'summary'
         else:
             key = 'description'

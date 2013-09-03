@@ -66,12 +66,12 @@
      factory=".symptoms.TitleFormatSymptom" />
 
   <subscriber
-     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     for="Products.Archetypes.interfaces.IExtensibleMetadata"
      provides=".interfaces.ISymptom"
      factory=".symptoms.DescriptionLengthSymptom" />
 
   <subscriber
-     for="Products.CMFCore.interfaces.IMinimalDublinCore"
+     for="Products.Archetypes.interfaces.IExtensibleMetadata"
      provides=".interfaces.ISymptom"
      factory=".symptoms.DescriptionFormatSymptom" />
 

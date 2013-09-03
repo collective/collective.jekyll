@@ -307,10 +307,10 @@ class LinksInBodySymptom(SymptomBase):
             symptom_description = _(
                 u"The body text has less than ${minimum} links to other pages."
             )
-        self.description = Message(
-            symptom_description,
-            mapping={'minimum': minimum}
-        )
+            self.description = Message(
+                symptom_description,
+                mapping={'minimum': minimum}
+            )
 
 
 class ImagePresentSymptom(SymptomBase):

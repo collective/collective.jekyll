@@ -31,22 +31,45 @@ class DiagnosisCollectionView(BrowserView):
         b_size = 20
         results = self._getResults()
         total_length = len(results)
-        filter = DiagnosisFilter(results, total_length)
+        symptom_name = self.getSymptomName()
+        filter = DiagnosisFilter(results, total_length, symptom_name)
         results = Batch(filter, b_size, b_start)
         return results
 
     def _getResults(self):
         return self.context.getQuery(brains=True)
 
+    def getSymptomName(self):
+        name = self.request.get('symptom_name', None)
+        return name
+
     @view.memoize
     def getSymptomTypes(self):
-        helps = []
+        names = set()
+        symptoms = set()
+        URL = '{context_url}/diagnosis_view?symptom_name={name}'
         for item, diagnosis in self.items():
             for symptom in diagnosis.symptoms:
-                help = dict(title=symptom.title, help=symptom.help)
-                if help not in helps:
-                    helps.append(help)
-        return helps
+                name = symptom.name
+                if name not in names:
+                    context_url = self.context.absolute_url()
+                    url = URL.format(context_url=context_url, name=name)
+                    title = translate(_(symptom.title), context=self.request)
+                    data = SymptomData(
+                        title=title,
+                        help=symptom.help,
+                        name=name,
+                        url=url,
+                    )
+                    names.add(name)
+                    symptoms.add(data)
+        result = sorted(symptoms, key=lambda x: x.title)
+        return result
+
+
+class SymptomData(object):
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
 
 
 class DiagnosisTopicView(DiagnosisCollectionView):

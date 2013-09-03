@@ -62,6 +62,13 @@ class Diagnosis(Status):
         self._update()
         return self._byName.get(name, None)
 
+    def getStatusByName(self, name):
+        symptom = self.getSymptomByName(name)
+        if symptom is None:
+            return True
+        else:
+            return symptom.status
+
     def getSymptomsByStatus(self, status):
         return [
             symptom 

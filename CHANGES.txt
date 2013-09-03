@@ -5,6 +5,9 @@ Changelog
 0.2.1 (unreleased)
 ------------------
 
+- Columns are sortable in collection_view.
+  [gotcha]
+
 - Remove global diagnosis column in collection_view.
   [gotcha]
 

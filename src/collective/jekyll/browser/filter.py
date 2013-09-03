@@ -5,12 +5,13 @@ from collective.jekyll.interfaces import IDiagnosis
 
 class DiagnosisFilter(object):
 
-    def __init__(self, seq, length):
+    def __init__(self, seq, length, symptom_name=None):
         self._seq = seq
         self._invalid = []
         self._valid = []
         self._end_index = -1
         self._len = length
+        self.symptom_name = symptom_name
 
     def __getitem__(self, index):
         invalid = self._invalid
@@ -45,7 +46,7 @@ class DiagnosisFilter(object):
                 e = e + 1
                 v = s[e]
                 diagnosis = IDiagnosis(v)
-                if diagnosis.status:
+                if self.getItemStatus(diagnosis):
                     valid.append((v, diagnosis))
                     valid_len += 1
                 else:
@@ -59,6 +60,12 @@ class DiagnosisFilter(object):
             return invalid[i]
         else:
             return valid[i - invalid_len - 1]
+
+    def getItemStatus(self, diagnosis):
+        if self.symptom_name is None:
+            return diagnosis.status
+        else:
+            return diagnosis.getStatusByName(self.symptom_name)
 
     def __len__(self):
         return self._len

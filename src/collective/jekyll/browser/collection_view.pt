@@ -22,8 +22,11 @@
                      <thead>
                        <tr>
                             <th tal:repeat="type view/getSymptomTypes"
-                                tal:content="type/title"
-                                tal:attributes="title type/help" />
+                              class="nosort">
+                               <a tal:content="type/title"
+                                 tal:attributes="title type/help; href type/url" />
+                               <span tal:condition="python:view.getSymptomName() == type.name">&#x25bc;</span>
+                               </th>
                             <th tal:repeat="field here/getCustomViewFields"
                                 tal:content="python:vocab.getValue(field, field)"
                                 i18n:translate=""/>
@@ -36,7 +39,7 @@
                                        oddrow repeat/result/odd;"
                           tal:attributes="class python:'even' if oddrow else 'odd'">
                             <tal:symptoms repeat="type view/getSymptomTypes">
-                            <td tal:define="symptom python:diagnosis.getSymptomByTitle(type['title'])">
+                            <td tal:define="symptom python:diagnosis.getSymptomByName(type.name)">
                                <span tal:condition="symptom" 
                                      tal:replace="structure symptom/@@status" />
                             </td>

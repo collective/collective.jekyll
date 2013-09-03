@@ -43,5 +43,9 @@ setup(name='collective.jekyll',
           test=[
               'plone.app.testing',
               'plone.app.robotframework',
+          ],
+          pytest=[
+              'pytest',
+              'gocept.pytestlayer',
           ]),
       )

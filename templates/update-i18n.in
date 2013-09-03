@@ -1,0 +1,13 @@
+#!/bin/sh
+${buildout:directory}/bin/i18ndude rebuild-pot --pot \
+    ${i18n:directory}/collective.jekyll.pot \
+    --create collective.jekyll ${buildout:directory}/src/collective
+${buildout:directory}/bin/i18ndude sync --pot \
+    ${i18n:directory}/collective.jekyll.pot \
+    ${i18n:directory}/fr/LC_MESSAGES/collective.jekyll.po
+${buildout:directory}/bin/i18ndude sync --pot \
+    ${i18n:directory}/collective.jekyll.pot \
+    ${i18n:directory}/nl/LC_MESSAGES/collective.jekyll.po
+${buildout:directory}/bin/i18ndude sync --pot \
+    ${i18n:directory}/collective.jekyll.pot \
+    ${i18n:directory}/en/LC_MESSAGES/collective.jekyll.po

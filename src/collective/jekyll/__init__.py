@@ -1,8 +1,11 @@
 from zope.i18nmessageid import MessageFactory
-jekyllMessageFactory = MessageFactory('collective.jekyll')
+jekyllMessageFactory = _ = MessageFactory('collective.jekyll')
 
 DIAGNOSE_PERMISSION = 'collective.jekyll: Diagnose'
 IGNORE_PERMISSION = 'collective.jekyll: Ignore'
+
+OK = _(u'ok')
+WARNING = _(u'warning')
 
 
 def initialize(context):

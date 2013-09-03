@@ -110,10 +110,24 @@ class IdFormatSymptom(SymptomBase):
 class TitleLengthSymptom(SymptomBase):
 
     title = _(u"Title length")
-    help = _(u"Title should not count too many significant words.")
+
+    @property
+    def maximum(self):
+        return int(self._registry.get('%s.maximum' % self.name, 5))
+
+    @property
+    def help(self):
+        symptom_help = _(
+            u"The title should have at most ${maximum} significant words "
+            u"(longer than 3 letters). "
+        )
+        return Message(
+            symptom_help,
+            mapping={'maximum': self.maximum}
+        )
 
     def _update(self):
-        maximum = int(self._registry.get('%s.maximum' % self.name, 5))
+        maximum = self.maximum
         title = self.context.Title()
         word_count = countWords(title)
         self.status = word_count <= maximum
@@ -146,34 +160,79 @@ class TitleFormatSymptom(SymptomBase):
 
 class DescriptionFormatSymptom(SymptomBase):
 
-    title = _(u"Description format")
-    help = _(u"Description should begin with uppercase letter.")
+    title = _(u"Summary format")
+    help = _(
+        u"The summary (or description) should begin with "
+        u"uppercase letter."
+    )
+
+    FORMAT = dict(
+        description=_(u"Description does not begin with uppercase letter."),
+        summary=_(u"Summary does not begin with uppercase letter."),
+    )
 
     def _update(self):
         description = self.context.Description()
+        if 'summary' in self.context.schema['description'].widget.label:
+            key = 'summary'
+        else:
+            key = 'description'
         if len(description):
             self.status = description[0].isupper()
-            self.description = _(
-                u"Description does not begin with uppercase letter.")
+            self.description = self.FORMAT[key]
 
 
 class DescriptionLengthSymptom(SymptomBase):
 
-    title = _(u"Description length")
-    help = _(u"Description should not count too many significant words.")
+    title = _(u"Summary length")
+
+    @property
+    def maximum(self):
+        return int(self._registry.get('%s.maximum' % self.name, 20))
+
+    @property
+    def help(self):
+        symptom_help = _(
+            u"The summary (or description) should not be empty "
+            u"and should have at most ${maximum} significant words "
+            u"(longer than 3 letters). "
+        )
+        return Message(
+            symptom_help,
+            mapping={'maximum': self.maximum}
+        )
+
+    EMPTY = dict(
+        description=_(u"Description does not have content."),
+        summary=_(u"Summary does not have content."),
+    )
+
+    TOO_LONG = dict(
+        description=_(
+            u"The description counts ${word_count} significant words "
+            u"(longer than 3 letters). "
+            u"It should have at most ${maximum} significant words."
+        ),
+        summary=_(
+            u"The summary counts ${word_count} significant words "
+            u"(longer than 3 letters). "
+            u"It should have at most ${maximum} significant words."
+        ),
+    )
 
     def _update(self):
-        maximum = int(self._registry.get('%s.maximum' % self.name, 20))
+        maximum = self.maximum
         word_count = countWords(self.context.Description())
+        if 'summary' in self.context.schema['description'].widget.label:
+            key = 'summary'
+        else:
+            key = 'description'
         if not len(self.context.Description()):
             self.status = False
-            self.description = _(u"Description does not have content.")
+            self.description = self.EMPTY[key]
         else:
             self.status = (word_count <= maximum)
-            symptom_description = _(
-                u"The description counts ${word_count} significant words "
-                u"(longer than 3 letters). "
-                u"It should have at most ${maximum} significant words.")
+            symptom_description = self.TOO_LONG[key]
             self.description = Message(
                 symptom_description,
                 mapping={'word_count': word_count, 'maximum': maximum}
@@ -222,16 +281,36 @@ def empty_or_spaces(text):
 class LinksInBodySymptom(SymptomBase):
 
     title = _(u"Links In Body")
-    help = _(u"Body text should have links.")
+
+    @property
+    def minimum(self):
+        return int(self._registry.get('%s.minimum' % self.name, 2))
+
+    @property
+    def help(self):
+        symptom_help = _(
+            u"The body text should have at least ${minimum} links to other "
+            u"pages. "
+        )
+        return Message(
+            symptom_help,
+            mapping={'minimum': self.minimum}
+        )
 
     def _update(self):
-        self.minimum = int(self._registry.get('%s.minimum' % self.name, 2))
+        minimum = self.minimum
         cooked = self.context.CookedBody(stx_level=2).strip()
         soup = BeautifulSoup(cooked)
         links = soup.find_all('a')
-        self.status = len(links) > self.minimum
+        self.status = len(links) > minimum
         if not self.status:
-            self.description = _(u"Body text does not have enough links.")
+            symptom_description = _(
+                u"The body text has less than ${minimum} links to other pages."
+            )
+        self.description = Message(
+            symptom_description,
+            mapping={'minimum': minimum}
+        )
 
 
 class ImagePresentSymptom(SymptomBase):

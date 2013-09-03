@@ -5,6 +5,9 @@ Changelog
 0.2.1 (unreleased)
 ------------------
 
+- Symptom descriptions makes more sense.
+  [gotcha]
+
 - Columns are sortable in collection_view.
   [gotcha]
 

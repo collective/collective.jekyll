@@ -35,17 +35,19 @@ def testSetup(context):
             'collective_jekyll_test.txt') is None:
         return
     portal = context.getSite()
-    folder_id = portal.invokeFactory('Folder', 'pages')
-    folder = getattr(portal, folder_id)
-    for i in range(40):
-        make_subfolder(folder, str(i + 1))
-    topic_id = portal.invokeFactory(
-        'Collection', 'diagnosis', title="Diagnosis")
-    topic = getattr(portal, topic_id)
-    topic.setQuery([
-        {'i': 'portal_type',
-         'o': 'plone.app.querystring.operation.selection.is',
-         'v': ['Document']}])
+    if 'pages' not in portal.objectIds():
+        folder_id = portal.invokeFactory('Folder', 'pages')
+        folder = getattr(portal, folder_id)
+        for i in range(40):
+            make_subfolder(folder, str(i + 1))
+    if 'diagnosis' not in portal.objectIds():
+        topic_id = portal.invokeFactory(
+            'Collection', 'diagnosis', title="Diagnosis")
+        topic = getattr(portal, topic_id)
+        topic.setQuery([
+            {'i': 'portal_type',
+             'o': 'plone.app.querystring.operation.selection.is',
+             'v': ['Document']}])
 
 
 def make_subfolder(folder, index):

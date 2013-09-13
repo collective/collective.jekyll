@@ -29,6 +29,8 @@ Ignore empty description
     [tags]  testing
     Add page with empty description
     Click to open diagnosis menu
+    DescriptionLengthSymptom should not be ignored
+    DescriptionLengthSymptom should have Ignore link
     Click DescriptionLengthSymptom Ignore link
     Diagnosis should be ok
     Diagnosis menu should be closed
@@ -53,6 +55,24 @@ Diagnose valid description
     TitleLengthSymptom should not be ignored
     Symptom DescriptionLengthSymptom should be ok
     DescriptionLengthSymptom should not be ignored
+
+Ignore valid symptom
+    Add page with valid description
+    Click to open diagnosis menu
+    Symptom DescriptionLengthSymptom should be ok
+    DescriptionLengthSymptom should not be ignored
+    DescriptionLengthSymptom should have Ignore link
+    Click DescriptionLengthSymptom Ignore link
+    Diagnosis should be ok
+    Click to open diagnosis menu
+    DescriptionLengthSymptom should be ignored
+    DescriptionLengthSymptom should have Consider link
+    Click DescriptionLengthSymptom Consider link
+    Diagnosis should be ok 
+    Diagnosis menu should be closed
+    Click to open diagnosis menu
+    DescriptionLengthSymptom should not be ignored
+    DescriptionLengthSymptom should have Ignore link
 
 Diagnosis view
     Element Should Be Visible  css=#portaltab-diagnosis a
@@ -115,14 +135,14 @@ Description of symptom ${symptom_class} should be ${symptom_description}
     Element Should Contain  ${description_selector}  ${symptom_description}
 
 ${symptom_class} should have ${link_text} link
-    ${link_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} .symptomDescription a
+    ${link_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} a.ignore
     Page Should Contain Element  ${link_selector}
     Element Should Be Visible  ${link_selector} 
     Element Should contain  ${link_selector}  ${link_text}
 
 Click ${symptom_class} ${link_text} link
     ${symptom_class} should have ${link_text} link
-    ${link_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} .symptomDescription a
+    ${link_selector} =  set variable  css=.name-collective-jekyll-symptoms-${symptom_class} a.ignore
     Click Element  ${link_selector}
 
 ${symptom_class} should be ignored

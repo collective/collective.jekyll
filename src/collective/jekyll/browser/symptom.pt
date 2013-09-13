@@ -7,11 +7,11 @@
             tal:content="context/status_title" />
       <span class="symptomTitle"
             tal:content="context/title" />
+      <span tal:replace="structure view/ignore_action" />
     </div>
     <div tal:condition="not:context/status"
          class="symptomDescription">
-      <span tal:replace="context/description" />
-      <span tal:replace="structure view/ignore_action" />
+      <span tal:replace="structure context/description" />
     </div>
     <div class="symptomHelp">
       <div tal:replace="context/help" />

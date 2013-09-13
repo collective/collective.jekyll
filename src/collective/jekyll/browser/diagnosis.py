@@ -106,7 +106,7 @@ class SymptomView(BrowserView):
             name=self.context.name,
             action=action,
         )
-        return u'<a href="{url}">{text}</a>'.format(
+        return u'<a class="ignore" href="{url}">{text}</a>'.format(
             url=url,
             text=link_text,
         )

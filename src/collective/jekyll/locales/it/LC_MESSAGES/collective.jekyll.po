@@ -1,0 +1,217 @@
+# #############################################################################
+#
+# Copyright (c) 2003-2004 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# #############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-04-12 14:23+0000\n"
+"PO-Revision-Date: 2014-04-12 14:23+0000\n"
+"Last-Translator: Maurizio Delmonte <maurizio.delmonte@abstract.it>\n"
+"Language-Team: Italiano\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language-Code: it\n"
+"Language-Name: Italiano\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.jekyll\n"
+
+#: collective/jekyll/interfaces.py:40
+msgid "Active Symptoms"
+msgstr "Sintomi Attivi"
+
+#: collective/jekyll/symptoms.py:244
+msgid "Body text"
+msgstr "Testo del documento"
+
+#: collective/jekyll/symptoms.py:250
+msgid "Body text does not have content."
+msgstr "Testo del documento senza contenuto."
+
+#: collective/jekyll/symptoms.py:272
+msgid "Body text ends with empty tags or BR."
+msgstr "Il testo del documento finisce con tag HTML vuoti o BR."
+
+#: collective/jekyll/symptoms.py:245
+msgid "Body text should have content."
+msgstr "Il testo del documento dovrebbe contenere qualcosa."
+
+#: collective/jekyll/symptoms.py:256
+msgid "Body text should not start or end with empty tags or BR."
+msgstr "Testo del documento non dovrebbe iniziare con tag HTML vuoti o BR."
+
+#: collective/jekyll/symptoms.py:267
+msgid "Body text starts with empty tags or BR."
+msgstr "Il testo del documento inizia con tag HTML vuoti o BR."
+
+#: collective/jekyll/browser/controlpanel.py:50
+#: collective/jekyll/profiles/default/controlpanel.xml
+msgid "Content quality"
+msgstr "Qualità del contenuto"
+
+#: collective/jekyll/symptoms.py:170
+msgid "Description does not begin with uppercase letter."
+msgstr "La descrizione non inizia con una lettera maiuscola."
+
+#: collective/jekyll/symptoms.py:206
+msgid "Description does not have content."
+msgstr "La descrizione non ha contenuto."
+
+#: collective/jekyll/symptoms.py:94
+msgid "Id format"
+msgstr "Format dell'id"
+
+#: collective/jekyll/symptoms.py:95
+msgid "Id should not start with 'copy_of'."
+msgstr "L'id non dovrebbe iniziare con 'copy_of'."
+
+#: collective/jekyll/symptoms.py:103
+msgid "Id starts with '${start}'."
+msgstr "L'id inizia con '${start}'."
+
+#: collective/jekyll/browser/diagnosis.py:102
+msgid "Ignore"
+msgstr "Ignora"
+
+#: collective/jekyll/browser/symptom.pt:4
+msgid "Ignored"
+msgstr "Ignorato"
+
+#: collective/jekyll/symptoms.py:347
+msgid "Image field content has correct size."
+msgstr "Il contenuto del campo immagine ha dimensione corretta."
+
+#: collective/jekyll/symptoms.py:326
+msgid "Image field does not have content."
+msgstr "Il campo immagine non ha contenuto."
+
+#: collective/jekyll/symptoms.py:324
+msgid "Image field has content."
+msgstr "Il campo immagine ha contenuto."
+
+#: collective/jekyll/symptoms.py:319
+msgid "Image field should have content."
+msgstr "Il campo immagine dovrebbe avere contenuto."
+
+#: collective/jekyll/symptoms.py:332
+msgid "Image field should have correct size."
+msgstr "Il campo immagine dovrebbe avere una dimensione corretta."
+
+#: collective/jekyll/symptoms.py:318
+msgid "Image present"
+msgstr "Immagine presente"
+
+#: collective/jekyll/symptoms.py:331
+msgid "Image size"
+msgstr "Dimensione immagine"
+
+#: collective/jekyll/symptoms.py:283
+msgid "Links In Body"
+msgstr "Link nel testo del documento"
+
+#: collective/jekyll/browser/diagnosis.py:99
+msgid "Restore"
+msgstr "Ripristina"
+
+#: collective/jekyll/interfaces.py:41
+msgid "Select which symptoms will be taken in account when diagnosing content quality."
+msgstr "Seleziona i sintomi di cui tenere conto quando si valuta la qualità del contenuto."
+
+#: collective/jekyll/symptoms.py:255
+msgid "Spaces In Body"
+msgstr "Spazi nel testo del documento"
+
+#: collective/jekyll/symptoms.py:171
+msgid "Summary does not begin with uppercase letter."
+msgstr "La descrizione non inizia con una lettera maiuscola."
+
+#: collective/jekyll/symptoms.py:207
+msgid "Summary does not have content."
+msgstr "La descrizione non ha contenuto."
+
+#: collective/jekyll/symptoms.py:163
+msgid "Summary format"
+msgstr "Format della descrizione"
+
+#: collective/jekyll/symptoms.py:187
+msgid "Summary length"
+msgstr "Lunghezza della descrizione"
+
+#: collective/jekyll/browser/controlpanel.py:52
+msgid "Symptoms activation"
+msgstr "Attivazione dei sintomi."
+
+#: collective/jekyll/symptoms.py:307
+msgid "The body text has less than ${minimum} links to other pages."
+msgstr "Il testo del documento ha meno di ${minimum} link ad altre pagine."
+
+#: collective/jekyll/symptoms.py:291
+msgid "The body text should have at least ${minimum} links to other pages. "
+msgstr "Il testo del documento dovrebbe avere almeno ${minimum} link ad altre pagine."
+
+#: collective/jekyll/symptoms.py:211
+msgid "The description counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
+msgstr "La descrizione conta ${word_count} parole significative (più lunghe di 3 lettere). Dovrebbe avere al massimo ${maximum} parole significative."
+
+#: collective/jekyll/symptoms.py:164
+msgid "The summary (or description) should begin with uppercase letter."
+msgstr "La descrizione dovrebbe iniziare con una lettera maiuscola."
+
+#: collective/jekyll/symptoms.py:195
+msgid "The summary (or description) should not be empty and should have at most ${maximum} significant words (longer than 3 letters). "
+msgstr "La descrizione non dovrebbe essere vuota e dovrebbe avere al massimo ${maximum} parole significative (più lunghe di 3 lettere)."
+
+#: collective/jekyll/symptoms.py:216
+msgid "The summary counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
+msgstr "La descrizione conta ${word_count} parole significative (più lunghe di 3 lettere). Dovrebbe avere al massimo ${maximum} parole significative."
+
+#: collective/jekyll/symptoms.py:134
+msgid "The title counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
+msgstr "Il titolo conta ${word_count} parole significative (più lunghe di 3 lettere). Dovrebbe avere al massimo ${maximum} parole significative."
+
+#: collective/jekyll/symptoms.py:120
+msgid "The title should have at most ${maximum} significant words (longer than 3 letters). "
+msgstr "Il titolo dovrebbe avere al massimo ${maximum} parole significative (più lunghe di 3 lettere)."
+
+#: collective/jekyll/symptoms.py:158
+msgid "Title does not begin with uppercase letter."
+msgstr "Il titolo non inizia con una lettera maiuscola."
+
+#: collective/jekyll/symptoms.py:151
+msgid "Title format"
+msgstr "Format del titolo"
+
+#: collective/jekyll/symptoms.py:112
+msgid "Title length"
+msgstr "Lunghezza del titolo"
+
+#: collective/jekyll/symptoms.py:152
+msgid "Title should begin with uppercase letter."
+msgstr "Il titolo dovrebbe iniziare con una lettera maiuscola."
+
+#: collective/jekyll/symptoms.py:349
+msgid "Wrong size : image is ${actual_width} by ${actual_height} pixels. It should be ${width} by ${height} pixels."
+msgstr "Dimensione errata: l'Immagine è ${actual_width} per ${actual_height} pixel. Dovrebbe essere ${width} per ${height} pixel."
+
+#: collective/jekyll/browser/controlpanel.py:51
+msgid "You can activate / deactivate symptoms using this form."
+msgstr "Puoi attivare / disattivare i sintomi usando questa form."
+
+#: collective/jekyll/__init__.py:7
+msgid "ok"
+msgstr "ok"
+
+#: collective/jekyll/__init__.py:8
+msgid "warning"
+msgstr "attenzione"

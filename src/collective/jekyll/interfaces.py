@@ -17,6 +17,12 @@ class ISymptom(Interface):
     description = Text(title=u'Description')
     status = Int(title=u'Status')
 
+    def _update():
+        pass
+
+    def isActive():
+        pass
+
 
 class IDiagnosis(Interface):
 

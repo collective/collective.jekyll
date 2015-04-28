@@ -25,9 +25,9 @@ buildout.cfg: travis.cfg
 	cp travis.cfg buildout.cfg
 
 # use python as Travis has setup the virtualenv
-bin/buildout: bootstrap.py buildout.cfg
+bin/buildout: bootstrap-buildout.py buildout.cfg
 	mkdir -p buildout-cache/downloads
-	python bootstrap.py
+	python bootstrap-buildout.py --version=2.3.1 --setuptools-version=15.2
 	touch $@
 	bin/buildout install download install
 
@@ -41,8 +41,8 @@ bin/python:
 buildout.cfg:
 	cp dev.cfg buildout.cfg
 
-bin/buildout: bin/python bootstrap.py buildout.cfg
-	./bin/python bootstrap.py
+bin/buildout: bin/python bootstrap-buildout.py buildout.cfg
+	./bin/python bootstrap-buildout.py --version=2.3.1 --setuptools-version=15.2
 	touch $@
 
 endif
@@ -79,7 +79,7 @@ cleanall:
 	rm -fr bin develop-eggs downloads eggs parts .installed.cfg
 
 test: bin/test	
-	./bin/test
+	zope_i18n_compile_mo_files=true ./bin/test
 
 bin/robot: $(BUILDOUT_FILES)
 	$(BUILDOUT_COMMAND) install robot

@@ -41,6 +41,7 @@ setup(name='collective.jekyll',
       ],
       extras_require=dict(
           test=[
+              'Products.PloneTestCase',
               'plone.app.testing',
               'plone.app.robotframework',
           ],

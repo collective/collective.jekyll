@@ -4,7 +4,7 @@
                version="20120714-01"
                handler="collective.jekyll.setuphandlers.setupSettings"
                title="Collective Jekyll: setup settings">
-    <dependency step="registry" />
+    <dependency step="plone.app.registry" />
     Setup settings for Collective Jekyll.
   </import-step>
 </import-steps>

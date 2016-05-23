@@ -5,6 +5,9 @@ Changelog
 0.3.1 (unreleased)
 ------------------
 
+- Do not override view_methods of collection on installation.
+  [bsuttor]
+
 - Added initial documentation.
   [miziodel]
 

@@ -71,7 +71,7 @@ class Diagnosis(Status):
 
     def getSymptomsByStatus(self, status):
         return [
-            symptom 
+            symptom
             for symptom in self.symptoms
             if bool(symptom.status) == status
         ]
@@ -80,7 +80,7 @@ class Diagnosis(Status):
         result = self.getSymptomsByStatus(False)
         result.extend(self.getSymptomsByStatus(True))
         result = [
-            symptom 
+            symptom
             for symptom in result
             if symptom not in self.ignored_symptoms
         ]

@@ -9,6 +9,9 @@ Changelog
   This also fixes tests on local machine
   [laulaz]
 
+- Fix controlpanel in Plone 5.
+  [pbauer]
+
 
 0.4.0 (2018-06-25)
 ------------------

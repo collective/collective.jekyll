@@ -6,8 +6,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.jekyll">
 
-    <adapter factory=".controlpanel.JekyllControlPanelAdapter" />
-
     <browser:page
         name="jekyll-controlpanel"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"

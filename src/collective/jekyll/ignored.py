@@ -1,8 +1,8 @@
-from persistent.dict import PersistentDict
-from zope.interface import implements
-from zope.annotation.interfaces import IAnnotations
-
+# -*- coding: utf-8 -*-
 from collective.jekyll.interfaces import IIgnoredSymptomNames
+from persistent.dict import PersistentDict
+from zope.annotation.interfaces import IAnnotations
+from zope.interface import implements
 
 
 JEKYLL_IGNORED_SYMPTOMS = 'JEKYLL_IGNORED_SYMPTOMS'
@@ -15,6 +15,8 @@ class IgnoredNames(object):
         self.context = context
 
     def _getNamesDict(self):
+        if not IAnnotations.providedBy(self.context):
+            return {}
         annotations = IAnnotations(self.context)
         return annotations.setdefault(
             JEKYLL_IGNORED_SYMPTOMS, PersistentDict())

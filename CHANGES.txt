@@ -5,6 +5,10 @@ Changelog
 0.3.1 (unreleased)
 ------------------
 
+- Check if IAnnotations provided context to get ignored symptoms.
+  It will prevent an error when context is IItem (no Archetypes or Dexterity).
+  [bsuttor]
+
 - Do not override view_methods of collection on installation.
   [bsuttor]
 

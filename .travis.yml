@@ -11,7 +11,7 @@ env:
 language: python
 before_script: 
 - sudo apt-get install libpcre3-dev
-- sudo apt-get install docutils
+- sudo apt-get install python-docutils
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 before_install: 

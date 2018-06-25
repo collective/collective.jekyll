@@ -6,7 +6,7 @@ pybot_options =
 
 PACKAGE_ROOT = src/collective/jekyll
 BUILDOUT_VERSION = 2.11.5
-SETUPTOOLS_VERSION = 39.0.2
+SETUPTOOLS_VERSION = 39.2.0
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 

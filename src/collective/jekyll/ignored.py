@@ -3,6 +3,7 @@ from collective.jekyll.interfaces import IIgnoredSymptomNames
 from persistent.dict import PersistentDict
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
+from zope.component import ComponentLookupError
 
 
 JEKYLL_IGNORED_SYMPTOMS = 'JEKYLL_IGNORED_SYMPTOMS'
@@ -15,9 +16,10 @@ class IgnoredNames(object):
         self.context = context
 
     def _getNamesDict(self):
-        if not IAnnotations.providedBy(self.context):
+        try:
+           annotations = IAnnotations(self.context)
+        except ComponentLookupError:
             return {}
-        annotations = IAnnotations(self.context)
         return annotations.setdefault(
             JEKYLL_IGNORED_SYMPTOMS, PersistentDict())
 

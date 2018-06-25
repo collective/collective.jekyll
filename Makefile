@@ -12,7 +12,7 @@ BUILDOUT_COMMAND = ./bin/buildout -Nt 5
 
 all: instance
 
-BUILDOUT_FILES = buildout.cfg buildout-varnish.cfg setup.py bin/buildout
+BUILDOUT_FILES = buildout.cfg varnish.cfg setup.py bin/buildout
 
 ifneq ($(strip $(TRAVIS)),)
 IS_TRAVIS = yes
@@ -42,7 +42,7 @@ buildout.cfg:
 	cp dev.cfg buildout.cfg
 
 bin/buildout: bin/python bootstrap-buildout.py buildout.cfg
-	./bin/python bootstrap-buildout.py --version=2.3.1 --setuptools-version=15.2
+	./bin/python bootstrap-buildout.py --version=2.11.5 --setuptools-version=39.0.2
 	touch $@
 
 endif

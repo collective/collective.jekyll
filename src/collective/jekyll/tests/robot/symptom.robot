@@ -82,11 +82,13 @@ Diagnosis view
     Element Should Be Visible  css=#plone-contentmenu-display-diagnosis_view span
     Click element  css=#plone-contentmenu-display-diagnosis_view span
     Page should contain  View changed
-    Page should contain  [1]
+    Page should contain element  css=.pagination .current
+    Element should contain  css=.pagination .current  1
     Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-TitleLengthSymptom .diag-ok
     Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-warning
     Click link  3
-    Page should contain  [3]
+    Page should contain element  css=.pagination .current
+    Element should contain  css=.pagination .current  3
     Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-TitleLengthSymptom .diag-ok
     Page Should contain element  css=.listing tr:nth-child(1) td div.name-collective-jekyll-symptoms-DescriptionLengthSymptom .diag-ok
 

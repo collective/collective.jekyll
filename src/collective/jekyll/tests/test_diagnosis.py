@@ -1,4 +1,5 @@
-import unittest2 as unittest
+import unittest
+
 from zope.component import provideSubscriptionAdapter
 from zope.component import provideAdapter
 import zope.component.testing

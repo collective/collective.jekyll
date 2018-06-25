@@ -1,4 +1,4 @@
-import unittest2 as unittest
+import unittest
 
 from zope.component import getMultiAdapter
 from zope.event import notify

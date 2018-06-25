@@ -1,8 +1,12 @@
   include *.py
   include *.rst
   include *.txt
+  include varnish.cfg
+  include versions.cfg
   recursive-include docs *.GPL
   recursive-include docs *.txt
+  recursive-include docs *.png
+  recursive-include docs *.rst
   recursive-include src *.css
   recursive-include src *.js
   recursive-include src *.png

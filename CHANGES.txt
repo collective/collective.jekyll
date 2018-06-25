@@ -5,6 +5,16 @@ Changelog
 0.3.1 (unreleased)
 ------------------
 
+- Enabled shared resources across symptoms
+  see ``SymptomBaseWithCache``
+  [gotcha]
+
+- Avoid computation of inactive symptoms
+  [gotcha]
+
+- Avoid character detection when using BeautifulSoup
+  [gotcha]
+
 - Check if IAnnotations provided context to get ignored symptoms.
   It will prevent an error when context is IItem (no Archetypes or Dexterity).
   [bsuttor]

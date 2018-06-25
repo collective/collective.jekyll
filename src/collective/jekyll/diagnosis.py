@@ -16,6 +16,7 @@ class Diagnosis(Status):
         self._byName = {}
         self._status = True
         self._invalid = True
+        self.cache = {}
 
     def _update(self):
         if self._invalid:
@@ -26,6 +27,9 @@ class Diagnosis(Status):
     def _updateStatus(self):
         self._status = True
         for symptom in self._symptoms:
+            if hasattr(symptom, 'setCache'):
+                symptom.setCache(self.cache)
+            symptom._update()
             if symptom not in self._ignored_symptoms:
                 self._status = self._status and symptom.status
 

@@ -36,7 +36,6 @@ class SymptomBase(Status):
         self.status = True
         self.description = ''
         self._registry = queryUtility(IRegistry, default={})
-        self._update()
 
     def _update(self):
         raise NotImplementedError(u"")
@@ -67,6 +66,12 @@ class SymptomBase(Status):
     @property
     def serialized_name(self):
         return self.name.replace('.', '-')
+
+
+class SymptomBaseWithCache(SymptomBase):
+
+    def setCache(self, cache):
+        self.cache = cache
 
 
 class SymptomsVocabulary(object):
@@ -239,26 +244,29 @@ class DescriptionLengthSymptom(SymptomBase):
             )
 
 
-class BodyTextPresentSymptom(SymptomBase):
+class BodyTextPresentSymptom(SymptomBaseWithCache):
 
     title = _(u"Body text")
     help = _(u"Body text should have content.")
 
     def _update(self):
-        self.status = len(self.context.CookedBody(stx_level=2).strip())
+        cooked = self.cache.setdefault('cooked_body', self.context.CookedBody(stx_level=2).strip())
+        self.status = len(cooked)
         if not self.status:
             self.description = _(u"Body text does not have content.")
 
 
-class SpacesInBodySymptom(SymptomBase):
+class SpacesInBodySymptom(SymptomBaseWithCache):
 
     title = _(u"Spaces In Body")
     help = _(u"Body text should not start or end with empty tags or BR.")
 
     def _update(self):
         self.status = True
-        cooked = self.context.CookedBody(stx_level=2).strip()
-        soup = BeautifulSoup(cooked)
+        cooked = self.cache.setdefault('cooked_body',
+                self.context.CookedBody(stx_level=2).strip())
+        soup = self.cache.setdefault('cooked_body_soup',
+                BeautifulSoup(cooked.decode('utf-8')))
         child_count = 0
         for child in soup.children:
             child_count += 1
@@ -278,7 +286,7 @@ def empty_or_spaces(text):
     return not bool(text)
 
 
-class LinksInBodySymptom(SymptomBase):
+class LinksInBodySymptom(SymptomBaseWithCache):
 
     title = _(u"Links In Body")
 
@@ -299,10 +307,12 @@ class LinksInBodySymptom(SymptomBase):
 
     def _update(self):
         minimum = self.minimum
-        cooked = self.context.CookedBody(stx_level=2).strip()
-        soup = BeautifulSoup(cooked)
+        cooked = self.cache.setdefault('cooked_body',
+                self.context.CookedBody(stx_level=2).strip())
+        soup = self.cache.setdefault('cooked_body_soup',
+                BeautifulSoup(cooked.decode('utf-8')))
         links = soup.find_all('a')
-        self.status = len(links) > minimum
+        self.status = len(links) >= minimum
         if not self.status:
             symptom_description = _(
                 u"The body text has less than ${minimum} links to other pages."

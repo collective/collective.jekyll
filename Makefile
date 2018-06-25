@@ -5,6 +5,8 @@ pybot_options =
 .PHONY: instance cleanall test robot stop coverage
 
 PACKAGE_ROOT = src/collective/jekyll
+BUILDOUT_VERSION = 2.11.5
+SETUPTOOLS_VERSION = 39.0.2
 
 GS_FILES = $(PACKAGE_ROOT)/profiles/*/*.xml $(PACKAGE_ROOT)/setuphandlers.py
 
@@ -27,7 +29,7 @@ buildout.cfg: travis.cfg
 # use python as Travis has setup the virtualenv
 bin/buildout: bootstrap-buildout.py buildout.cfg
 	mkdir -p buildout-cache/downloads
-	python bootstrap-buildout.py --version=2.3.1 --setuptools-version=15.2
+	python bootstrap-buildout.py --version=$(BUILDOUT_VERSION) --setuptools-version=$(SETUPTOOLS_VERSION)
 	touch $@
 	bin/buildout install download install
 
@@ -42,7 +44,7 @@ buildout.cfg:
 	cp dev.cfg buildout.cfg
 
 bin/buildout: bin/python bootstrap-buildout.py buildout.cfg
-	./bin/python bootstrap-buildout.py --version=2.11.5 --setuptools-version=39.0.2
+	./bin/python bootstrap-buildout.py --version=$(BUILDOUT_VERSION) --setuptools-version=$(SETUPTOOLS_VERSION)
 	touch $@
 
 endif

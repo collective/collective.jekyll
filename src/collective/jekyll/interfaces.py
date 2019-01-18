@@ -34,7 +34,7 @@ class IIgnoredSymptomNames(Interface):
     def ignore(name):
         """store on context that symptom will be ignored"""
 
-    def restore(name):
+    def consider(name):
         """store on context that symptom will not be ignored"""
 
     def isIgnored(name):

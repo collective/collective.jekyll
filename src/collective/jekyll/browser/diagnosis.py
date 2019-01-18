@@ -96,8 +96,8 @@ class SymptomView(BrowserView):
     def _make_link(self):
         content = self.context.context
         if self.context.isIgnored:
-            link_text = translate(_(u"Restore"), context=self.request)
-            action = u"restore"
+            link_text = translate(_(u"Consider"), context=self.request)
+            action = u"consider"
         else:
             link_text = translate(_(u"Ignore"), context=self.request)
             action = u"ignore"
@@ -121,10 +121,10 @@ class IgnoreSymptomView(BrowserView):
         self.request.RESPONSE.redirect(self.context.absolute_url())
 
 
-class RestoreSymptomView(BrowserView):
+class ConsiderSymptomView(BrowserView):
 
     def __call__(self):
         name = self.request.symptomName
         ignored = IIgnoredSymptomNames(self.context)
-        ignored.restore(name)
+        ignored.consider(name)
         self.request.RESPONSE.redirect(self.context.absolute_url())

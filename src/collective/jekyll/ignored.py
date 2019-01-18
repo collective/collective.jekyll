@@ -31,7 +31,7 @@ class IgnoredNames(object):
         ignoredDict = self._getNamesDict()
         ignoredDict[name] = True
 
-    def restore(self, name):
+    def consider(self, name):
         ignoredDict = self._getNamesDict()
         if name in ignoredDict:
             del ignoredDict[name]

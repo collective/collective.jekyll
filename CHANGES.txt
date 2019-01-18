@@ -5,7 +5,9 @@ Changelog
 0.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Renaming based on EN translation
+  This also fixes tests on local machine
+  [laulaz]
 
 
 0.4.0 (2018-06-25)

@@ -48,8 +48,8 @@
 
     <browser:page
         for="OFS.interfaces.IItem"
-        name="jekyll_restore_symptom"
-        class=".diagnosis.RestoreSymptomView"
+        name="jekyll_consider_symptom"
+        class=".diagnosis.ConsiderSymptomView"
         permission="jekyll.Ignore"
         layer=".interfaces.IThemeSpecific"
         />

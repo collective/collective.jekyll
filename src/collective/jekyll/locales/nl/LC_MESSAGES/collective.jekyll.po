@@ -124,7 +124,7 @@ msgid "Links In Body"
 msgstr "Links in hoofdtekst"
 
 #: collective/jekyll/browser/diagnosis.py:99
-msgid "Restore"
+msgid "Consider"
 msgstr "Herstellen"
 
 #: collective/jekyll/interfaces.py:41

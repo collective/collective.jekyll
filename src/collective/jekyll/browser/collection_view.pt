@@ -16,8 +16,7 @@
                         batch topicContents;">
                 <table class="listing"
                        summary="Content listing"
-                       tal:define="vocab python:here.listMetaDataFields(False);
-                                   use_view_action site_properties/typesUseViewActionInListings|python:();"
+                       tal:define="use_view_action site_properties/typesUseViewActionInListings|python:();"
                        i18n:attributes="summary summary_content_listing;">
                      <thead>
                        <tr>
@@ -27,8 +26,8 @@
                                  tal:attributes="title type/help; href type/url" />
                                <span tal:condition="python:view.getSymptomName() == type.name">&#x25bc;</span>
                                </th>
-                            <th tal:repeat="field here/getCustomViewFields"
-                                tal:content="python:vocab.getValue(field, field)"
+                            <th tal:repeat="field here/selectedViewFields"
+                                tal:content="python:field[1]"
                                 i18n:translate=""/>
                         </tr>
                      </thead>
@@ -44,38 +43,45 @@
                                      tal:replace="structure symptom/@@status" />
                             </td>
                             </tal:symptoms>
-                            <tal:fields repeat="field here/getCustomViewFields"
+                            <tal:fields repeat="field here/customViewFields"
                                         define="normalizeString nocall:context/@@plone/normalizeString;
+                                                toLocalizedTime nocall: context/@@plone/toLocalizedTime;
                                                 url obj/getURL;
                                                 obj_type obj/portal_type;
+                                                obj_type_class     python:'contenttype-' + normalizeString(obj_type);
                                                 obj_description obj/Description;
                                                 obj_typeinfo python: here.portal_types.getTypeInfo(obj_type);
-                                                obj_icon python:plone_view.getIcon(obj);
+                                                obj_has_image      python:obj.getIcon;
                                                 obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
                                                 obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);
                                                 obj_url python:url+'/view' if obj_type in use_view_action else url;
                                                 title_or_id obj/pretty_title_or_id">
                             <tal:block define="value python: getattr(obj, field, None)">
-                                <td tal:condition="python: field != 'Title'"
-                                    tal:content="python:here.formatCatalogMetadata(value)"
+                                <td tal:condition="python: field != 'Title' and field not in ['ModificationDate',
+                                        'CreationDate', 'EffectiveDate',
+                                        'ExpirationDate', ]"
+                                    tal:content="value"
                                     i18n:translate=""/>
+                                <td tal:condition="python:field in ['ModificationDate',
+                                        'CreationDate', 'EffectiveDate',
+                                        'ExpirationDate', ]">
+                                    <span tal:replace="python:toLocalizedTime(value,long_format=1)">
+                                      August 16, 2001 at 23:35:59
+                                    </span>
+                                </td>
                                 <td tal:condition="python: field == 'Title'">
-                                    <a href="#" tal:attributes="href obj_url;
-                                                                title obj_description;">
-                                        <img src="#"
-                                             height="16"
-                                             width="16"
-                                             tal:condition="obj_icon/url"
-                                             tal:attributes="src obj_icon/url;
-                                                             alt obj_icon/description;
-                                                             title obj_icon/title;
-                                                             width obj_icon/width;
-                                                             height obj_icon/height;"/>
+                                    <a href="#"
+                                        tal:condition="obj_has_image"
+                                        tal:attributes="href obj_url;
+                                                        title obj_description;">
+                                        <img class="thumb-icon"
+                                            tal:define="getIcon python:obj.getURL() +'/@@images/image/icon'"
+                                            tal:attributes="src  string:$getIcon;alt obj/Description">
                                     </a>
                                     <a href="#"
                                        tal:condition="python: obj.portal_type != 'Link'"
                                        tal:attributes="href obj_url;
-                                                       class string:${obj_wf_state_class};
+                                                       class string:${obj_type_class} ${obj_wf_state_class} url;
                                                        title obj_description;"
                                        tal:content="title_or_id">
                                         Item Title
@@ -84,7 +90,7 @@
                                     <a href="#"
                                        tal:condition="python: obj.portal_type == 'Link'"
                                        tal:attributes="href obj/getRemoteUrl;
-                                                       class string:${obj_wf_state_class} link-plain;
+                                                       class string:${obj_type_class} ${obj_wf_state_class} link-plain;
                                                        title obj_description;"
                                        class="link-plain"
                                        tal:content="title_or_id" />

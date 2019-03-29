@@ -15,7 +15,7 @@
         />
 
     <browser:page
-        for="plone.app.collection.interfaces.ICollection"
+        for="plone.app.contenttypes.interfaces.ICollection"
         name="diagnosis_view"
         class=".diagnosis.DiagnosisCollectionView"
         template="collection_view.pt"

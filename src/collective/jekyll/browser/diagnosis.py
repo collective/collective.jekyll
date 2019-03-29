@@ -37,7 +37,7 @@ class DiagnosisCollectionView(BrowserView):
         return results
 
     def _getResults(self):
-        return self.context.getQuery(brains=True)
+        return list(self.context.results(brains=True))
 
     def getSymptomName(self):
         name = self.request.get('symptom_name', None)

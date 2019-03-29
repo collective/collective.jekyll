@@ -3,15 +3,11 @@ after_success:
 addons:
   firefox: "latest"
 install:
-- sed -ie "s#travis-4.3#travis-$PLONE_VERSION#" travis.cfg
 - pip install coveralls
 - make bin/test
 env: 
   global: 
     secure: aeJaNydBzTcyBwbbluHDvs8vmryEpwaSFYD+SvTlD2e341Ilye+vxKR2/fT56OYLONEvFXkc5K1maw4caJqaxAfjlfO80Id3FsIO3f/AM/zTl3SERHd//y8CaaokL9vaxqNRjUHRMrpJZQpTFKW8V7HMnK88ulQF8nuM1gaQU/Q=
-  matrix:
-  - PLONE_VERSION=4.3
-  - PLONE_VERSION=5.1
 language: python
 before_script: 
 - export DISPLAY=:99.0

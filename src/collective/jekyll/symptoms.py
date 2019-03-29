@@ -165,31 +165,24 @@ class TitleFormatSymptom(SymptomBase):
 
 class DescriptionFormatSymptom(SymptomBase):
 
-    title = _(u"Summary format")
+    title = _(u"Description format")
     help = _(
-        u"The summary (or description) should begin with "
+        u"The description should begin with "
         u"uppercase letter."
     )
 
-    FORMAT = dict(
-        description=_(u"Description does not begin with uppercase letter."),
-        summary=_(u"Summary does not begin with uppercase letter."),
-    )
+    FORMAT = _(u"Description does not begin with uppercase letter.")
 
     def _update(self):
         description = self.context.Description()
-        if 'summary' in self.context.Schema()['description'].widget.label:
-            key = 'summary'
-        else:
-            key = 'description'
         if len(description):
             self.status = description[0].isupper()
-            self.description = self.FORMAT[key]
+            self.description = self.FORMAT
 
 
 class DescriptionLengthSymptom(SymptomBase):
 
-    title = _(u"Summary length")
+    title = _(u"Description length")
 
     @property
     def maximum(self):
@@ -207,41 +200,35 @@ class DescriptionLengthSymptom(SymptomBase):
             mapping={'maximum': self.maximum}
         )
 
-    EMPTY = dict(
-        description=_(u"Description does not have content."),
-        summary=_(u"Summary does not have content."),
-    )
+    EMPTY = _(u"Description does not have content.")
 
-    TOO_LONG = dict(
-        description=_(
+    TOO_LONG = _(
             u"The description counts ${word_count} significant words "
             u"(longer than 3 letters). "
             u"It should have at most ${maximum} significant words."
-        ),
-        summary=_(
-            u"The summary counts ${word_count} significant words "
-            u"(longer than 3 letters). "
-            u"It should have at most ${maximum} significant words."
-        ),
-    )
+        )
 
     def _update(self):
         maximum = self.maximum
         word_count = countWords(self.context.Description())
-        if 'summary' in self.context.Schema()['description'].widget.label:
-            key = 'summary'
-        else:
-            key = 'description'
         if not len(self.context.Description()):
             self.status = False
-            self.description = self.EMPTY[key]
+            self.description = self.EMPTY
         else:
             self.status = (word_count <= maximum)
-            symptom_description = self.TOO_LONG[key]
+            symptom_description = self.TOO_LONG
             self.description = Message(
                 symptom_description,
                 mapping={'word_count': word_count, 'maximum': maximum}
             )
+
+
+def get_text(context):
+    text = context.text
+    if text:
+        return text.output.strip()
+    else:
+        return ''
 
 
 class BodyTextPresentSymptom(SymptomBaseWithCache):
@@ -250,8 +237,8 @@ class BodyTextPresentSymptom(SymptomBaseWithCache):
     help = _(u"Body text should have content.")
 
     def _update(self):
-        cooked = self.cache.setdefault('cooked_body', self.context.CookedBody(stx_level=2).strip())
-        self.status = len(cooked)
+        text = self.cache.setdefault('body', get_text(self.context))
+        self.status = len(text)
         if not self.status:
             self.description = _(u"Body text does not have content.")
 
@@ -263,10 +250,9 @@ class SpacesInBodySymptom(SymptomBaseWithCache):
 
     def _update(self):
         self.status = True
-        cooked = self.cache.setdefault('cooked_body',
-                self.context.CookedBody(stx_level=2).strip())
-        soup = self.cache.setdefault('cooked_body_soup',
-                BeautifulSoup(cooked.decode('utf-8')))
+        text = self.cache.setdefault('body', get_text(self.context))
+        soup = self.cache.setdefault('body_soup',
+                BeautifulSoup(text, features='lxml'))
         child_count = 0
         for child in soup.children:
             child_count += 1
@@ -307,10 +293,9 @@ class LinksInBodySymptom(SymptomBaseWithCache):
 
     def _update(self):
         minimum = self.minimum
-        cooked = self.cache.setdefault('cooked_body',
-                self.context.CookedBody(stx_level=2).strip())
-        soup = self.cache.setdefault('cooked_body_soup',
-                BeautifulSoup(cooked.decode('utf-8')))
+        text = self.cache.setdefault('body', get_text(self.context))
+        soup = self.cache.setdefault('body_soup',
+                BeautifulSoup(text, features='lxml'))
         links = soup.find_all('a')
         self.status = len(links) >= minimum
         if not self.status:
@@ -329,7 +314,7 @@ class ImagePresentSymptom(SymptomBase):
     help = _(u"Image field should have content.")
 
     def _update(self):
-        self.status = hasImage(self.context)
+        self.status = bool(self.context.image)
         if self.status:
             self.description = _(u"Image field has content.")
         else:
@@ -346,9 +331,8 @@ class ImageSizeSymptom(SymptomBase):
         width = int(self._registry.get('%s.width' % self.name, 675))
         height = int(self._registry.get('%s.height' % self.name, 380))
 
-        if hasImage(context):
-            imageField = context.Schema()['image']
-            size = imageField.getSize(context)
+        if self.context.image:
+            size = self.context.image.getImageSize()
             self.status = size == (width, height)
         else:
             self.status = False
@@ -370,9 +354,3 @@ class ImageSizeSymptom(SymptomBase):
                     'height': height
                 }
             )
-
-
-def hasImage(value):
-    imageField = value.Schema()['image']
-    status = imageField.get_size(value)
-    return status

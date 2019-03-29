@@ -1,20 +1,20 @@
 # #############################################################################
-# 
+#
 # Copyright (c) 2003-2004 Zope Foundation and Contributors.
 # All Rights Reserved.
-# 
+#
 # This software is subject to the provisions of the Zope Public License,
 # Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
 # THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
 # WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
-# 
+#
 # #############################################################################
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2013-09-03 14:23+0000\n"
+"POT-Creation-Date: 2019-03-29 20:18+0000\n"
 "PO-Revision-Date: 2012-05-11 15:55+0200\n"
 "Last-Translator: bsuttor <bsuttor@cirb.irisnet.be>\n"
 "Language-Team: English\n"
@@ -29,193 +29,192 @@ msgstr ""
 "Language: en\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: collective/jekyll/interfaces.py:40
+#: ../interfaces.py:46
 msgid "Active Symptoms"
 msgstr ""
 
-#: collective/jekyll/symptoms.py:244
+#: ../symptoms.py:236
 msgid "Body text"
 msgstr "Body text present"
 
-#: collective/jekyll/symptoms.py:250
+#: ../symptoms.py:243
 msgid "Body text does not have content."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:272
+#: ../symptoms.py:266
 msgid "Body text ends with empty tags or BR."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:245
+#: ../symptoms.py:237
 msgid "Body text should have content."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:256
+#: ../symptoms.py:249
 msgid "Body text should not start or end with empty tags or BR."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:267
+#: ../symptoms.py:261
 msgid "Body text starts with empty tags or BR."
 msgstr ""
 
-#: collective/jekyll/browser/controlpanel.py:50
-#: collective/jekyll/profiles/default/controlpanel.xml
-msgid "Content quality"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:170
-msgid "Description does not begin with uppercase letter."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:206
-msgid "Description does not have content."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:94
-msgid "Id format"
-msgstr "Short Name format"
-
-#: collective/jekyll/symptoms.py:95
-msgid "Id should not start with 'copy_of'."
-msgstr "Short Name should not start with 'copy_of'."
-
-#: collective/jekyll/symptoms.py:103
-msgid "Id starts with '${start}'."
-msgstr "Short Name starts with '${start}'."
-
-#: collective/jekyll/browser/diagnosis.py:102
-msgid "Ignore"
-msgstr ""
-
-#: collective/jekyll/browser/symptom.pt:4
-msgid "Ignored"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:347
-msgid "Image field content has correct size."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:326
-msgid "Image field does not have content."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:324
-msgid "Image field has content."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:319
-msgid "Image field should have content."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:332
-msgid "Image field should have correct size."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:318
-msgid "Image present"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:331
-msgid "Image size"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:283
-msgid "Links In Body"
-msgstr "Links In Body Text"
-
-#: collective/jekyll/browser/diagnosis.py:99
+#: ../browser/diagnosis.py:102
 msgid "Consider"
 msgstr "Consider"
 
-#: collective/jekyll/interfaces.py:41
+#: ../browser/controlpanel.py:11
+#: ../profiles/default/controlpanel.xml
+msgid "Content quality"
+msgstr ""
+
+#: ../testing.zcml:16
+msgid "Content to ease tests"
+msgstr ""
+
+#: ../symptoms.py:174
+msgid "Description does not begin with uppercase letter."
+msgstr ""
+
+#: ../symptoms.py:203
+msgid "Description does not have content."
+msgstr ""
+
+#: ../symptoms.py:168
+msgid "Description format"
+msgstr ""
+
+#: ../symptoms.py:185
+msgid "Description length"
+msgstr ""
+
+#: ../symptoms.py:99
+msgid "Id format"
+msgstr "Short Name format"
+
+#: ../symptoms.py:100
+msgid "Id should not start with 'copy_of'."
+msgstr "Short Name should not start with 'copy_of'."
+
+#: ../symptoms.py:108
+msgid "Id starts with '${start}'."
+msgstr "Short Name starts with '${start}'."
+
+#: ../browser/diagnosis.py:105
+msgid "Ignore"
+msgstr ""
+
+#: ../browser/symptom.pt:4
+msgid "Ignored"
+msgstr ""
+
+#: ../symptoms.py:341
+msgid "Image field content has correct size."
+msgstr ""
+
+#: ../symptoms.py:321
+msgid "Image field does not have content."
+msgstr ""
+
+#: ../symptoms.py:319
+msgid "Image field has content."
+msgstr ""
+
+#: ../symptoms.py:314
+msgid "Image field should have content."
+msgstr ""
+
+#: ../symptoms.py:327
+msgid "Image field should have correct size."
+msgstr ""
+
+#: ../symptoms.py:313
+msgid "Image present"
+msgstr ""
+
+#: ../symptoms.py:326
+msgid "Image size"
+msgstr ""
+
+#: ../configure.zcml:28
+msgid "Installs the collective.jekyll package"
+msgstr ""
+
+#: ../symptoms.py:277
+msgid "Links In Body"
+msgstr "Links In Body Text"
+
+#: ../interfaces.py:47
 msgid "Select which symptoms will be taken in account when diagnosing content quality."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:255
+#: ../symptoms.py:248
 msgid "Spaces In Body"
 msgstr "Spaces In Body Text"
 
-#: collective/jekyll/symptoms.py:171
-msgid "Summary does not begin with uppercase letter."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:207
-msgid "Summary does not have content."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:163
-msgid "Summary format"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:187
-msgid "Summary length"
-msgstr ""
-
-#: collective/jekyll/browser/controlpanel.py:52
-msgid "Symptoms activation"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:307
+#: ../symptoms.py:302
 msgid "The body text has less than ${minimum} links to other pages."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:291
+#: ../symptoms.py:285
 msgid "The body text should have at least ${minimum} links to other pages. "
 msgstr ""
 
-#: collective/jekyll/symptoms.py:211
+#: ../symptoms.py:205
 msgid "The description counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:164
-msgid "The summary (or description) should begin with uppercase letter."
+#: ../symptoms.py:169
+msgid "The description should begin with uppercase letter."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:195
+#: ../symptoms.py:193
 msgid "The summary (or description) should not be empty and should have at most ${maximum} significant words (longer than 3 letters). "
 msgstr ""
 
-#: collective/jekyll/symptoms.py:216
-msgid "The summary counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:134
+#: ../symptoms.py:139
 msgid "The title counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:120
+#: ../symptoms.py:125
 msgid "The title should have at most ${maximum} significant words (longer than 3 letters). "
 msgstr ""
 
-#: collective/jekyll/symptoms.py:158
+#: ../symptoms.py:163
 msgid "Title does not begin with uppercase letter."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:151
+#: ../symptoms.py:156
 msgid "Title format"
 msgstr ""
 
-#: collective/jekyll/symptoms.py:112
+#: ../symptoms.py:117
 msgid "Title length"
 msgstr ""
 
-#: collective/jekyll/symptoms.py:152
+#: ../symptoms.py:157
 msgid "Title should begin with uppercase letter."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:349
+#: ../symptoms.py:343
 msgid "Wrong size : image is ${actual_width} by ${actual_height} pixels. It should be ${width} by ${height} pixels."
 msgstr ""
 
-#: collective/jekyll/browser/controlpanel.py:51
+#: ../browser/controlpanel.py:12
 msgid "You can activate / deactivate symptoms using this form."
 msgstr ""
 
+#: ../configure.zcml:28
+msgid "collective.jekyll"
+msgstr ""
+
+#: ../testing.zcml:16
+msgid "collective.jekyll tests"
+msgstr ""
+
 # values for status
-#: collective/jekyll/__init__.py:7
+#: ../__init__.py:7
 msgid "ok"
 msgstr ""
 
-#: collective/jekyll/__init__.py:8
+#: ../__init__.py:8
 msgid "warning"
 msgstr ""
-

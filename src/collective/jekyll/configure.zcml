@@ -66,37 +66,37 @@
      factory=".symptoms.TitleFormatSymptom" />
 
   <subscriber
-     for="Products.Archetypes.interfaces.IExtensibleMetadata"
+     for="plone.dexterity.interfaces.IDexterityContent"
      provides=".interfaces.ISymptom"
      factory=".symptoms.DescriptionLengthSymptom" />
 
   <subscriber
-     for="Products.Archetypes.interfaces.IExtensibleMetadata"
+     for="plone.dexterity.interfaces.IDexterityContent"
      provides=".interfaces.ISymptom"
      factory=".symptoms.DescriptionFormatSymptom" />
 
   <subscriber
-     for="Products.ATContentTypes.interfaces.IATDocument"
+     for="plone.app.contenttypes.behaviors.richtext.IRichText"
      provides=".interfaces.ISymptom"
      factory=".symptoms.BodyTextPresentSymptom" />
 
   <subscriber
-     for="Products.ATContentTypes.interfaces.IATDocument"
+     for="plone.app.contenttypes.behaviors.richtext.IRichText"
      provides=".interfaces.ISymptom"
      factory=".symptoms.SpacesInBodySymptom" />
 
   <subscriber
-     for="Products.ATContentTypes.interfaces.IATDocument"
+     for="plone.app.contenttypes.behaviors.richtext.IRichText"
      provides=".interfaces.ISymptom"
      factory=".symptoms.LinksInBodySymptom" />
 
   <subscriber
-     for="Products.ATContentTypes.interfaces.IATNewsItem"
+     for="plone.app.contenttypes.interfaces.INewsItem"
      provides=".interfaces.ISymptom"
      factory=".symptoms.ImagePresentSymptom" />
 
   <subscriber
-     for="Products.ATContentTypes.interfaces.IATNewsItem"
+     for="plone.app.contenttypes.interfaces.INewsItem"
      provides=".interfaces.ISymptom"
      factory=".symptoms.ImageSizeSymptom" />
 

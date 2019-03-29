@@ -1,20 +1,20 @@
 # #############################################################################
-# 
+#
 # Copyright (c) 2003-2004 Zope Foundation and Contributors.
 # All Rights Reserved.
-# 
+#
 # This software is subject to the provisions of the Zope Public License,
 # Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
 # THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
 # WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
-# 
+#
 # #############################################################################
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2013-09-03 14:23+0000\n"
+"POT-Creation-Date: 2019-03-29 20:18+0000\n"
 "PO-Revision-Date: 2012-05-11 15:55+0200\n"
 "Last-Translator: bsuttor <bsuttor@cirb.irisnet.be>\n"
 "Language-Team: Dutch\n"
@@ -29,194 +29,193 @@ msgstr ""
 "Language: nl\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: collective/jekyll/interfaces.py:40
+#: ../interfaces.py:46
 msgid "Active Symptoms"
 msgstr "Actieve criteria"
 
-#: collective/jekyll/symptoms.py:244
+#: ../symptoms.py:236
 msgid "Body text"
 msgstr "Hoofdtekst aanwezig"
 
-#: collective/jekyll/symptoms.py:250
+#: ../symptoms.py:243
 msgid "Body text does not have content."
 msgstr "De hoofdtekst is leeg."
 
-#: collective/jekyll/symptoms.py:272
+#: ../symptoms.py:266
 msgid "Body text ends with empty tags or BR."
 msgstr "De hoofdtekst eindigt met lege tags of BR."
 
-#: collective/jekyll/symptoms.py:245
+#: ../symptoms.py:237
 msgid "Body text should have content."
 msgstr "De hoofdtekst moet inhoud hebben."
 
-#: collective/jekyll/symptoms.py:256
+#: ../symptoms.py:249
 msgid "Body text should not start or end with empty tags or BR."
 msgstr "Hoofdtekst mag niet starten of eindigen met lege tags of BR."
 
-#: collective/jekyll/symptoms.py:267
+#: ../symptoms.py:261
 msgid "Body text starts with empty tags or BR."
 msgstr "De hoofdtekst start met lege tags of BR."
 
-#: collective/jekyll/browser/controlpanel.py:50
-#: collective/jekyll/profiles/default/controlpanel.xml
+#: ../browser/diagnosis.py:102
+msgid "Consider"
+msgstr "Herstellen"
+
+#: ../browser/controlpanel.py:11
+#: ../profiles/default/controlpanel.xml
 msgid "Content quality"
 msgstr "Kwaliteit van de inhoud"
 
-#: collective/jekyll/symptoms.py:170
+#: ../testing.zcml:16
+msgid "Content to ease tests"
+msgstr ""
+
+#: ../symptoms.py:174
 msgid "Description does not begin with uppercase letter."
 msgstr "De beschrijving begint niet met een hoofdletter."
 
-#: collective/jekyll/symptoms.py:206
+#: ../symptoms.py:203
 msgid "Description does not have content."
 msgstr "De beschrijving is leeg."
 
-#: collective/jekyll/symptoms.py:94
+#: ../symptoms.py:168
+msgid "Description format"
+msgstr ""
+
+#: ../symptoms.py:185
+msgid "Description length"
+msgstr ""
+
+#: ../symptoms.py:99
 msgid "Id format"
 msgstr "Formaat van de verkorte naam"
 
-#: collective/jekyll/symptoms.py:95
+#: ../symptoms.py:100
 msgid "Id should not start with 'copy_of'."
 msgstr "Verkorte naam mag niet starten met 'copy_of'."
 
-#: collective/jekyll/symptoms.py:103
+#: ../symptoms.py:108
 msgid "Id starts with '${start}'."
 msgstr "Verkorte naam start met '${start}'."
 
 # values for ignore
-#: collective/jekyll/browser/diagnosis.py:102
+#: ../browser/diagnosis.py:105
 msgid "Ignore"
 msgstr "Negeren"
 
-#: collective/jekyll/browser/symptom.pt:4
+#: ../browser/symptom.pt:4
 msgid "Ignored"
 msgstr "Genegeerd"
 
-#: collective/jekyll/symptoms.py:347
+#: ../symptoms.py:341
 msgid "Image field content has correct size."
 msgstr "Het veld afbeelding heeft een correcte grootte."
 
-#: collective/jekyll/symptoms.py:326
+#: ../symptoms.py:321
 msgid "Image field does not have content."
 msgstr "Het veld afbeelding is niet ingevuld."
 
-#: collective/jekyll/symptoms.py:324
+#: ../symptoms.py:319
 msgid "Image field has content."
 msgstr "Het veld afbeelding is ingevuld."
 
-#: collective/jekyll/symptoms.py:319
+#: ../symptoms.py:314
 msgid "Image field should have content."
 msgstr "Het veld afbeelding moet ingevuld zijn."
 
-#: collective/jekyll/symptoms.py:332
+#: ../symptoms.py:327
 msgid "Image field should have correct size."
 msgstr "Het veld afbeelding moet een correcte grootte hebben."
 
-#: collective/jekyll/symptoms.py:318
+#: ../symptoms.py:313
 msgid "Image present"
 msgstr "Afbeelding aanwezig"
 
-#: collective/jekyll/symptoms.py:331
+#: ../symptoms.py:326
 msgid "Image size"
 msgstr "Grootte van de afbeelding"
 
-#: collective/jekyll/symptoms.py:283
+#: ../configure.zcml:28
+msgid "Installs the collective.jekyll package"
+msgstr ""
+
+#: ../symptoms.py:277
 msgid "Links In Body"
 msgstr "Links in hoofdtekst"
 
-#: collective/jekyll/browser/diagnosis.py:99
-msgid "Consider"
-msgstr "Herstellen"
-
-#: collective/jekyll/interfaces.py:41
+#: ../interfaces.py:47
 msgid "Select which symptoms will be taken in account when diagnosing content quality."
 msgstr "Selecteer de criteria die gebruikt zullen worden tijdens de diagnose van de kwaliteit van de inhoud."
 
-#: collective/jekyll/symptoms.py:255
+#: ../symptoms.py:248
 msgid "Spaces In Body"
 msgstr "Spaties in hoofdtekst"
 
-#: collective/jekyll/symptoms.py:171
-msgid "Summary does not begin with uppercase letter."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:207
-msgid "Summary does not have content."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:163
-msgid "Summary format"
-msgstr ""
-
-#: collective/jekyll/symptoms.py:187
-msgid "Summary length"
-msgstr ""
-
-#: collective/jekyll/browser/controlpanel.py:52
-msgid "Symptoms activation"
-msgstr "Criteria activeren"
-
-#: collective/jekyll/symptoms.py:307
+#: ../symptoms.py:302
 msgid "The body text has less than ${minimum} links to other pages."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:291
+#: ../symptoms.py:285
 msgid "The body text should have at least ${minimum} links to other pages. "
 msgstr ""
 
-#: collective/jekyll/symptoms.py:211
+#: ../symptoms.py:205
 msgid "The description counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
 msgstr "De beschrijving telt ${word_count} significante woorden (langer dan 3 letters). Ze zou hoogstens ${maximum} significante woorden mogen bevatten."
 
-#: collective/jekyll/symptoms.py:164
-msgid "The summary (or description) should begin with uppercase letter."
+#: ../symptoms.py:169
+msgid "The description should begin with uppercase letter."
 msgstr ""
 
-#: collective/jekyll/symptoms.py:195
+#: ../symptoms.py:193
 msgid "The summary (or description) should not be empty and should have at most ${maximum} significant words (longer than 3 letters). "
 msgstr ""
 
-#: collective/jekyll/symptoms.py:216
-msgid "The summary counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
-msgstr ""
-
-#: collective/jekyll/symptoms.py:134
+#: ../symptoms.py:139
 msgid "The title counts ${word_count} significant words (longer than 3 letters). It should have at most ${maximum} significant words."
 msgstr "De titel bevat ${word_count} significante woorden (langer dan 3 letters). Hij zou hoogstens ${maximum} significante woorden mogen bevatten."
 
-#: collective/jekyll/symptoms.py:120
+#: ../symptoms.py:125
 msgid "The title should have at most ${maximum} significant words (longer than 3 letters). "
 msgstr "De title zou hoogstens ${maximum} significante woorden (langer dan 3 letters) bevatten."
 
-#: collective/jekyll/symptoms.py:158
+#: ../symptoms.py:163
 msgid "Title does not begin with uppercase letter."
 msgstr "De titel begint niet met een hoofdletter."
 
-#: collective/jekyll/symptoms.py:151
+#: ../symptoms.py:156
 msgid "Title format"
 msgstr "Formaat van de titel"
 
-#: collective/jekyll/symptoms.py:112
+#: ../symptoms.py:117
 msgid "Title length"
 msgstr "Lengte van de titel"
 
-#: collective/jekyll/symptoms.py:152
+#: ../symptoms.py:157
 msgid "Title should begin with uppercase letter."
 msgstr "De titel moet beginnen met een hoofdletter."
 
-#: collective/jekyll/symptoms.py:349
+#: ../symptoms.py:343
 msgid "Wrong size : image is ${actual_width} by ${actual_height} pixels. It should be ${width} by ${height} pixels."
 msgstr "Verkeerde grootte: de afbeelding is ${actual_width} op ${actual_height} pixels groot. Ze zou ${width} op ${height} pixels groot moeten zijn."
 
-#: collective/jekyll/browser/controlpanel.py:51
+#: ../browser/controlpanel.py:12
 msgid "You can activate / deactivate symptoms using this form."
 msgstr "U kan met dit formulier criteria activeren of desactiveren."
 
+#: ../configure.zcml:28
+msgid "collective.jekyll"
+msgstr ""
+
+#: ../testing.zcml:16
+msgid "collective.jekyll tests"
+msgstr ""
+
 # values for status
-#: collective/jekyll/__init__.py:7
+#: ../__init__.py:7
 msgid "ok"
 msgstr ""
 
-#: collective/jekyll/__init__.py:8
+#: ../__init__.py:8
 msgid "warning"
 msgstr "niet ok"
-

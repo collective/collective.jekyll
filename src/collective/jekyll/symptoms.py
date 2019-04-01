@@ -10,6 +10,12 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
 
+try:
+    from plone.protect.auto import safeWrite
+except ImportError:
+    def safeWrite(*args):
+        pass
+
 from plone.registry.interfaces import IRegistry
 
 from collective.jekyll.interfaces import ISymptom
@@ -36,6 +42,7 @@ class SymptomBase(Status):
         self.status = True
         self.description = ''
         self._registry = queryUtility(IRegistry, default={})
+        safeWrite(self.context, self.context.REQUEST)
 
     def _update(self):
         raise NotImplementedError(u"")

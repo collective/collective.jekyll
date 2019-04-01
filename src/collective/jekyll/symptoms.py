@@ -6,10 +6,10 @@ from zope.interface import implements
 from zope.i18nmessageid import Message
 from zope.component import queryUtility
 from zope.component import getGlobalSiteManager
+from zope.globalrequest import getRequest
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
-
 try:
     from plone.protect.auto import safeWrite
 except ImportError:
@@ -42,7 +42,7 @@ class SymptomBase(Status):
         self.status = True
         self.description = ''
         self._registry = queryUtility(IRegistry, default={})
-        safeWrite(self.context, self.context.REQUEST)
+        safeWrite(self.context, getRequest())
 
     def _update(self):
         raise NotImplementedError(u"")

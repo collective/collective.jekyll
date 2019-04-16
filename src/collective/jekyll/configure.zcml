@@ -26,7 +26,15 @@
       description="Installs the collective.jekyll package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-   
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="uninstall collective.jekyll"
+      directory="profiles/uninstall"
+      description="Uninstall the collective.jekyll package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
   <i18n:registerTranslations directory="locales" />
 
   <adapter

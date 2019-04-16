@@ -19,6 +19,10 @@ setup(name='collective.jekyll',
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
+          "Framework :: Plone",
+          "Framework :: Plone :: 4.3",
+          "Framework :: Plone :: 5.0",
+          "Framework :: Plone :: 5.1",
           "Programming Language :: Python",
           "Programming Language :: Python :: 2.6",
           "Programming Language :: Python :: 2.7",
@@ -26,7 +30,7 @@ setup(name='collective.jekyll',
       keywords='Plone content diagnosis',
       author='Godefroid Chapelle',
       author_email='gotcha@bubblenet.be',
-      url='http://svn.plone.org/svn/collective/',
+      url='https://github.com/collective/collective.jekyll',
       license='gpl',
       packages=find_packages('src'),
       package_dir={'': 'src'},
@@ -49,4 +53,9 @@ setup(name='collective.jekyll',
               'pytest',
               'gocept.pytestlayer',
           ]),
+      entry_points="""
+      # -*- Entry points: -*-
+      [z3c.autoinclude.plugin]
+      target = plone
+      """,
       )

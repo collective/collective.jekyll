@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.jekyll.interfaces import IIgnoredSymptomNames
 from persistent.dict import PersistentDict
+from plone.protect.auto import safeWrite
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
 from zope.component import ComponentLookupError
@@ -20,6 +21,10 @@ class IgnoredNames(object):
            annotations = IAnnotations(self.context)
         except ComponentLookupError:
             return {}
+        try:
+            safeWrite(annotations.obj.__annotations__)
+        except AttributeError:
+            pass
         return annotations.setdefault(
             JEKYLL_IGNORED_SYMPTOMS, PersistentDict())
 
